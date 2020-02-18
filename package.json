@@ -1,0 +1,25 @@
+{
+  "name": "trivia-application-cen4010",
+  "version": "1.0.0",
+  "description": "Cypress automation testing",
+  "main": "index.js",
+  "dependencies": {
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "cypress": "^4.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndpiperis/Trivia-Application-CEN4010.git"
+  },
+  "author": "Nick Piperis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ndpiperis/Trivia-Application-CEN4010/issues"
+  },
+  "homepage": "https://github.com/ndpiperis/Trivia-Application-CEN4010#readme"
+}
