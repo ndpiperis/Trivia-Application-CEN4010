@@ -19,7 +19,15 @@
 @font-face {
   font-family:"Roboto Slab";
   src: url("/font/Roboto_Slab/RobotoSlab-Regular.ttf");
+  font-weight:normal;
 }
+
+@font-face {
+  font-family:"Roboto Slab";
+  src: url("/font/Roboto_Slab/RobotoSlab-Medium.ttf");
+  font-weight:medium;
+}
+
 
 @font-face {
   font-family: "Patua One";
@@ -137,6 +145,8 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
     box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);   
 }
 
+/*right below landing splash */
+
 .info-envelope {
     background:rgba(0,0,0, .04);
     -webkit-box-shadow: 0px -10px 59px 10px rgba(0,0,0,0.2);
@@ -145,7 +155,8 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
     display:flex;
     justify-content:center;
     width:100%;
-    height:100%;
+    height:auto;
+    padding-bottom:100px; 
     
 }
 
@@ -153,7 +164,7 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
     margin-top:10px;
     min-width:700px;
     max-width:50%;
-    height:100%;
+    min-height:600px;
 }
 
 .spacer {
@@ -196,6 +207,44 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
     line-height:24pt;
     font-size:16pt;
     font-family:'Roboto';
+}
+
+.footer {
+  min-height: 300px;
+  max-height:10%;
+  color:white;
+  background:rgba(0,0,0, .8);
+  display:flex;
+  
+}
+
+.footer-item {
+  box-sizing:border-box;
+  padding:20px;
+  padding-top:60px;
+  min-width:25%;
+}
+
+.footer-item p {
+  font-family:'Roboto';
+  font-size:11pt;
+}
+
+.footer a {
+  color:white;
+  outline:none;
+  text-decoration:none;
+  font-family:'Roboto';
+}
+.footer a:hover {
+  text-decoration:underline;
+}
+
+.footer-section-title {
+  font-family:'Roboto';
+  font-weight:medium;
+  font-size:12pt;
+  margin-bottom:10px;
 }
 
 
