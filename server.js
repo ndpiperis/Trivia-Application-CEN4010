@@ -37,6 +37,7 @@ console.log('Server initialized');
 
 
 //include resources
+app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/www/res'));
 
 //serves /www/, all files visible to client
@@ -45,4 +46,13 @@ app.get('/', function(req, res) {
 });
 console.log('Live, from /www/, its SATURDAY NIGHT LIVE');
 
+io.on('connection', function(socket){
+    console.log('a user connected');
+    socket.on('disconnect', function(){
+      console.log('user disconnected');
+    });
+  });
+
 server.listen(4200);
+
+
