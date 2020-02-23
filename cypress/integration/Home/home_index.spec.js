@@ -1,7 +1,7 @@
 describe('Checks the content of the trivia app home page', () => {
 
     it('Navigates to the home page', () => {
-        cy.visit('/index.html');
+        cy.visit('localhost:4200');
     });
 
     it('Verifies text, buttons and elements in the page', () => {
@@ -15,4 +15,14 @@ describe('Checks the content of the trivia app home page', () => {
         cy.get('h2').should('contain', 'How does Witti work?');
         });
 
+        it('Checks the footers content of the page.', () => {
+            cy.get('section.footer').should('exist');
+
+            cy.get('h4.footer-section-title').should('contain', 'Site Links');
+            
+            cy.get('section.footer-item p').eq(0).find('a').should('have.attr', 'href', '#');
+            cy.get('section.footer-item p').eq(0).find('a').should('contain', 'About');
+            cy.get('section.footer-item p').eq(1).find('a').should('have.attr', 'href', 'https://github.com/ndpiperis/Trivia-Application-CEN4010').should('contain', 'Github');
+            cy.get('section.footer-item p').eq(2).find('a').should('have.attr', 'href', 'https://socket.io/').should('contain', 'Socket.io');
+        });
 });
