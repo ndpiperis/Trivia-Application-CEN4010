@@ -7,6 +7,7 @@
                 content="default-src 'self';
                 style-src 'self' 'unsafe-inline';
                 script-src 'self' http://localhost:4200 'unsafe-inline' 'unsafe-eval';
+                connect-src 'self';
                 font-src 'self' data:;
                 connect-src ws:">
         <!--CSS-->
@@ -23,9 +24,11 @@
                 </section>
                 <!--info/links-->
                 <section class="landing-body">
-                    <input type="text" class="landing-textfield" placeholder="Room Code" maxlength="10"/>
-                    <input type="text" class="landing-textfield" placeholder="Name" maxlength="20"/>
-                    <input type="button" class="landing-button" value="Play"/>
+                    <form action="" method="POST" class="entry-form">
+                    <input type="text" class="landing-textfield" id="code" placeholder="Room Code" maxlength="6"/>
+                    <input type="text" class="landing-textfield" id="name" placeholder="Name" maxlength="20" required/>
+                    <input type="submit" class="landing-button" value="Play"/>
+                </form>
                 </section>
             </section>
             <section class="info-envelope">
@@ -52,6 +55,15 @@
                 </section>
             </section>
         </section>
+
+        <!-- Script loading -->
+        <script src="/socket.io-client/dist/socket.io.js">           
+        </script>
+        <script src="jquery/dist/jquery.js">
+        </script>
+        <script src="js/client.js">           
+        </script>
+
     </body>
 
 </html>
