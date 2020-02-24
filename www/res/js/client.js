@@ -1,33 +1,38 @@
 var socket = io();
 var room = 00000;
+var errShown = false;
 
 $('.entry-form').submit(function(e) {
-    showErr("", false);
+    ncode = $('#code').val()
+    nname = $('#name').val()
+
     
     //disable page reload
     e.preventDefault();
     
     //code and name values, 0 and 1 respectively
-    var entry = [$('#code').val(), $('#name').val()];
+    var entry = [ncode, nname];
     
     //test room code for validity
-    var codel = $('#code').val().length;
+    var codel = ncode.length;
 
     //make sure code is 5 characters long
     if(codel == 5) {
-        console.log('sending join request for room ' + $('#code').val());
+        //signaling joining room
+        console.log('sending join request for room #' + ncode);
         socket.emit("join", {
-            code : $('#code').val(),
-            name : $('#name').val()
+            code : ncode,
+            name : nname
         });
-        room = $('#code').val();
+        room = ncode;
     }
     else if(codel == 0){
+        ncode = 00000;
         //signaling new room
-        console.log('sending create request for room ' + $('#code').val());
+        console.log('sending create request for room #' + ncode);
         socket.emit("create", {
-            code : $('#code').val(),
-            name : $('#name').val()
+            code : ncode,
+            name : nname
         });
     }   
     else {
@@ -35,16 +40,19 @@ $('.entry-form').submit(function(e) {
     }
 });
 
+//swaps view to game room
 function changeToRoom(info) {
     console.log('Successfully joined room');
 }
 
+//receives join success packet, start room change
 socket.on('join success', function(info) {
     changeToRoom(info);
 });
 
-
+//shows input error messages
 function showErr(reason, o) {
+    errShown = o;
     console.log("Error: " + reason);
     if(o) {
         $('.err').text(reason);

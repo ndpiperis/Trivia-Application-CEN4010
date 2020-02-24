@@ -47,6 +47,8 @@ app.get('/', function(req, res) {
 
 console.log('Live, from /www/, its SATURDAY NIGHT LIVE');
 
+
+//socket code
 var users = {};
 var rooms = [
   [11111, "CJ's Room"]
@@ -54,11 +56,15 @@ var rooms = [
 
 function createRoom(code, name) {
   console.log("Attempting room creation");
+  //generates code for room since none was entered, causing a room to be created
   var code = Math.floor(Math.random()*90000) + 10000;
 
+  //adds room and info to registry array
   rooms.append = [
-    [code, info[1] + "'s Room"]
+    [code, name + "'s Room"]
   ];
+
+  console.log(name + "'s room (" + code + ") successfully created. Added to array");
   
 }
 
@@ -80,21 +86,22 @@ function joinRoom(code, name) {
 
     //creates room if user attempts to join room where none exist
     console.log('No available rooms, creating one now');
-    createRoom(code, name);
+    createRoom(info.code, info.name);
   }
 }
 
 io.on('connection', function(socket){
     console.log('a user connected');
 
-    socket.on("join", function(code, name) {
+    socket.on("join", function(info) {
       console.log('attempting room join');
-      joinRoom(code, name);
+      joinRoom(info.code, info.name);
     });
   
-    socket.on("create", function(code, name) {
-      console.log('attempting room creation');
-      createRoom(code, name);
+    socket.on("create", function(info) {
+
+      console.log('attempting room creation: ' + info.name);
+      createRoom(info.code, info.name);
     });
 
     socket.on('disconnect', function(){
