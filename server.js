@@ -27,12 +27,12 @@
     //  * - completed
     
 //includes xpress and initializes
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 
 //Creates server, binds socket to server
 server = require('http').createServer(app)
-var io = require('socket.io')(server);
+const io = require('socket.io')(server);
 console.log('Server initialized');
 
 
@@ -44,14 +44,67 @@ app.use(express.static(__dirname + '/www/res'));
 app.get('/', function(req, res) {
     res.sendFile(__dirname + "/www/index.html");
 });
+
 console.log('Live, from /www/, its SATURDAY NIGHT LIVE');
+
+var users = {};
+var rooms = [
+  [11111, "CJ's Room"]
+];
+
+function createRoom(code, name) {
+  console.log("Attempting room creation");
+  var code = Math.floor(Math.random()*90000) + 10000;
+
+  rooms.append = [
+    [code, info[1] + "'s Room"]
+  ];
+  
+}
+
+function joinRoom(code, name) {
+  console.log('user attempting to join room ' + name);
+  if(rooms.length > 0) {
+    //tests for match in room array
+    for(var i = 0; i < rooms.length; i++) {
+
+      if(code == rooms[i][0]) {
+
+        //emits success event
+        io.emit('join success', code);
+        break;
+        
+      }
+    }
+  } else {
+
+    //creates room if user attempts to join room where none exist
+    console.log('No available rooms, creating one now');
+    createRoom(code, name);
+  }
+}
 
 io.on('connection', function(socket){
     console.log('a user connected');
+
+    socket.on("join", function(code, name) {
+      console.log('attempting room join');
+      joinRoom(code, name);
+    });
+  
+    socket.on("create", function(code, name) {
+      console.log('attempting room creation');
+      createRoom(code, name);
+    });
+
     socket.on('disconnect', function(){
-      console.log('user disconnected');
+    console.log('user disconnected');
     });
   });
+
+ 
+  
+ 
 
 server.listen(4200);
 

@@ -25,10 +25,11 @@
                 <!--info/links-->
                 <section class="landing-body">
                     <form action="" method="POST" class="entry-form">
-                    <input type="text" class="landing-textfield" id="code" placeholder="Room Code" maxlength="6"/>
-                    <input type="text" class="landing-textfield" id="name" placeholder="Name" maxlength="20" required/>
-                    <input type="submit" class="landing-button" value="Play"/>
-                </form>
+                        <section class="err"></section>
+                        <input type="text" class="landing-textfield" id="code" placeholder="Room Code" maxlength="5"/>
+                        <input type="text" class="landing-textfield" id="name" placeholder="Name" maxlength="20" required/>
+                        <input type="submit" class="landing-button" value="Play"/>
+                    </form>
                 </section>
             </section>
             <section class="info-envelope">
@@ -57,12 +58,15 @@
         </section>
 
         <!-- Script loading -->
-        <script src="/socket.io-client/dist/socket.io.js">           
+
+        <script src="socket.io-client/dist/socket.io.js">           
         </script>
         <script src="jquery/dist/jquery.js">
         </script>
         <script src="js/client.js">           
         </script>
+         <script src="js/ui.js">           
+         </script>
 
     </body>
 
