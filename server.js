@@ -49,12 +49,24 @@ console.log('Live, from /www/, its SATURDAY NIGHT LIVE');
 
 
 //socket code
-var users = {};
 var rooms = [
-  [11111, "CJ's Room"]
-];
 
-function createRoom(code, name) {
+  ];
+
+function switchRoom(code, name, socket) {
+  console.log(name + ' sent to room #' + code);
+
+  //joins user to room, sends succes message, updates all users in the room
+  socket.join('code');
+  io.emit('join success', {
+    code: code,
+    name: name
+  });
+  socket.to(code).emit('user joined', name);
+  
+}
+
+function createRoom(code, name, socket) {
   console.log("Attempting room creation");
   //generates code for room since none was entered, causing a room to be created
   var code = Math.floor(Math.random()*90000) + 10000;
@@ -65,10 +77,10 @@ function createRoom(code, name) {
   ];
 
   console.log(name + "'s room (" + code + ") successfully created. Added to array");
-  
+  switchRoom(code, name, socket);
 }
 
-function joinRoom(code, name) {
+function joinRoom(code, name, socket) {
   console.log('user attempting to join room ' + name);
   if(rooms.length > 0) {
     //tests for match in room array
@@ -77,7 +89,8 @@ function joinRoom(code, name) {
       if(code == rooms[i][0]) {
 
         //emits success event
-        io.emit('join success', code);
+        
+        switchRoom(code, name, socket);
         break;
         
       }
@@ -86,7 +99,7 @@ function joinRoom(code, name) {
 
     //creates room if user attempts to join room where none exist
     console.log('No available rooms, creating one now');
-    createRoom(info.code, info.name);
+    createRoom(code, name);
   }
 }
 
@@ -95,13 +108,13 @@ io.on('connection', function(socket){
 
     socket.on("join", function(info) {
       console.log('attempting room join');
-      joinRoom(info.code, info.name);
+      joinRoom(info.code, info.name, socket);
     });
   
     socket.on("create", function(info) {
 
       console.log('attempting room creation: ' + info.name);
-      createRoom(info.code, info.name);
+      createRoom(info.code, info.name, socket);
     });
 
     socket.on('disconnect', function(){

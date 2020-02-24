@@ -36,13 +36,14 @@ $('.entry-form').submit(function(e) {
         });
     }   
     else {
-        showErr("Code must be 5 digits", true);
+        showDialog("Code must be 5 digits", true, false);
     }
 });
 
 //swaps view to game room
 function changeToRoom(info) {
-    console.log('Successfully joined room');
+    showDialog("Successfully joined room", true, true);
+    console.log('Server: Successfully joined room #' + info.code);
 }
 
 //receives join success packet, start room change
@@ -51,10 +52,18 @@ socket.on('join success', function(info) {
 });
 
 //shows input error messages
-function showErr(reason, o) {
-    errShown = o;
-    console.log("Error: " + reason);
+function showDialog(reason, o, i) {
+    console.log("Attention: " + reason);
     if(o) {
+        if(i) {
+            $('.err').css({
+                'background' : 'green'
+            });
+        } else {
+            $('.err').css({
+                'background' : 'rgba(255, 57, 57, .85)'
+            });
+        }
         $('.err').text(reason);
         $('.err').show();
         
