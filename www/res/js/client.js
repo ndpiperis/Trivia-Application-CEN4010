@@ -44,10 +44,11 @@ $('.entry-form').submit(function(e) {
 function changeToRoom(info) {
     showDialog("Successfully joined room", true, true);
     console.log('Server: Successfully joined room #' + info.code);
+
 }
 
 //receives join success packet, start room change
-socket.on('join success', function(info) {
+socket.on('join-success', function(info) {
     changeToRoom(info);
 });
 

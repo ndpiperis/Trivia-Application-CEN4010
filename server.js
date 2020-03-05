@@ -45,8 +45,20 @@ app.get('/', function(req, res) {
     res.sendFile(__dirname + "/www/");
 });
 
-console.log('Live, from /www/, its SATURDAY NIGHT LIVE');
-
+console.log('ayy lmao');
+console.log(
+'    o   o\n'+
+'     )-(\n' +
+'    (O O)\n' +
+'     \\\=/\n' +
+'    .-"-.\n' +
+'   //\/ \\\\\\\n' +
+' _///   \\\\\\_\n' +
+'=./ {,-.} \\.=\n' +
+'    || ||\n' +
+'    || ||    \n' +
+'  __|| ||__  \n' +
+' `---" "---\n');
 
 //socket code
 //[
@@ -83,9 +95,8 @@ function prepSocket(room, info, socket) {
   room.push(socket.id);
   socket.username = info.name;
   socket.room = info.code;
+
 }
-
-
 
 io.on('connection', function(socket){
     console.log( socket.id + ' connected');
@@ -99,6 +110,9 @@ io.on('connection', function(socket){
           
           prepDataJoin(info, socket);
           console.log('user joined room-' + info.code);
+         socket.emit('join-success', {
+            code: nroom
+          });
           listUsersInRoom(info.code);
         });
       } else {
@@ -114,11 +128,17 @@ io.on('connection', function(socket){
         
         prepDataCreate(nroom, info.name, socket);
         console.log('user joined room-' + nroom);
+        socket.emit('join-success', {
+          code: nroom
+        });
       });
     });
 
     socket.on('disconnect', function(){
-      removeFromRoom(socket);
+      if(_rooms.length > 0) {
+        removeFromRoom(socket);
+        cleanRooms();
+      }
       console.log(socket.id  + ' disconnected');
 
     });
@@ -126,16 +146,37 @@ io.on('connection', function(socket){
 
 
   //UTILITY FUNCTIONS
-  function isInRoom(socket) {
-    for (var i = 0; i < _rooms.length; i++) {
-      for(var j = 0; j < _rooms[i][3].length; j++) {
 
-        if(io.sockets.adapter.sids[socket.id][_rooms[i][3][j]]) {
-          console.log("User already in room");
-          return true;
-        }
+  //gets room that socket is member of. breaks after first room is found, so it cannot get multiple rooms
+  function removeFromRoom(socket) {
+    
+    for (var i = 0; i < _rooms.length; i++) {
+      for(var j = 0; j < _rooms[i].users.length; j++) {
+        if(_rooms[i].users[j] == socket.id) {
+            if(_rooms.users && typeof _rooms.users.length > 0) {
+              _rooms.users.splice(j, 1);  
+              console.log(_rooms[i].users);
+              if(_rooms[i].users.length == 0) {
+                console.log('no users in room ' + _rooms[i].code +', room deleted');
+                _rooms.splice(i, 1);  
+              }
+          }
+        }      
+      }
     }
-      return false;
+  }
+
+  //deletes socket id from users array for room. 
+  
+
+    //broadcast to all users in rom with updated user list
+    
+  
+
+  function cleanRooms() {
+    for (var i = 0; i < _rooms.length; i++) {
+
+      
     }
   }
 
@@ -148,8 +189,15 @@ io.on('connection', function(socket){
     }
   }
 
+  //generates random room code
   function randRoom() {
-    return nroom = Math.floor(Math.random()*90000) + 10000;
+    nroom = Math.floor(Math.random()*90000) + 10000;
+    for (var i = 0; i < _rooms.length; i++) {
+      if(_rooms[i].code == nroom) {
+        randRoom();
+      }
+    }
+    return nroom;
   }
  
   function listUsersInRoom(code) {
