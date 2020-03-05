@@ -10,7 +10,7 @@
                 connect-src 'self';
                 font-src 'self' data:;
                 connect-src ws:">
-            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        
         <!--CSS-->
         <link rel="stylesheet" type="text/css" href="css/mobile.css"/>
     </head>
@@ -27,7 +27,7 @@
                 <section class="landing-body">
                     <form action="" method="POST" class="entry-form">
                         <section class="err"></section>
-                        <input type="text" class="landing-textfield" id="code" placeholder="Room Code" maxlength="5" onkeyup="this.value = this.value.replace(/[^0-9]/g, '');"/>
+                        <input type="text" class="landing-textfield" id="code" placeholder="Room Code" maxlength="5"/>
                         <input type="text" class="landing-textfield" id="name" placeholder="Name" maxlength="20" required/>
                         <input type="submit" class="landing-button" value="Play"/>
                     </form>
@@ -60,6 +60,8 @@
 
         <!-- Script loading -->
         <script src="jquery/dist/jquery.js">
+        </script>
+        <script src="js/ui.js">           
         </script>
         <script src="socket.io-client/dist/socket.io.js">           
         </script>  
