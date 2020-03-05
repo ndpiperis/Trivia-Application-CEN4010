@@ -266,6 +266,12 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
   margin-bottom:10px;
 }
 
+@media (min-width:1025px) {
+  .info-envelope-body {
+    width:60%;
+  }
+}
+
 
 /* room view/ Game UI */
 
