@@ -34,16 +34,24 @@
             </section>
             <section class="info-envelope">
                 <section class="info-envelope-body">
-                    <h1 class="info-envelope-title">Knowledge that sticks.</h1>
-                    <p>[name] is an intuitive, free-to-use trivia app that expands your knowledge as you play! 
-                        Each question includes a source, so that you can deep-dive into new topics, or refine your knowledge on a topic you already know.</p>
-                    
-                    <div class="spacer"></div>
-                    
-                    <h2>How does Witti work?</h2>
-                    <p>
-                    dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
+                    <div style="font-size:20pt;">Quiz</div>
+                    <div id="question"> 
+                        <span id="question"></span>
+                    </div>
+                    <div><input type="radio" id="opt1" name="options">
+                       <span id="optt1"></span>
+                   </div>
+                   <div><input type="radio" id="opt2" name="options">
+                       <span id="optt2"></span>
+                   </div>
+                   <div><input type="radio" id="opt3" name="options">
+                       <span id="optt3"></span>
+                   </div>
+                   <div><input type="radio" id="opt4" name="options">
+                       <span id="optt4"></span>
+                   </div>
+                   <button onclick="checkAnswer()">next ></button>
+                               
                 </section>
             </section>
             <!--Bottom footer for additional information-->
@@ -58,6 +66,7 @@
         </section>
 
         <!-- Script loading -->
+      
         <script src="jquery/dist/jquery.js">
         </script>
         <script src="js/ui.js">           
@@ -70,8 +79,6 @@
         </script>
         <script src="js/data.js">
         </script>
-        
-
     </body>
 
 </html>
