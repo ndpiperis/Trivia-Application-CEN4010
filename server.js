@@ -42,87 +42,123 @@ app.use(express.static(__dirname + '/www/res'));
 
 //serves /www/, all files visible to client
 app.get('/', function(req, res) {
-    res.sendFile(__dirname + "/www/index.html");
+    res.sendFile(__dirname + "/www/");
 });
 
 console.log('Live, from /www/, its SATURDAY NIGHT LIVE');
 
 
 //socket code
-var rooms = [
+//[
+//  code, room name, users
+//]
+var _rooms = [
 
   ];
 
-function switchRoom(code, name, socket) {
-  console.log(name + ' sent to room #' + code);
-
-  //joins user to room, sends succes message, updates all users in the room
-  socket.join('code');
-  io.emit('join success', {
-    code: code,
-    name: name
-  });
-  socket.to(code).emit('user joined', name);
+function prepDataCreate(nroom, name, socket) {
   
+  console.log('room-' + nroom);
+  _rooms.push({
+    code: nroom, 
+    roomName: name + "'s room",
+    users: [
+      socket.id
+    ]
+  });
 }
 
-function createRoom(code, name, socket) {
-  console.log("Attempting room creation");
-  //generates code for room since none was entered, causing a room to be created
-  var code = Math.floor(Math.random()*90000) + 10000;
-
-  //adds room and info to registry array
-  rooms.append = [
-    [code, name + "'s Room"]
-  ];
-
-  console.log(name + "'s room (" + code + ") successfully created. Added to array");
-  switchRoom(code, name, socket);
-}
-
-function joinRoom(code, name, socket) {
-  console.log('user attempting to join room ' + name);
-  if(rooms.length > 0) {
-    //tests for match in room array
-    for(var i = 0; i < rooms.length; i++) {
-
-      if(code == rooms[i][0]) {
-
-        //emits success event
-        
-        switchRoom(code, name, socket);
-        break;
-        
+function prepDataJoin(info, socket) {
+  for(var i = 0; i < _rooms.length; i++) {
+    for(var j = 0; j < _rooms[i].users.length; j++) {
+      if(_rooms[i].code == info.code) {
+        prepSocket(_rooms[i].users, info, socket);
+        return true;
       }
     }
-  } else {
-
-    //creates room if user attempts to join room where none exist
-    console.log('No available rooms, creating one now');
-    createRoom(code, name);
   }
 }
 
+function prepSocket(room, info, socket) {
+  room.push(socket.id);
+  socket.username = info.name;
+  socket.room = info.code;
+}
+
+
+
 io.on('connection', function(socket){
-    console.log('a user connected');
+    console.log( socket.id + ' connected');
 
+    //joining request
     socket.on("join", function(info) {
-      console.log('attempting room join');
-      joinRoom(info.code, info.name, socket);
-    });
-  
-    socket.on("create", function(info) {
+      console.log('attempting to join room ' + info.code);
 
+      if (checkRoomExist(info, socket)) {
+        socket.join(info.code, function() {
+          
+          prepDataJoin(info, socket);
+          console.log('user joined room-' + info.code);
+          listUsersInRoom(info.code);
+        });
+      } else {
+        console.log("unable to join room");
+      }
+    });
+    
+    //creation request
+    socket.on("create", function(info) {
       console.log('attempting room creation: ' + info.name);
-      createRoom(info.code, info.name, socket);
+      nroom = randRoom();
+      socket.join(nroom, function() {
+        
+        prepDataCreate(nroom, info.name, socket);
+        console.log('user joined room-' + nroom);
+      });
     });
 
     socket.on('disconnect', function(){
-    console.log('user disconnected');
+      removeFromRoom(socket);
+      console.log(socket.id  + ' disconnected');
+
     });
   });
 
+
+  //UTILITY FUNCTIONS
+  function isInRoom(socket) {
+    for (var i = 0; i < _rooms.length; i++) {
+      for(var j = 0; j < _rooms[i][3].length; j++) {
+
+        if(io.sockets.adapter.sids[socket.id][_rooms[i][3][j]]) {
+          console.log("User already in room");
+          return true;
+        }
+    }
+      return false;
+    }
+  }
+
+
+  function checkRoomExist(info, socket) {
+    for(var i = 0; i < _rooms.length; i++) {
+      if(_rooms[i].code == info.code) {
+        return true;
+      }
+    }
+  }
+
+  function randRoom() {
+    return nroom = Math.floor(Math.random()*90000) + 10000;
+  }
  
+  function listUsersInRoom(code) {
+    for(var i = 0; i < _rooms.length; i++) {
+      if(_rooms[i].code == code) {
+        console.log(_rooms[i].users);
+      }
+    }
+  }
   
  
 

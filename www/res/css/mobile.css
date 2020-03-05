@@ -1,0 +1,355 @@
+/*
+
+    Clyde Goodall 2020
+
+*/
+
+@font-face {
+  font-family:"Montserrat";
+  src: url("/font/Montserrat/Montserrat-Regular.ttf");
+
+}
+
+@font-face {
+  font-family:"Roboto";
+  src: url("/font/Roboto/Roboto-Regular.ttf");
+
+}
+
+@font-face {
+  font-family:"Roboto Slab";
+  src: url("/font/Roboto_Slab/RobotoSlab-Regular.ttf");
+  font-weight:normal;
+}
+
+@font-face {
+  font-family:"Roboto Slab";
+  src: url("/font/Roboto_Slab/RobotoSlab-Medium.ttf");
+  font-weight:medium;
+}
+
+
+@font-face {
+  font-family: "Patua One";
+  src: url("/font/Patua_One/PatuaOne-Regular.ttf");
+}
+
+body, html {
+  scale:100%;
+    width:100%;
+    height:100%;
+    margin:0;
+}
+
+/*
+
+    UI [in order of visible components]
+    container  
+        -> landing page
+            -> play menu
+        -> info section
+        -> footer
+
+*/
+
+.container {
+    width:100%;
+    height:100%;
+
+}
+
+.landing {
+  background: rgb(153,82,148);
+  background: linear-gradient(0deg, rgba(153,82,148,1) 0%, rgba(0,212,255,1) 100%);   
+    min-height: 580px;
+    max-height: 80%;
+    width:100%;
+}
+
+/*  top bar contains logo   */
+.landing-splash {
+    width:inherit;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    height:115px;
+}
+
+.splash {
+    cursor:pointer;
+
+    z-index:200;
+    width:190px;
+    height:105px;
+}
+
+/*  play menu UI   */
+.landing-body {
+    min-height:350px;
+    width:inherit;
+    flex-direction:column;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.entry-form {
+  flex-direction:column;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.landing-textfield {
+    color:rgba(0,0,0, .85);
+    background:white;
+    border:1px solid rgba(0,0,0,.2);
+    border-bottom:2px solid rgba(0,0,0, .2);
+    border-radius:5px;
+    margin:8px;
+    outline:none;
+    width: 250px;
+    height:45px;
+    font-size:13pt;
+    font-family: 'Montserrat';
+    box-sizing:border-box;
+    padding-left:12px;
+    padding-right:12px;
+    
+}
+
+.landing-button, .landing-textfield {
+    -webkit-box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
+-moz-box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
+box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
+}
+
+.landing-button {
+
+    border:none;
+    color:rgba(0,0,0, .85);
+    background:white;
+    border-bottom:2px solid rgba(0,0,0, .2);
+
+    border-radius:5px;
+    margin:8px;
+    outline:none;
+    width: 250px;
+    height:45px;
+    font-size:13pt;
+    font-family: 'Montserrat';
+    box-sizing:border-box;
+    padding-left:12px;
+    padding-right:12px;
+    
+}
+
+.landing-button:active {
+    position:relative;
+    top:1px;
+    border-bottom:0px solid rgba(0,0,0, .2);
+    -webkit-box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);
+    -moz-box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);
+    box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);   
+}
+
+.err {
+  height:auto;
+  width:225px;
+  color:white;
+  display:none;
+  background: rgba(255, 57, 57, .85);
+  border-radius:8px;
+  padding:12px;
+  font-family:'Roboto';
+  margin-bottom:5px;
+}
+
+/*right below landing splash */
+
+.info-envelope {
+    background:rgba(0,0,0, .04);
+    -webkit-box-shadow: 0px -10px 59px 10px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px -10px 59px 10px rgba(0,0,0,0.2);
+    box-shadow: 0px -10px 59px 10px rgba(0,0,0,0.2);
+    display:flex;
+    justify-content:center;
+    width:100%;
+    height:auto;
+    padding-bottom:100px; 
+    
+}
+
+.info-envelope-body {
+    margin-top:10px;
+    min-width:90%;
+    max-width:95%;
+    min-height:600px;
+}
+
+.spacer {
+    white-space: pre;
+    height:50px;
+    width:50px;
+}
+
+.info-envelope .info-envelope-title, h1, h2 {
+    font-family:'Patua One';
+}
+
+.info-envelope-title {
+    width:80%;
+    text-align:center;
+    font-size:38pt;
+    color:rgba(0,0,0 .98);
+}
+
+.info-envelope h2 {
+    font-size:27pt;
+    color:rgba(0,0,0 .98);
+}
+
+.info-envelope h3 {
+    font-size:23pt;
+    color:rgba(0,0,0 .98);
+}
+
+.info-envelope p {
+    box-sizing:border-box;
+    padding:20px;
+    border-radius:14px;
+    background:white;
+    border:1px solid rgba(0,0,0, .06);
+    -webkit-box-shadow: -4px 3px 25px -5px rgba(0,0,0,0.04);
+    -moz-box-shadow: -4px 3px 25px -5px rgba(104, 59, 59, 0.04);
+    box-shadow: -4px 3px 25px -5px rgba(0,0,0,0.04);
+    color:rgba(0,0,0, .88);
+    line-height:24pt;
+    font-size:16pt;
+    font-family:'Roboto';
+}
+
+.footer {
+  min-height: 300px;
+  max-height:10%;
+  color:white;
+  background:rgba(0,0,0, .8);
+  display:flex;
+  
+}
+
+.footer-item {
+  box-sizing:border-box;
+  padding:80px 0px 0px 80px;
+  min-width:25%;
+}
+
+.footer-item p {
+  font-family:'Roboto';
+  font-size:11pt;
+}
+
+.footer a {
+  color:white;
+  outline:none;
+  text-decoration:none;
+  font-family:'Roboto';
+}
+.footer a:hover {
+  text-decoration:underline;
+}
+
+.footer-section-title {
+  font-family:'Roboto';
+  font-weight:medium;
+  font-size:12pt;
+  margin-bottom:10px;
+}
+
+@media (min-width:1025px) {
+  .info-envelope-body {
+    width:60%;
+  }
+}
+
+
+/* room view/ Game UI */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* animations */
+
+
+/* ----------------------------------------------
+ * Generated by Animista on 2020-2-17 21:15:58
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation color-change-5x
+ * ----------------------------------------
+ */
+
+ @-webkit-keyframes color-change-5x {
+    0% {
+      background: #19dcea;
+    }
+    25% {
+      background: #b22cff;
+    }
+    50% {
+      background: #ea2222;
+    }
+    75% {
+      background: #f5be10;
+    }
+    100% {
+      background: #3bd80d;
+    }
+  }
+  @keyframes color-change-5x {
+    0% {
+      background: #19dcea;
+    }
+    25% {
+      background: #b22cff;
+    }
+    50% {
+      background: #ea2222;
+    }
+    75% {
+      background: #f5be10;
+    }
+    100% {
+      background: #3bd80d;
+    }
+  }
+  
+
+  /* platform queries */
+
