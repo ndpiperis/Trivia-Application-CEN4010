@@ -42,7 +42,12 @@ $('.entry-form').submit(function(e) {
 
 //swaps view to game room
 function changeToRoom(info) {
-    showDialog("Successfully joined room", true, true);
+    //showDialog("Successfully joined room", true, true);
+    $(".landing").animate({
+            height: $(window).height()
+
+    });
+    $(".footer, .info-envelope").fadeOut(300);
     console.log('Server: Successfully joined room #' + info.code);
 
 }
