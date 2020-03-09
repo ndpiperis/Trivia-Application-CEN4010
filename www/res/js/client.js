@@ -46,12 +46,16 @@ function changeToRoom(info) {
     console.log($(window).height());
     $(".landing").addClass('fillScreen', 300).removeClass('landing', 300);
     $(".footer, .info-envelope").fadeOut(300);
-    $('.splash, .landing-body').animate({
+    $('.splash, .landing-body, .landing-splash').animate({
         marginTop:"-800px"
         
-    }, 400).hide(0);
+    }, 400).hide(0, function() {
+        $('.game-ui').fadeIn(200, function() {
+        $(this).addClass('game-flex');
+    });
+    });
 
-    $('.game-ui').fadeIn();
+    $(".q-box").append("<h1 class='info-envelope-title'>Room " + info.code +" lobby</h1><img class='load' src='img/load.png'/>");
     console.log('Server: Successfully joined room #' + info.code);
 
 }
