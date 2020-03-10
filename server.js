@@ -135,6 +135,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('disconnect', function(){
+      //room cleanup (not really working) *********************
       if(_rooms.length > 0) {
         removeFromRoom(socket);
         cleanRooms();
