@@ -1,6 +1,5 @@
 var jsonData = [
-    {
-        //Example questions
+    {   //Example questions
         "q": "What does html stand for?",
         "opt1": "HyperText Markup Language",
         "opt2": "HyperText Transfer Protocol",
