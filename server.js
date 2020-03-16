@@ -39,6 +39,7 @@ console.log('Server initialized');
 //include resources
 app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/www/res'));
+app.use(express.static(__dirname + '/www/'));
 
 //serves /www/, all files visible to client
 app.get('/', function(req, res) {

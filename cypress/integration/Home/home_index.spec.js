@@ -9,7 +9,7 @@ describe('Checks the content of the trivia app home page', () => {
         
         cy.get('input.landing-textfield').eq(0).should('have.attr', 'placeholder', 'Room Code');
         cy.get('input.landing-textfield').eq(1).should('have.attr', 'placeholder', 'Name');
-        cy.get('input.landing-button').should('have.attr', 'type', 'button').should('have.value', 'Play');
+        cy.get('input.landing-button').should('have.attr', 'type', 'submit').should('have.value', 'Play');
 
         cy.get('h1.info-envelope-title').should('contain', 'Knowledge that sticks.');
         cy.get('h2').should('contain', 'How does Witti work?');
