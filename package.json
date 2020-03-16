@@ -10,7 +10,7 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "cypress": "^4.0.2"
+    "cypress": "^4.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
