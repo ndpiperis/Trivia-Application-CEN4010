@@ -131,7 +131,7 @@ body, html {
     
 }
 
-.landing-button, .landing-textfield {
+.landing-shadow {
     -webkit-box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
 -moz-box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
 box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
@@ -158,9 +158,9 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
 }
 
 .landing-button:active {
-    position:relative;
-    top:1px;
+  
     border-bottom:0px solid rgba(0,0,0, .2);
+    border-top:2px solid rgba(0,0,0, .2);
     -webkit-box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);
     -moz-box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);
     box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);   
@@ -373,13 +373,48 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
 }
 
 
+
+.q-box h1 {
+  font-size:16pt;
+}
+
+.q-box .switcher {
+  box-sizing:border-box;
+  padding:10px;
+  display:inherit;
+  align-items:center;
+  justify-content:center;
+  border-top:1px solid rgba(0,0, 0, .1);
+  width:100%;
+}
+
+.q-box .members {
+  min-height:150px;
+  max-height:200px;
+  overflow-y:scroll;
+  width:100%;
+}
+
+.q-box .user {
+  border-bottom:1px solid rgba(0,0,0, .09);
+  box-sizing:border-box;
+  padding:10px;
+  width:auto;
+  background:rgba(0,0,0, .02);
+  margin-left:15px;
+}
+
+.q-box .menu {
+  border-top:1px solid rgba(0,0,0, .1);
+}
+
+
+
+
 /* game ui platform specifics */
 @media (min-width: 600px) {
   .q-box, .a-box {
     width:60%;
-  }
-  .q-box {
-    flex-direction:row;
   }
 
   .load {

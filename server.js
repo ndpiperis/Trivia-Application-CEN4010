@@ -39,6 +39,7 @@ console.log('Server initialized');
 //include resources
 app.use(express.static(__dirname + '/node_modules'));
 app.use(express.static(__dirname + '/www/res'));
+app.use(express.static(__dirname + '/www/'));
 
 //serves /www/, all files visible to client
 app.get('/', function(req, res) {
@@ -68,11 +69,16 @@ var _rooms = [
 
   ];
 
+var user_quizzes = [
+
+];
+
 function prepDataCreate(nroom, name, socket) {
   
   console.log('room-' + nroom);
   _rooms.push({
     code: nroom, 
+    owner: name,
     roomName: name + "'s room",
     users: [
       socket.id
@@ -111,7 +117,8 @@ io.on('connection', function(socket){
           prepDataJoin(info, socket);
           console.log('user joined room-' + info.code);
          socket.emit('join-success', {
-            code: nroom
+            code: nroom,
+            owner: false
           });
           listUsersInRoom(info.code);
         });
@@ -129,7 +136,8 @@ io.on('connection', function(socket){
         prepDataCreate(nroom, info.name, socket);
         console.log('user joined room-' + nroom);
         socket.emit('join-success', {
-          code: nroom
+          code: nroom,
+          owner: true
         });
       });
     });

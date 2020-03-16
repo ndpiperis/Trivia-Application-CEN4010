@@ -44,26 +44,36 @@ $('.entry-form').submit(function(e) {
 function changeToRoom(info) {
     //showDialog("Successfully joined room", true, true);
     console.log($(window).height());
-    // $(".landing").addClass('fillScreen', 300).removeClass('landing', 300);
-    // 
-    // $('.splash, .landing-body, .landing-splash').animate({
-    //     marginTop:"-800px"
-        
-    // }, 400).hide(0, function() {
-    //     $('.game-ui').fadeIn(200, function() {
-    //     $(this).addClass('game-flex');
-    // });
-    // });
-
     $(".landing-splash, .landing-body").fadeOut(200, function() {
         $(".landing").addClass('fillScreen', 300).removeClass('landing', 300);
         $(".game-ui").fadeIn(500);
         $(".footer, .info-envelope").fadeOut(300);
         $('.landing-textfield').blur();
-    })
+    });
 
-    $(".q-box").append("<h1 class='info-envelope-title'>Room " + info.code +" lobby</h1><img class='load' src='img/load.png'/>");
-    console.log('Server: Successfully joined room #' + info.code);
+    if(owner) {
+        $('.q-box').append(" <h1>Room #####</h1>"+
+            "<section class='switcher'>"+
+
+            "<input type='button' class='landing-button' value='Your Quizzes'>"+
+            "<input type='button' class='landing-button' value='Premade Quizzes'>"+
+
+        "</section>"+
+        "<section class='members'>"+
+            
+        "</section>"+
+        "<section class='menu'>"+
+
+            "<input type='button' class='landing-button' value='Leave'>"+
+            "<input type='button' class='landing-button' value='View Lobby'>"+
+            "<input type='button' class='landing-button' value='Start'>"+
+
+        "</section>");
+    } else {
+        $(".q-box").append("<h1 class='info-envelope-title'>Room " + info.code +" lobby</h1><img class='load' src='img/load.png'/>");
+        console.log('Server: Successfully joined room #' + info.code);
+    }
+   
 
 }
 
