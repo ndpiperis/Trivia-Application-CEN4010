@@ -63,7 +63,7 @@ console.log(
 
 //socket code
 //[
-//  code, room name, users
+//  code, owner, room name, users(socket id, name)
 //]
 var _rooms = [
 
@@ -73,19 +73,21 @@ var user_quizzes = [
 
 ];
 
+//pushes room to array (ONLY ON ROOM CREATE)
 function prepDataCreate(nroom, name, socket) {
   
   console.log('room-' + nroom);
   _rooms.push({
     code: nroom, 
-    owner: name,
+    owner: socket.id,
     roomName: name + "'s room",
     users: [
-      socket.id
+      [socket.id, name]
     ]
   });
 }
 
+//gets room user is joining and sends info (May be deprecated in favor of getRoomAtID())
 function prepDataJoin(info, socket) {
   for(var i = 0; i < _rooms.length; i++) {
     for(var j = 0; j < _rooms[i].users.length; j++) {
@@ -97,8 +99,9 @@ function prepDataJoin(info, socket) {
   }
 }
 
+//pushes join info (ONLY ON ROOM JOIN)
 function prepSocket(room, info, socket) {
-  room.push(socket.id);
+  room.push([socket.id, info.name]);
   socket.username = info.name;
   socket.room = info.code;
 
@@ -114,13 +117,14 @@ io.on('connection', function(socket){
       if (checkRoomExist(info, socket)) {
         socket.join(info.code, function() {
           
-          prepDataJoin(info, socket);
-          console.log('user joined room-' + info.code);
-         socket.emit('join-success', {
-            code: nroom,
-            owner: false
-          });
-          listUsersInRoom(info.code);
+        prepDataJoin(info, socket);
+        console.log('user joined room-' + info.code);
+        croom = getRoomAtCode(info.code);
+        oid = croom.owner;
+        
+        socket.emit('join-success', croom);
+        io.to(`${oid}`).emit('updated-users', croom);
+        listUsersInRoom(info.code);
         });
       } else {
         console.log("unable to join room");
@@ -134,19 +138,23 @@ io.on('connection', function(socket){
       socket.join(nroom, function() {
         
         prepDataCreate(nroom, info.name, socket);
-        console.log('user joined room-' + nroom);
-        socket.emit('join-success', {
-          code: nroom,
-          owner: true
-        });
+        console.log('user created room-' + nroom);
+        croom = getRoomAtCode(nroom);
+        console.log(croom.owner);
+        socket.emit('join-success', croom);
       });
     });
 
     socket.on('disconnect', function(){
       //room cleanup (not really working) *********************
-      if(_rooms.length > 0) {
-        removeFromRoom(socket);
-        cleanRooms();
+      try {
+        croom = getRoomAtID(socket.id);
+        cleanRooms(socket.id);
+        io.to(`${croom.owner}`).emit('updated-users', croom);
+        console.log("Updating room " + croom.code + " with users " + croom.users);
+      }
+      catch(error) {
+        console.log("Error occurred");
       }
       console.log(socket.id  + ' disconnected');
 
@@ -156,46 +164,65 @@ io.on('connection', function(socket){
 
   //UTILITY FUNCTIONS
 
-  //gets room that socket is member of. breaks after first room is found, so it cannot get multiple rooms
-  function removeFromRoom(socket) {
-    
+  //returns room at code or err
+  function getRoomAtCode(code) {
     for (var i = 0; i < _rooms.length; i++) {
-      for(var j = 0; j < _rooms[i].users.length; j++) {
-        if(_rooms[i].users[j] == socket.id) {
-            if(_rooms.users && typeof _rooms.users.length > 0) {
-              _rooms.users.splice(j, 1);  
-              console.log(_rooms[i].users);
-              if(_rooms[i].users.length == 0) {
-                console.log('no users in room ' + _rooms[i].code +', room deleted');
-                _rooms.splice(i, 1);  
-              }
-          }
-        }      
+      if(_rooms[i].code == code) {
+        return _rooms[i];    
+      }
+    }
+    return 1;
+  }
+
+  //returns room at id
+  function getRoomAtID(id) {
+    for (var i = 0; i < _rooms.length; i++) {
+      for (var j = 0; j < _rooms[i].users.length; j++) {
+       
+        if(_rooms[i].users[j][0] == id) {
+          return _rooms[i];
+        }
       }
     }
   }
-
-  //deletes socket id from users array for room. 
-  
-
-    //broadcast to all users in rom with updated user list
     
   
-
-  function cleanRooms() {
-    for (var i = 0; i < _rooms.length; i++) {
-
-      
-    }
+//checks and removes empty rooms
+  function cleanRooms(id) {
+    console.log("cleaning rooms");
+    //if(_rooms != undefined) {
+      try {
+        for (var i = 0; i < _rooms.length; i++) {
+          for (var j = 0; j < _rooms[i].users.length; j++) {
+          
+            if(_rooms[i].users[j][0] == id) {
+              _rooms[i].users[j] = [];
+              console.log("user removed");
+              
+              
+            }
+            if(_rooms[i].owner == id) {
+              _rooms[i] = [];
+              console.log("Room removed");
+            }
+            console.log("Active rooms: " + _rooms);
+          }
+        }
+      }
+      catch(e) {
+        console.log(e);
+      }
+    //}
   }
 
-
+  //does what name implies, returns boolean value
   function checkRoomExist(info, socket) {
     for(var i = 0; i < _rooms.length; i++) {
       if(_rooms[i].code == info.code) {
         return true;
       }
     }
+    return false;
   }
 
   //generates random room code
@@ -209,6 +236,7 @@ io.on('connection', function(socket){
     return nroom;
   }
  
+  //provide array of users in console
   function listUsersInRoom(code) {
     for(var i = 0; i < _rooms.length; i++) {
       if(_rooms[i].code == code) {

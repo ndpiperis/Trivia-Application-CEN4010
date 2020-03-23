@@ -51,12 +51,12 @@ function changeToRoom(info) {
         $('.landing-textfield').blur();
     });
 
-    if(owner) {
-        $('.q-box').append(" <h1>Room #####</h1>"+
+    if(info.owner == socket.id) {
+        $('.q-box').append(" <h1>Room "+ info.code +"</h1>"+
             "<section class='switcher'>"+
 
-            "<input type='button' class='landing-button' value='Your Quizzes'>"+
-            "<input type='button' class='landing-button' value='Premade Quizzes'>"+
+            "<input type='button' id='your-quizzes' class='landing-button' value='Your Quizzes'>"+
+            "<input type='button' id='premade-quizzes' class='landing-button' value='Premade Quizzes'>"+
 
         "</section>"+
         "<section class='members'>"+
@@ -64,22 +64,42 @@ function changeToRoom(info) {
         "</section>"+
         "<section class='menu'>"+
 
-            "<input type='button' class='landing-button' value='Leave'>"+
+            "<input type='button' id='leave' class='landing-button' value='Leave'>"+
             "<input type='button' class='landing-button' value='View Lobby'>"+
-            "<input type='button' class='landing-button' value='Start'>"+
+            "<input type='button' id='start' class='landing-button' value='Start'>"+
 
         "</section>");
     } else {
         $(".q-box").append("<h1 class='info-envelope-title'>Room " + info.code +" lobby</h1><img class='load' src='img/load.png'/>");
         console.log('Server: Successfully joined room #' + info.code);
     }
-   
+}
 
+function updateUserList(info) {
+    $(".members").empty();
+    for(var i = 0; i < info.users.length; i++)  {
+        if(info.users[i][1] != undefined) {
+            $(".members").append("<div class='user'>" + info.users[i][1] + "</div>");
+        }
+    }
 }
 
 //receives join success packet, start room change
 socket.on('join-success', function(info) {
+
     changeToRoom(info);
+    console.log("Owner: " + info.owner);
+    if(info.owner == socket.id) {
+        console.log("You are the owner of this room");
+        updateUserList(info);
+    }
+});
+
+socket.on('updated-users', function(room) {
+    if(room.owner == socket.id) {
+        console.log("You are the owner of this room");
+        updateUserList(room);
+    }
 });
 
 //shows input error messages
