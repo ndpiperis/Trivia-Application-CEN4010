@@ -118,6 +118,24 @@ body, html {
     
 }
 
+.landing-textfield-2 {
+  color:rgba(0,0,0, .85);
+  background:white;
+  border:1px solid rgba(0,0,0,.2);
+  border-bottom:2px solid rgba(0,0,0, .2);
+  border-radius:5px;
+  margin:8px;
+  outline:none;
+  width: 250px;
+  height:45px;
+  font-size:13pt;
+  font-family: 'Montserrat';
+  box-sizing:border-box;
+  padding-left:12px;
+  padding-right:12px;
+  
+}
+
 .landing-button, .landing-textfield {
     -webkit-box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
 -moz-box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
@@ -265,6 +283,16 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
   font-size:12pt;
   margin-bottom:10px;
 }
+
+
+/* FRANCO's STUFF */
+
+b {
+  margin: 0;
+  padding: 0;
+}
+
+
 
 
 /* room view */
