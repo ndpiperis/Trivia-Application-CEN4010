@@ -456,6 +456,31 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
 
 }
 
+textarea.textbox {
+  width: 100%;
+  color: red;
+  
+}
+
+.expand {
+  padding: 5px 5px 5px 5px;
+  border-radius: 10px;
+  height: 49px;
+  width: 22%;
+  margin: 5px 1% 5px 1%;
+  float: left;
+  position: relative;
+  transition: height 0.5s;
+  -webkit-transition: height 0.5s;
+  text-align: center;
+  overflow: hidden;
+}
+
+.expand:hover {
+  -webkit-text-size-adjust: 200px;
+  width: 400px;
+}
+
 /* animations */
 
 

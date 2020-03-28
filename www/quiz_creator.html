@@ -11,6 +11,7 @@
                 font-src 'self' data:;
                 connect-src ws:">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+               <!--Math.min(textarea.scrollHeight, limit) + "px";-->
         <!--CSS-->
         <link rel="stylesheet" type="text/css" href="css/mobile.css"/>
     </head>
@@ -23,24 +24,64 @@
                 <section class="game-ui an">
                     <section class="q-box">
                         <h2>Quiz Creator</h2>
-                                                    
-                            <b>Quiz Title:</b>
+                        
+                        <form action="">
+                            <label>Quiz Title:</label>
                             <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="5"/>
+                            <br>
 
-                            <b>Main Question:</b>
+                            <label>Main Question:</label>
                             <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="5"/>
+                            <br>
 
-                            <b>A</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/>
-                            <b>B</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/>
-                            <b>C</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/>
-                            <b>D</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/>
+                            <!--div class="grow"-->
+                                <label>A</label>
+                                <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <!--input type="text" class="landing-textfield" id="code" placeholder="There is so much shit in here! AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!" maxlength="20"/-->
+                                <br>
 
-                            <b>Review</b>
-                            <input type="checkbox" name="c1" onclick="showme(div)">
+                                <label>B</label>
+                                <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <!--input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
+                                <br>
+
+                                <label>C</label>
+                                <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <!--input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
+                                <br>
+
+                                <label>D</label>
+                                <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <!--input type="tex" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
+                                <br>
+
+                                <label>Review</label>
+                                <input type="checkbox" id="reviewButton" onclick="myFunction()">
+
+                                <div id="reviewSection">
+                                    <label>A</label>
+                                    <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                    <!--input type="text" class="landing-textfield" id="code" placeholder="There is so much shit in here! AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!" maxlength="20"/-->
+                                    <br>
+    
+                                    <label>B</label>
+                                    <textarea class="textbox" oninput="showTextBox(this)"></textarea>
+                                    <!--input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
+                                    <br>
+    
+                                    <label>C</label>
+                                    <textarea class="textbox" oninput="showTextBox(this)"></textarea>
+                                    <!--input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
+                                    <br>
+    
+                                    <label>D</label>
+                                    <textarea class="textbox" oninput="showTextBox(this)"></textarea>
+                                    <!--input type="tex" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
+                                    <br>
+                                </div>
+
+                            <!--/div-->
+                        </form>
                         
                     </section>
                     
@@ -63,6 +104,32 @@
         <script src="js/data.js">
         </script>
         
+        <script>
+            document.getElementById("reviewButton").checked = true;
+
+            function hideTextBox(e)
+            {
+                e.style.height = "";
+            }
+
+            function showTextBox(e)
+            {
+                
+                e.style.height = "";
+                e.style.height = e.scrollHeight + "px"; 
+
+            }
+
+            //SHOW/HIDE REVIEW SECTION
+            function myFunction() {
+                var x = document.getElementById("reviewSection");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>
 
     </body>
 
