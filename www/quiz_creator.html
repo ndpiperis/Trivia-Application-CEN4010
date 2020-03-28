@@ -22,63 +22,84 @@
             <section class="an fillScreen">
                 <!-- GAME UI -->
                 <section class="game-ui an">
-                    <section class="q-box">
+                    <section class="q-box-2">
                         <h2>Quiz Creator</h2>
                         
-                        <form action="">
+                        <form class="formfield" action="">
                             <label>Quiz Title:</label>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="5"/>
+                            <input type="text" class="landing-textfield" placeholder="" maxlength="30"/>
                             <br>
 
                             <label>Main Question:</label>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="5"/>
+                            <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
+
+                            <label for="img">Select image:</label>
+                            <input type="file" id="img" name="img" accept="image/*">
+                            <br>
                             <br>
 
                             <!--div class="grow"-->
+                            <label>A</label>
+                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
+
+                            <label>B</label>
+                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
+
+                            <label>C</label>
+                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
+
+                            <label>D</label>
+                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
+                            <br>
+
+                            <label>Review</label>
+                            <input type="checkbox" id="reviewButton" onclick="myFunction()">
+                            <br>
+                            <br>
+
+                            <div id="reviewSection">
+
+                                <label>Explaination:</label>
+                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+    
+                                <label>Example Question:</label>
+                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+
+                                <label for="img">Select image:</label>
+                                <input type="file" id="img" name="img" accept="image/*">
+                                <br>
+                                <br>
+
+                                <label>Answer</label>
+                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+                                <br>
+                                
+                                <label>Makeup Question:</label>
+                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+
+                                <label for="img">Select image:</label>
+                                <input type="file" id="img" name="img" accept="image/*">
+                                <br>
+                                <br>
+                                
                                 <label>A</label>
-                                <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                                <!--input type="text" class="landing-textfield" id="code" placeholder="There is so much shit in here! AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!" maxlength="20"/-->
+                                <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
                                 <br>
 
                                 <label>B</label>
-                                <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                                <!--input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
+                                <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
                                 <br>
 
-                                <label>C</label>
-                                <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                                <!--input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
-                                <br>
-
-                                <label>D</label>
-                                <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                                <!--input type="tex" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
-                                <br>
-
-                                <label>Review</label>
-                                <input type="checkbox" id="reviewButton" onclick="myFunction()">
-
-                                <div id="reviewSection">
-                                    <label>A</label>
-                                    <textarea class="textbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                                    <!--input type="text" class="landing-textfield" id="code" placeholder="There is so much shit in here! AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!" maxlength="20"/-->
-                                    <br>
-    
-                                    <label>B</label>
-                                    <textarea class="textbox" oninput="showTextBox(this)"></textarea>
-                                    <!--input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
-                                    <br>
-    
-                                    <label>C</label>
-                                    <textarea class="textbox" oninput="showTextBox(this)"></textarea>
-                                    <!--input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
-                                    <br>
-    
-                                    <label>D</label>
-                                    <textarea class="textbox" oninput="showTextBox(this)"></textarea>
-                                    <!--input type="tex" class="landing-textfield" id="code" placeholder="" maxlength="20"/-->
-                                    <br>
-                                </div>
+                            </div>
 
                             <!--/div-->
                         </form>

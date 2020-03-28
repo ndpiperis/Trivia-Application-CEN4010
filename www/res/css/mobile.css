@@ -343,7 +343,7 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
   padding:10px;
   
   display:flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   flex-direction:column;
   padding:25px;
@@ -450,16 +450,36 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
 
 /* FRANCO's STUFF */
 
-.q-box b {
-  margin: 0;
-  padding: 0;
-
+.q-box-2 {
+  background:white;
+  width:50%;
+  min-height:200px;
+  border-radius:5px;
+  -webkit-box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
+  -moz-box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
+  box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
+  font-family: 'Montserrat';
+  box-sizing:border-box;
+  padding:10px;
+  
+  display:flex;
+  align-items: left;
+  justify-content: center;
+  flex-direction:column;
+  padding:25px;
 }
 
-textarea.textbox {
-  width: 100%;
-  color: red;
-  
+textarea.tbox {
+  width: 70%;
+}
+
+textarea.panswer {
+  margin-left: 30px;
+  width: 50%;
+}
+
+.formfield * {
+  vertical-align: middle;
 }
 
 .expand {
