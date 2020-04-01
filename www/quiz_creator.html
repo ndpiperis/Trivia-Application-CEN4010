@@ -11,6 +11,7 @@
                 font-src 'self' data:;
                 connect-src ws:">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+               <!--Math.min(textarea.scrollHeight, limit) + "px";-->
         <!--CSS-->
         <link rel="stylesheet" type="text/css" href="css/mobile.css"/>
     </head>
@@ -21,26 +22,87 @@
             <section class="an fillScreen">
                 <!-- GAME UI -->
                 <section class="game-ui an">
-                    <section class="q-box">
+                    <section class="q-box-2">
                         <h2>Quiz Creator</h2>
-                                                    
-                            <b>Quiz Title:</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="5"/>
+                        
+                        <form class="formfield" action="">
+                            <label>Quiz Title:</label>
+                            <input type="text" class="landing-textfield" placeholder="" maxlength="30"/>
+                            <br>
 
-                            <b>Main Question:</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="5"/>
+                            <label>Main Question:</label>
+                            <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
 
-                            <b>A</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/>
-                            <b>B</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/>
-                            <b>C</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/>
-                            <b>D</b>
-                            <input type="text" class="landing-textfield" id="code" placeholder="" maxlength="20"/>
+                            <label for="img">Select image:</label>
+                            <input type="file" id="img" name="img" accept="image/*">
+                            <br>
+                            <br>
 
-                            <b>Review</b>
-                            <input type="checkbox" name="c1" onclick="showme(div)">
+                            <!--div class="grow"-->
+                            <label>A</label>
+                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
+
+                            <label>B</label>
+                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
+
+                            <label>C</label>
+                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
+
+                            <label>D</label>
+                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                            <br>
+                            <br>
+
+                            <label>Review</label>
+                            <input type="checkbox" id="reviewButton" onclick="myFunction()">
+                            <br>
+                            <br>
+
+                            <div id="reviewSection">
+
+                                <label>Explaination:</label>
+                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+    
+                                <label>Example Question:</label>
+                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+
+                                <label for="img">Select image:</label>
+                                <input type="file" id="img" name="img" accept="image/*">
+                                <br>
+                                <br>
+
+                                <label>Answer</label>
+                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+                                <br>
+                                
+                                <label>Makeup Question:</label>
+                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+
+                                <label for="img">Select image:</label>
+                                <input type="file" id="img" name="img" accept="image/*">
+                                <br>
+                                <br>
+                                
+                                <label>A</label>
+                                <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+
+                                <label>B</label>
+                                <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <br>
+
+                            </div>
+
+                            <!--/div-->
+                        </form>
                         
                     </section>
                     
@@ -63,6 +125,32 @@
         <script src="js/data.js">
         </script>
         
+        <script>
+            document.getElementById("reviewButton").checked = true;
+
+            function hideTextBox(e)
+            {
+                e.style.height = "";
+            }
+
+            function showTextBox(e)
+            {
+                
+                e.style.height = "";
+                e.style.height = e.scrollHeight + "px"; 
+
+            }
+
+            //SHOW/HIDE REVIEW SECTION
+            function myFunction() {
+                var x = document.getElementById("reviewSection");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>
 
     </body>
 
