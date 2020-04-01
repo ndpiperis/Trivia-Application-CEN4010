@@ -1,0 +1,66 @@
+.quiz-title {
+    width:80%;
+}
+
+legend {
+font-family:'Patua One';
+font-size:16pt;
+box-sizing:border-box;
+padding:0px 10px 0px 10px;
+}
+
+fieldset {
+  border-radius:10px;
+  border:1px solid rgba(0,0,0, .1);
+  padding-bottom: 10px;
+}
+
+.qc {
+    box-sizing:border-box;
+    overflow-y:scroll;
+    width:90%;
+    text-align:left;
+  }
+
+.upload {
+    border:none;
+    color:rgba(0,0,0, .85);
+    background:rgba(0,0,0, .05);
+    border-bottom:2px solid rgba(0,0,0, .2);
+
+    border-radius:5px;
+    margin:8px;
+    outline:none;
+    width: 175px;
+    height:35px;
+    font-size:13pt;
+    font-family: 'Montserrat';
+    box-sizing:border-box;
+    padding-left:12px;
+    padding-right:12px;
+    
+}
+
+.upload:active {
+
+    -webkit-box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);
+    -moz-box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);
+    box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);   
+}
+
+.quiz-textfield {
+    color:rgba(0,0,0, .85);
+    background:white;
+    border:1px solid rgba(0,0,0,.2);
+    border-bottom:2px solid rgba(0,0,0, .2);
+    border-radius:5px;
+    margin:8px;
+    outline:none;
+    width: 300px;
+    height:80px;
+    font-size:14pt;
+    font-family: 'Montserrat';
+    box-sizing:border-box;
+    padding:15px;
+}
+  

@@ -14,6 +14,7 @@
                <!--Math.min(textarea.scrollHeight, limit) + "px";-->
         <!--CSS-->
         <link rel="stylesheet" type="text/css" href="css/mobile.css"/>
+        <link rel="stylesheet" type="text/css" href="css/quiz-creator.css"/>
     </head>
     <body>
         <!--contains all visible layers-->
@@ -22,87 +23,86 @@
             <section class="an fillScreen">
                 <!-- GAME UI -->
                 <section class="game-ui an">
-                    <section class="q-box-2">
-                        <h2>Quiz Creator</h2>
+                    <section class="q-box">
                         
-                        <form class="formfield" action="">
-                            <label>Quiz Title:</label>
-                            <input type="text" class="landing-textfield" placeholder="" maxlength="30"/>
-                            <br>
-
-                            <label>Main Question:</label>
-                            <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                            <br>
-
-                            <label for="img">Select image:</label>
-                            <input type="file" id="img" name="img" accept="image/*">
-                            <br>
-                            <br>
-
-                            <!--div class="grow"-->
-                            <label>A</label>
-                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                            <br>
-
-                            <label>B</label>
-                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                            <br>
-
-                            <label>C</label>
-                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                            <br>
-
-                            <label>D</label>
-                            <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                            <br>
-                            <br>
-
-                            <label>Review</label>
-                            <input type="checkbox" id="reviewButton" onclick="myFunction()">
-                            <br>
-                            <br>
-
-                            <div id="reviewSection">
-
-                                <label>Explaination:</label>
-                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                                <br>
-    
-                                <label>Example Question:</label>
-                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                        
+                        <section class="qc">
+                            <h1>Quiz Creator</h1>
+                          
+                            <fieldset>
+                                <legend>Quiz Title</legend>
+                                <input class="landing-textfield quiz-title" type="text" placeholder="" maxlength="30"/>
+                            
+                            </fieldset>
+                            <fieldset>
+                                <legend>Main Question:</legend>
+                                <textarea class="tbox landing-textfield" ></textarea>
                                 <br>
 
-                                <label for="img">Select image:</label>
-                                <input type="file" id="img" name="img" accept="image/*">
+                               
+                                <input type="button" class="upload" value="Upload image" id="img" name="img" accept="image/*">
                                 <br>
                                 <br>
 
-                                <label>Answer</label>
-                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
+                                <!--div class="grow"-->
+                           
+                                <input type="text" class="panswer landing-textfield" placeholder="A">
                                 <br>
+
+                           
+                                <input type="text" class="panswer landing-textfield" placeholder="B">
                                 <br>
+
+                         
+                                <input type="text" class="panswer landing-textfield" placeholder="C">
+                                <br>
+
+                          
+                                <input type="text" class="panswer landing-textfield" placeholder="D">
+                          
+                            </fieldset>
+
+                            <fieldset>
+                                <legend>Review</legend>
+               
                                 
-                                <label>Makeup Question:</label>
-                                <textarea class="tbox" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                                <br>
+                                    <textarea class="tbox quiz-textfield" placeholder="Explanation"></textarea>
+                                    <br>
+        
+        
+                                    <textarea class="tbox quiz-textfield" placeholder="Example Question"></textarea>
+                                    <br>
 
-                                <label for="img">Select image:</label>
-                                <input type="file" id="img" name="img" accept="image/*">
-                                <br>
-                                <br>
+                                    <input type="button" class="upload" value="Upload image" id="img" name="img" accept="image/*">
+
+                                    <br>
+                                    <br>
+
+
+                                    <textarea class="tbox quiz-textfield" placeholder="Answer"></textarea>
+                                    <br>
+                                    <br>
+                                    
+                                    <textarea class="tbox quiz-textfield" placeholder="Makeup Question"></textarea>
+                                    <br>
+
                                 
-                                <label>A</label>
-                                <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                                <br>
+                                    <input type="button" class="upload" value="Upload image" id="img" name="img" accept="image/*">
 
-                                <label>B</label>
-                                <textarea class="panswer" oninput="showTextBox(this)" onmouseout="hideTextBox(this)" onmouseover="showTextBox(this)"></textarea>
-                                <br>
+                                    <br>
+                                    <br>
+                                    
+                               
+                                    <input type="text" class="panswer quiz-textfield" placeholder="A">
+                                    <br>
 
-                            </div>
+                                    <input type="text" class="panswer quiz-textfield" placeholder="B">
+                                    <br>
+                            </fieldset>
+
 
                             <!--/div-->
-                        </form>
+                        </section>
                         
                     </section>
                     
