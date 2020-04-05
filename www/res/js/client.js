@@ -53,7 +53,7 @@ function changeToRoom(info) {
 
     if(info.owner == socket.id) {
         $('.q-box').append(" <h1>Room "+ info.code +"</h1>"+
-            "<section class='switcher'>"+
+            "<section class='switcher fc'>"+
 
             "<input type='button' id='your-quizzes' class='landing-button' value='Your Quizzes'>"+
             "<input type='button' id='premade-quizzes' class='landing-button' value='Premade Quizzes'>"+

@@ -154,7 +154,7 @@ io.on('connection', function(socket){
         console.log("Updating room " + croom.code + " with users " + croom.users);
       }
       catch(error) {
-        console.log("Error occurred");
+        console.log("Could not update rooms");
       }
       console.log(socket.id  + ' disconnected');
 
@@ -166,6 +166,7 @@ io.on('connection', function(socket){
 
   //returns room at code or err
   function getRoomAtCode(code) {
+
     for (var i = 0; i < _rooms.length; i++) {
       if(_rooms[i].code == code) {
         return _rooms[i];    
@@ -176,6 +177,12 @@ io.on('connection', function(socket){
 
   //returns room at id
   function getRoomAtID(id) {
+
+    // res = _rooms.filter(o => {
+    //   if(o.users.indexOf(id > 0)) {
+
+    //   }
+    // });
     for (var i = 0; i < _rooms.length; i++) {
       for (var j = 0; j < _rooms[i].users.length; j++) {
        
@@ -189,8 +196,21 @@ io.on('connection', function(socket){
   
 //checks and removes empty rooms
   function cleanRooms(id) {
-    console.log("cleaning rooms");
-    //if(_rooms != undefined) {
+    console.log("Cleaning rooms...");
+
+    // try {
+    //   res = _rooms.filter(o => o.code == code);
+    //   resobj = res.filter
+    //   if(res.owner == id) {
+    //     _rooms[i] = [];
+    //     console.log("Room removed");
+    //   }
+    // }
+    // catch(e) {
+    //   console.log("Error occurred");
+    // }
+
+    if(_rooms != undefined) {
       try {
         for (var i = 0; i < _rooms.length; i++) {
           for (var j = 0; j < _rooms[i].users.length; j++) {
@@ -212,7 +232,7 @@ io.on('connection', function(socket){
       catch(e) {
         console.log(e);
       }
-    //}
+    }
   }
 
   //does what name implies, returns boolean value
@@ -238,14 +258,21 @@ io.on('connection', function(socket){
  
   //provide array of users in console
   function listUsersInRoom(code) {
-    for(var i = 0; i < _rooms.length; i++) {
-      if(_rooms[i].code == code) {
-        console.log(_rooms[i].users);
-      }
-    }
+    console.log('Users in room:')
+    res = _rooms.filter(o => o.code == code);
+    console.log(res.users);
   }
   
+
+  /////////////////////////////////////////////////////////
+  //      QUIZ SECTION
+  /////////////////////////////////////////////////////////
  
+  io.on('quiz-start', function () {
+    quiz = new Quiz(getRoomAtID(socket.id));
+    quiz.pollQuestion();
+  });
+
 
 server.listen(4200);
 
