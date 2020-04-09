@@ -24,28 +24,6 @@ var jsonData = [
         "answer": "HyperText Markup Language"
     },
     //End of example questions, continue below
-
-    //Topic: " "
-    {
-        "q": "",
-        "opt1": "",
-        "opt2": "",
-        "opt3": "",
-        "opt4": "",
-        "answer": ""
-    },
-
-    //End topic
-
-    //Topic: " "
-    {
-        "q": "",
-        "opt1": "",
-        "opt2": "",
-        "opt3": "",
-        "opt4": "",
-        "answer": ""
-    },
     
     //End topic
     ];
