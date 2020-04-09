@@ -1,7 +1,17 @@
 var socket = io();
+//global room code
 var room = 00000;
 var errShown = false;
 
+//game start
+$('.q-box').on('click', '.start', function() {
+    console.log('You clicked this!');
+    socket.emit("start-quiz", {
+        roomn : room
+    });
+});
+
+//entry form
 $('.entry-form').submit(function(e) {
     ncode = $('#code').val()
     nname = $('#name').val()
@@ -40,9 +50,13 @@ $('.entry-form').submit(function(e) {
     }
 });
 
+
+
+
 //swaps view to game room
 function changeToRoom(info) {
     //showDialog("Successfully joined room", true, true);
+    room = info.room;
     console.log($(window).height());
     $(".landing-splash, .landing-body").fadeOut(200, function() {
         $(".landing").addClass('fillScreen', 300).removeClass('landing', 300);
@@ -66,7 +80,7 @@ function changeToRoom(info) {
 
             "<input type='button' id='leave' class='landing-button' value='Leave'>"+
             "<input type='button' class='landing-button' value='View Lobby'>"+
-            "<input type='button' id='start' class='landing-button' value='Start'>"+
+            "<input type='button' class='landing-button start' value='Start'>"+
 
         "</section>");
     } else {
@@ -75,6 +89,8 @@ function changeToRoom(info) {
     }
 }
 
+
+//refreshes the list of users in the room every time join/leave occurs
 function updateUserList(info) {
     $(".members").empty();
     for(var i = 0; i < info.users.length; i++)  {
@@ -95,6 +111,7 @@ socket.on('join-success', function(info) {
     }
 });
 
+//pulls users from server
 socket.on('updated-users', function(room) {
     if(room.owner == socket.id) {
         console.log("You are the owner of this room");

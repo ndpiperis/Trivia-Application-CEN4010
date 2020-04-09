@@ -7,7 +7,7 @@ class Quiz {
 
     constructor(room) {
         //load quiz json into questions
-
+        
         
     }
 

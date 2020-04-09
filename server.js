@@ -267,11 +267,7 @@ io.on('connection', function(socket){
   /////////////////////////////////////////////////////////
   //      QUIZ SECTION
   /////////////////////////////////////////////////////////
- 
-  io.on('quiz-start', function () {
-    quiz = new Quiz(getRoomAtID(socket.id));
-    quiz.pollQuestion();
-  });
+
 
 
 server.listen(4200);
