@@ -3,15 +3,15 @@ var socket = io();
 var room = 00000;
 var errShown = false;
 
-//game start
-
+//////////////////////////////
+//      HOMEPAGE            //
+//////////////////////////////
 
 //entry form
 $('.entry-form').submit(function(e) {
     ncode = $('#code').val()
     nname = $('#name').val()
 
-    
     //disable page reload
     e.preventDefault();
     
@@ -45,20 +45,15 @@ $('.entry-form').submit(function(e) {
     }
 });
 
-<<<<<<< HEAD
 
+//////////////////////////////
+//      UI UPDATES          //
+//////////////////////////////
 
-=======
-$("#start").click(function() {
-    console.log("You clicked this!");
-    socket.to(room).emit("start-quiz");
-});
->>>>>>> af0098a242ec0df5144f01ac2127fc02b3be67b6
 
 //swaps view to game room
 function changeToRoom(info) {
-    //showDialog("Successfully joined room", true, true);
-    room = info.room;
+    room = info.code;
     console.log($(window).height());
     $(".landing-splash, .landing-body").fadeOut(200, function() {
         $(".landing").addClass('fillScreen', 300).removeClass('landing', 300);
@@ -67,30 +62,32 @@ function changeToRoom(info) {
         $('.landing-textfield').blur();
     });
 
+    
+    //tests if user in room is owner, sends quiz manager, loading screen if not
     if(info.owner == socket.id) {
-        $('.q-box').append(" <h1>Room "+ info.code +"</h1>"+
-            "<section class='switcher fc'>"+
-
-            "<input type='button' id='your-quizzes' class='landing-button' value='Your Quizzes'>"+
-            "<input type='button' id='premade-quizzes' class='landing-button' value='Premade Quizzes'>"+
-
-        "</section>"+
-        "<section class='members'>"+
-            
-        "</section>"+
-        "<section class='menu'>"+
-
-            "<input type='button' id='leave' class='landing-button' value='Leave'>"+
-            "<input type='button' class='landing-button' value='View Lobby'>"+
-            "<input type='button' class='landing-button start' value='Start'>"+
-
-        "</section>");
+        //loads manager
+        $('.q-box').load('modules/quiz-manager.html');
     } else {
-        $(".q-box").append("<h1 class='info-envelope-title'>Room " + info.code +" lobby</h1><img class='load' src='img/load.png'/>");
+        //loads spinner
+        $(".q-box").load('modules/quiz-waitroom.html');
+
         console.log('Server: Successfully joined room #' + info.code);
     }
+    //prints room code in both owner and player ui
+    $('.q-box h1').text('Room ' + info.code);
+
 }
 
+function changeToQuiz() {
+
+    $(".info-envelope-title, .load").fadeOut(200, function() {
+        $(".q-box").load('modules/quiz.html');
+    });
+}
+
+function UpdateQuiz() {
+    //todo
+}
 
 //refreshes the list of users in the room every time join/leave occurs
 function updateUserList(info) {
@@ -102,9 +99,23 @@ function updateUserList(info) {
     }
 }
 
+$('.q-box').on('click', '.start', function() {
+    console.log('starting quiz');
+    socket.emit('start-quiz-owner', {
+        room : room
+    });
+    $('.q-box .start').prop('disabled', true);
+});
+
+
+//////////////////////////////
+//     SOCKET HANDLING      //
+//////////////////////////////
+
+
+
 //receives join success packet, start room change
 socket.on('join-success', function(info) {
-
     changeToRoom(info);
     console.log("Owner: " + info.owner);
     if(info.owner == socket.id) {
@@ -122,31 +133,8 @@ socket.on('updated-users', function(room) {
 });
 
 socket.on('start-quiz', function() {
-    $(".info-envelope-title, .load").fadeOut(200, function() {
-        $(".q-box").append("<section class='qc'>" +
-                "<section class='quiz-data'></section>" +
-                    "<h2 class='shifted-title'>How much wood could a wood chuck chuck if a wood chuck could chuck wood</h2>" +
-                    "<img src='test.jpg' class='qimg' alt='Picture Test' >" +
-                "</section>" + 
-
-                "<section class='a-box fc'>" +                       
-                    "<input type='button' class='landing-button qa' value='This is the answer for A.'>" +
-                    "<br>" +
-
-            
-                    "<input type='button' class='landing-button qa' value='This is the answer for B.'>" +
-                    "<br>" +
-
-            
-                    "<input type='button' class='landing-button qa' value='This is the answer for C.'>" +
-                    "<br>" +
-
-            
-                    "<input type='button' class='landing-button qa' value='This is the answer for D.'>" +
-                "</section>" +
-            "</section>");
-    });
-  
+    console.log('owner is starting quiz');
+    
    
 });
 

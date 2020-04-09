@@ -89,14 +89,16 @@ function prepDataCreate(nroom, name, socket) {
 
 //gets room user is joining and sends info (May be deprecated in favor of getRoomAtID())
 function prepDataJoin(info, socket) {
-  for(var i = 0; i < _rooms.length; i++) {
-    for(var j = 0; j < _rooms[i].users.length; j++) {
-      if(_rooms[i].code == info.code) {
-        prepSocket(_rooms[i].users, info, socket);
-        return true;
+ 
+    for(var i = 0; i < _rooms.length; i++) {
+      for(var j = 0; j < _rooms[i].users.length; j++) {
+        if(_rooms[i].code == info.code) {
+          prepSocket(_rooms[i].users, info, socket);
+          return true;
+        }
       }
     }
-  }
+
 }
 
 //pushes join info (ONLY ON ROOM JOIN)
@@ -145,6 +147,14 @@ io.on('connection', function(socket){
       });
     });
 
+
+    //QUIZ 
+    socket.on('start-quiz-owner', function(room) {
+      console.log('room ' + room.room + ' starting quiz');
+      socket.to(room.room).emit('start-quiz');
+    });
+
+
     socket.on('disconnect', function(){
       //room cleanup (not really working) *********************
       try {
@@ -159,6 +169,10 @@ io.on('connection', function(socket){
       console.log(socket.id  + ' disconnected');
 
     });
+
+    
+
+
   });
 
 
@@ -198,34 +212,27 @@ io.on('connection', function(socket){
   function cleanRooms(id) {
     console.log("Cleaning rooms...");
 
-    // try {
-    //   res = _rooms.filter(o => o.code == code);
-    //   resobj = res.filter
-    //   if(res.owner == id) {
-    //     _rooms[i] = [];
-    //     console.log("Room removed");
-    //   }
-    // }
-    // catch(e) {
-    //   console.log("Error occurred");
-    // }
-
     if(_rooms != undefined) {
       try {
         for (var i = 0; i < _rooms.length; i++) {
-          for (var j = 0; j < _rooms[i].users.length; j++) {
+          var current = _rooms[i].users;
+
+          for (var j = 0; j < current.length; j++) {
           
-            if(_rooms[i].users[j][0] == id) {
-              _rooms[i].users[j] = [];
+            if(current[j][0] == id) {
+              current[j] = [];
               console.log("user removed");
-              
-              
             }
             if(_rooms[i].owner == id) {
               _rooms[i] = [];
               console.log("Room removed");
             }
-            console.log("Active rooms: " + _rooms);
+            if(_rooms != undefined) {
+              console.log("Active rooms: " + _rooms);
+            }
+            else {
+              console.log('No active rooms');
+            }
           }
         }
       }
@@ -263,10 +270,6 @@ io.on('connection', function(socket){
     console.log(res.users);
   }
   
-
-  /////////////////////////////////////////////////////////
-  //      QUIZ SECTION
-  /////////////////////////////////////////////////////////
 
 
 
