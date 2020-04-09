@@ -4,12 +4,7 @@ var room = 00000;
 var errShown = false;
 
 //game start
-$('.q-box').on('click', '.start', function() {
-    console.log('You clicked this!');
-    socket.emit("start-quiz", {
-        roomn : room
-    });
-});
+
 
 //entry form
 $('.entry-form').submit(function(e) {
@@ -50,8 +45,15 @@ $('.entry-form').submit(function(e) {
     }
 });
 
+<<<<<<< HEAD
 
 
+=======
+$("#start").click(function() {
+    console.log("You clicked this!");
+    socket.to(room).emit("start-quiz");
+});
+>>>>>>> af0098a242ec0df5144f01ac2127fc02b3be67b6
 
 //swaps view to game room
 function changeToRoom(info) {
@@ -117,6 +119,35 @@ socket.on('updated-users', function(room) {
         console.log("You are the owner of this room");
         updateUserList(room);
     }
+});
+
+socket.on('start-quiz', function() {
+    $(".info-envelope-title, .load").fadeOut(200, function() {
+        $(".q-box").append("<section class='qc'>" +
+                "<section class='quiz-data'></section>" +
+                    "<h2 class='shifted-title'>How much wood could a wood chuck chuck if a wood chuck could chuck wood</h2>" +
+                    "<img src='test.jpg' class='qimg' alt='Picture Test' >" +
+                "</section>" + 
+
+                "<section class='a-box fc'>" +                       
+                    "<input type='button' class='landing-button qa' value='This is the answer for A.'>" +
+                    "<br>" +
+
+            
+                    "<input type='button' class='landing-button qa' value='This is the answer for B.'>" +
+                    "<br>" +
+
+            
+                    "<input type='button' class='landing-button qa' value='This is the answer for C.'>" +
+                    "<br>" +
+
+            
+                    "<input type='button' class='landing-button qa' value='This is the answer for D.'>" +
+                "</section>" +
+            "</section>");
+    });
+  
+   
 });
 
 //shows input error messages
