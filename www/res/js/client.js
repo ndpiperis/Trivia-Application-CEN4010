@@ -40,6 +40,11 @@ $('.entry-form').submit(function(e) {
     }
 });
 
+$("#start").click(function() {
+    console.log("You clicked this!");
+    socket.to(room).emit("start-quiz");
+});
+
 //swaps view to game room
 function changeToRoom(info) {
     //showDialog("Successfully joined room", true, true);
@@ -100,6 +105,35 @@ socket.on('updated-users', function(room) {
         console.log("You are the owner of this room");
         updateUserList(room);
     }
+});
+
+socket.on('start-quiz', function() {
+    $(".info-envelope-title, .load").fadeOut(200, function() {
+        $(".q-box").append("<section class='qc'>" +
+                "<section class='quiz-data'></section>" +
+                    "<h2 class='shifted-title'>How much wood could a wood chuck chuck if a wood chuck could chuck wood</h2>" +
+                    "<img src='test.jpg' class='qimg' alt='Picture Test' >" +
+                "</section>" + 
+
+                "<section class='a-box fc'>" +                       
+                    "<input type='button' class='landing-button qa' value='This is the answer for A.'>" +
+                    "<br>" +
+
+            
+                    "<input type='button' class='landing-button qa' value='This is the answer for B.'>" +
+                    "<br>" +
+
+            
+                    "<input type='button' class='landing-button qa' value='This is the answer for C.'>" +
+                    "<br>" +
+
+            
+                    "<input type='button' class='landing-button qa' value='This is the answer for D.'>" +
+                "</section>" +
+            "</section>");
+    });
+  
+   
 });
 
 //shows input error messages
