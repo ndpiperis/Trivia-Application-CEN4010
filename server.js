@@ -83,7 +83,7 @@ function prepDataCreate(nroom, name, socket) {
     owner: socket.id,
     roomName: name + "'s room",
     users: [
-      [socket.id, name]
+      
     ]
   });
 }
@@ -173,7 +173,7 @@ io.on('connection', function(socket){
       
       croom = getRoomAtID(socket.id);
       cleanRooms(socket.id);
-      if(croom != undefined) {
+      if(_rooms.length > 0) {
         io.to(`${croom.owner}`).emit('updated-users', croom);
         console.log("Updating room " + croom.code + " with users " + croom.users);
       }
@@ -220,15 +220,12 @@ io.on('connection', function(socket){
 
   function reloadUsers(room) {
     console.log('redirecting users');
-    var destination = '/index.html';
-    io.to(room.code).emit('redirect', destination);
+    io.to(`${room.code}`).emit('redirect', '/index.html');
   }
     
-  
 //checks and removes empty rooms
   function cleanRooms(id) {
     console.log("Cleaning rooms...");
-
 
       try {
         for (var i = 0; i < _rooms.length; i++) {
@@ -236,13 +233,15 @@ io.on('connection', function(socket){
 
           for (var j = 0; j < current.length; j++) {
           
-            if(current[j][0] == id && _rooms[i].owner != id) {
+            if(_rooms[i].owner == id) {
+              reloadUsers(_rooms[i]);
               current[j] = [];
+              
               console.log("user removed");
             }
-            else if(_rooms[i].owner == id) {
+            else if(current[j][0] == id) {
 
-              reloadUsers(_rooms[i]);
+              
               _rooms[i] = [];
               
               console.log("Room removed");
@@ -296,6 +295,6 @@ io.on('connection', function(socket){
 
 
 
-server.listen(4200);
+server.listen(25565);
 
 
