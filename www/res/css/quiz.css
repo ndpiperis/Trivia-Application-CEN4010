@@ -71,6 +71,10 @@ fieldset {
     padding-left:5%;
 }
 
+.qa:active, .active {
+    background:rgb(135, 255, 163);
+}
+
 .quiz-data {
     display:flex;
 }

@@ -3,6 +3,8 @@ var socket = io();
 var room = 00000;
 var errShown = false;
 
+
+
 //////////////////////////////
 //      HOMEPAGE            //
 //////////////////////////////
@@ -114,6 +116,17 @@ $(document).ready(function() {
 
     });
 
+    prevBtn = 0;
+    btnPressed = false;
+    $('.qa').click(function() {
+        console.log('selected answer');
+        if(btnPressed) {
+            prevBtn.toggleClass('active');
+            prevBtn = this;
+        }
+        this.toggleClass('active');
+        
+    });
 
     //////////////////////////////
     //     SOCKET HANDLING      //

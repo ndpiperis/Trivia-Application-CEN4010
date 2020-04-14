@@ -150,13 +150,14 @@ io.on('connection', function(socket){
 
       if(_rooms.length > 0) {
         croom = getRoomAtID(socket.id);
-        console.log(croom.code + ' being updated');
-        
-        
-        cleanRooms(socket.id);
-        console.log("Updating room " + croom.code + " with " + croom.users.length + " users ");
-        io.to(`${croom.owner}`).emit('updated-users', croom);
-      }
+        if(croom == false) {}
+        else {
+          console.log(croom.code + ' being updated');       
+          cleanRooms(socket.id);
+          console.log("Updating room " + croom.code + " with " + croom.users.length + " users ");
+          io.to(`${croom.owner}`).emit('updated-users', croom);
+         }
+        }
       
       console.log(socket.id  + ' disconnected');
 
@@ -192,11 +193,7 @@ io.on('connection', function(socket){
             return _rooms[i];
           }
           else {
-            return room = {
-              owner : "Nobody",
-              code : "[deleted]",
-              users : []
-            }
+            return false;
           }
         }
      } 
@@ -219,16 +216,13 @@ io.on('connection', function(socket){
           
             if(_rooms[i].owner == id) {
               reloadUsers(_rooms[i]);
-              current[j] = [];
-              
-              console.log("user removed");
+              delete _rooms[i];
+              console.log("Room removed");
             }
             else if(current[j][0] == id) {
+              delete current[j];
+              console.log("user removed");
 
-              
-              _rooms[i] = [];
-              
-              console.log("Room removed");
             }
             else if(_rooms != undefined) {
               console.log("Active rooms: " + _rooms);
