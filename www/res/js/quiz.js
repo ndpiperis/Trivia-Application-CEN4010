@@ -35,8 +35,7 @@ class QuizBuilder {
         }
     );
     console.log(this.questions);
-        
-        
+           
     }
 
     sendQuestion(socket) {
