@@ -1,30 +1,5 @@
 
-    //  Clyde Goodall 2020
-
-    // ->init server 
-    //     ->pool user connections
-    //         ->fetch IDs
-    //         ->handle entering/leaving (using entry tokens represented as button ids)
-    //             ->if joining room, ask for room
-    //                 ->redirect user if code is correct
-    //             ->if creating room, skip 
-    //     ->user rooms (represent with objects. should be easier to handle properties)
-    //         ->generate room id 
-    //         ->handle entering/leaving
-    //             ->update array of current users in room.IDs
-    //                 ->pass client updated list
-    //         ->lobby
-    //             ->allow lobby owner to select topic
-    //         ->handle game status
-    //             ->when each user has accepted, start game
-    //                 ->set/reset scores
-    //                 ->wait for every user to answer, or a length of time (eg 30s)  }- (looped until end of question)
-    //                 ->pop question from stack                                      }
-    //                 ->winner declared
-    //                     ->wait for users to elect to start new game
-    //                     ->allow winner to pick new topic
-    //                 ->exit game, redirect to homepage (will be changed if we opt to have a gameover landing screenf or users to collect/save question answer sources)
-    //  * - completed
+//  Clyde Goodall 2020
     
 //includes xpress and initializes
 const express = require('express');
@@ -169,14 +144,20 @@ io.on('connection', function(socket){
 
 
     socket.on('disconnect', function(){
-      //room cleanup (not really working) *********************
+      //croom giving problems :(
+      console.log("user leaving");
       
-      croom = getRoomAtID(socket.id);
-      cleanRooms(socket.id);
+
       if(_rooms.length > 0) {
+        croom = getRoomAtID(socket.id);
+        console.log(croom.code + ' being updated');
+        
+        
+        cleanRooms(socket.id);
+        console.log("Updating room " + croom.code + " with " + croom.users.length + " users ");
         io.to(`${croom.owner}`).emit('updated-users', croom);
-        console.log("Updating room " + croom.code + " with users " + croom.users);
       }
+      
       console.log(socket.id  + ' disconnected');
 
     });
@@ -202,20 +183,23 @@ io.on('connection', function(socket){
 
   //returns room at id
   function getRoomAtID(id) {
-    try {
+    
       for (var i = 0; i < _rooms.length; i++) {
-        for (let u of _rooms[i].users) {
-          _rooms[i].users.forEach(function callback(val) {
-            if(val[0] == id) {
-              return _rooms[i];
+        for (var j = 0; j < _rooms[i].users.length; j++) {
+          console.log(_rooms[i]);
+          if(_rooms[i].users[j][0] == id || _rooms[i].owner == id) {
+            console.log(_rooms[i]);
+            return _rooms[i];
+          }
+          else {
+            return room = {
+              owner : "Nobody",
+              code : "[deleted]",
+              users : []
             }
-          });
+          }
         }
-      }
-    }
-    catch(e) {
-      console.log(e);
-    }
+     } 
   }
 
   function reloadUsers(room) {
@@ -227,7 +211,7 @@ io.on('connection', function(socket){
   function cleanRooms(id) {
     console.log("Cleaning rooms...");
 
-      try {
+
         for (var i = 0; i < _rooms.length; i++) {
           var current = _rooms[i].users;
 
@@ -254,10 +238,6 @@ io.on('connection', function(socket){
             }
           }
         }
-      }
-      catch(e) {
-        console.log(e);
-      }
   }
 
   //does what name implies, returns boolean value
