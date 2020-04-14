@@ -15,7 +15,7 @@ class QuizBuilder {
         this.questions.push(
             {   //Example questions
                 "img" : "img/test.jpg",
-                "qu"   : "What does html stand for?",
+                "qu"  : "What does html stand for?",
                 "opt1": "HyperText Markup Language",
                 "opt2": "HyperText Transfer Protocol",
                 "opt3": "Internet Protocol",
@@ -25,16 +25,16 @@ class QuizBuilder {
         );
 
         this.questions.push(
-        {   //Example questions
-            "img" : "img/test.jpg",
-            "qu": "What does html stand for 2nd? ",
-            "opt1": "HyperText Markup Language 2nd",
-            "opt2": "HyperText Transfer Protocol 2nd",
-           " opt3": "Internet Protocol 2nd",
-            "opt4": "None of the above 2nd",
-            "answer": "HyperText Markup Language 2nd"
-        }
-    );
+            {   //Example questions
+                "img" : "img/test.jpg",
+                "qu": "What does html stand for 2nd? ",
+                "opt1": "HyperText Markup Language 2nd",
+                "opt2": "HyperText Transfer Protocol 2nd",
+                " opt3": "Internet Protocol 2nd",
+                "opt4": "None of the above 2nd",
+                "answer": "HyperText Markup Language 2nd"
+            }
+        );
     console.log(this.questions);
            
     }
@@ -61,6 +61,7 @@ class QuizBuilder {
     timer(socket) {
          for(var i = 0; i < 2; i++) {
              setInterval(this.sendQuestion(socket), 30000);
+             socket.emit('collect-answers', this.room);
          }
     }
 

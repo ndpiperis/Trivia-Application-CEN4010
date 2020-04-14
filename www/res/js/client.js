@@ -52,6 +52,19 @@ $(document).ready(function() {
     //      UI UPDATES          //
     //////////////////////////////
 
+    function loadJSON() {
+        
+    }
+
+    function populateDropdown() {
+        $.getJSON('json/data.json', function(data) {
+            $.each(data.quizzes, function(i, q){
+                console.log(q.quizzes[i].title);
+                $('.quizList').append('<option class="q' + i + '">' + q.quizzes[i].title + '</option>');
+            });
+        })
+        
+    }
 
     //swaps view to game room
     function changeToRoom(info) {
@@ -72,6 +85,7 @@ $(document).ready(function() {
             $('.q-box').loadTemplate('modules/quiz-manager.html',{
                 title : 'Room ' + room
             });
+            populateDropdown();
            
         } else {
             //loads spinner
@@ -85,13 +99,6 @@ $(document).ready(function() {
         
 
     }
-
-    // function changeToQuiz() {
-
-    //     $(".info-envelope-title, .load").fadeOut(200, function() {
-    //         $(".q-box").load('modules/quiz.html');
-    //     });
-    // }
 
     //refreshes the list of users in the room every time join/leave occurs
     function updateUserList(info) {
@@ -180,7 +187,7 @@ $(document).ready(function() {
     });
 
     socket.on('collect-answer', function(room) {
-        
+
     });
 
     socket.on('redirect', function(destination) {
@@ -211,4 +218,12 @@ $(document).ready(function() {
         
         
     }
+
+    //////////////////////////////
+    //     HELPERS              //
+    //////////////////////////////
+
+    
+
+    
 });

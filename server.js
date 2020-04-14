@@ -143,7 +143,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('collect-answer', function(room) {
-      io.to(`${room}`).emit('collect-answer-server', )
+      io.to(`${room}`).emit('collect-answer-server', room);
     })
 
 

@@ -1,58 +1,62 @@
 {
- "Software engineering Quiz": {
-    "questions": [    
-{
-    "q": "What does html stand for?",
-    "image": " ",
-    "opt1": "HyperText Markup Language",
-    "opt2": "HyperText Transfer Protocol",
-    "opt3": "Internet Protocol",
-    "opt4": "None of the above",
-    "answer": "HyperText Markup Language",
+    "quizzes": [
+                {
+                    "title" : "Software Engineering",
+                    "questions": [    
+                        {
+                            "q": "What does html stand for?",
+                            "image": "img/test.jpg",
+                            "opt1": "HyperText Markup Language",
+                            "opt2": "HyperText Transfer Protocol",
+                            "opt3": "Internet Protocol",
+                            "opt4": "None of the above",
+                            "answer": "HyperText Markup Language",
 
-    "review":{
-        "correct": "false",
-        "explanation": " ",
-        "q": " ",
-        "image": " ",
-        "answer": " ",
+                            "review":{
+                                "correct": "false",
+                                "explanation": " ",
+                                "q": " ",
+                                "image": " ",
+                                "answer": " ",
 
-        "makeup": {
-            "q": " ",
-            "image": " ",
-            "opt1": " ",
-            "opt2": " ",
-            "answer": " "
-        },
+                                "makeup": {
+                                    "q": " ",
+                                    "image": " ",
+                                    "opt1": " ",
+                                    "opt2": " ",
+                                    "answer": " "
+                                },
 
-        "main": {
-            "q": "What does html stand for?",
-            "image": " ",
-            "opt1": "HyperText Markup Language",
-            "opt2": "HyperText Transfer Protocol",
-            "answer": "HyperText Markup Language"
-         }
-    }
+                                "main": {
+                                    "q": "What does html stand for?",
+                                    "image": " ",
+                                    "opt1": "HyperText Markup Language",
+                                    "opt2": "HyperText Transfer Protocol",
+                                    "answer": "HyperText Markup Language"
+                                }
+                            }
 
-},
-{
-    "q": "What is SCRUM?",
-    "image": " ",
-    "opt1": "An agile method",
-    "opt2": "A programming language",
-    "opt3": "A learning method",
-    "opt4": "None of the above",
-    "answer": "An agile method"
-},
-{
-    "q": "Is JavaScript a programming language?",
-    "image": " ",
-    "opt1": "True",
-    "opt2": "False",
-    "answer": "True"
-}
-]
-}
+                        },
+                        {
+                            "q": "What is SCRUM?",
+                            "image": " ",
+                            "opt1": "An agile method",
+                            "opt2": "A programming language",
+                            "opt3": "A learning method",
+                            "opt4": "None of the above",
+                            "answer": "An agile method"
+                        },
+                        {
+                            "q": "Is JavaScript a programming language?",
+                            "image": " ",
+                            "opt1": "True",
+                            "opt2": "False",
+                            "answer": "True"
+                        }
+                    ]
+                }
+    ]
+    
 }
 
 
