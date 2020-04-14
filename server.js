@@ -142,6 +142,10 @@ io.on('connection', function(socket){
       croom.ongoing = true;
     });
 
+    socket.on('collect-answer', function(room) {
+      io.to(`${room}`).emit('collect-answer-server', )
+    })
+
 
     socket.on('disconnect', function(){
       //croom giving problems :(
@@ -152,10 +156,15 @@ io.on('connection', function(socket){
         croom = getRoomAtID(socket.id);
         if(croom == false) {}
         else {
-          console.log(croom.code + ' being updated');       
-          cleanRooms(socket.id);
-          console.log("Updating room " + croom.code + " with " + croom.users.length + " users ");
-          io.to(`${croom.owner}`).emit('updated-users', croom);
+          try {
+            console.log(croom.code + ' being updated');       
+            cleanRooms(socket.id);
+            console.log("Updating room " + croom.code + " with " + croom.users.length + " users ");
+            io.to(`${croom.owner}`).emit('updated-users', croom);
+          } 
+          catch(e) {
+            console.log(e);
+          }
          }
         }
       
@@ -216,11 +225,13 @@ io.on('connection', function(socket){
           
             if(_rooms[i].owner == id) {
               reloadUsers(_rooms[i]);
-              delete _rooms[i];
+              //delete _rooms[i];
+              _rooms.splice(i, 1);
               console.log("Room removed");
             }
             else if(current[j][0] == id) {
-              delete current[j];
+              //delete current[j];
+              current.splice(j, 1);
               console.log("user removed");
 
             }

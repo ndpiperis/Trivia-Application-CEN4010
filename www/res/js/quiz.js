@@ -3,7 +3,7 @@ class QuizBuilder {
     room;
     localCounter = 0
 
-    localScore = [] 
+    localScore = []
     questions = [
 
     ];
@@ -23,6 +23,7 @@ class QuizBuilder {
                 "answer": "HyperText Markup Language"
             }
         );
+
         this.questions.push(
         {   //Example questions
             "img" : "img/test.jpg",
@@ -58,9 +59,9 @@ class QuizBuilder {
     }
 
     timer(socket) {
-        // for(var i = 0; i < 2; i++) {
-        //     setInterval(this.sendQuestion(socket), 5000);
-        // }
+         for(var i = 0; i < 2; i++) {
+             setInterval(this.sendQuestion(socket), 30000);
+         }
     }
 
     beginQuiz(socket) {

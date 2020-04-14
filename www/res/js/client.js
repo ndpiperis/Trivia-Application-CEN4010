@@ -98,9 +98,16 @@ $(document).ready(function() {
         $(".members").empty();
         for(var i = 0; i < info.users.length; i++)  {
             if(info.users[i][1] != undefined) {
-                $(".members").append("<div class='user'>" + info.users[i][1] + "</div>");
+                appendUser(info.users, i);
+            }
+            else {
+                appendUser(info.users, i + 1);
             }
         }
+    }
+
+    function appendUser(user, i) {
+        $(".members").append("<div class='user'>" + user[i][1] + "</div>");
     }
 
     $('.q-box').on('click', '.start', function() {
@@ -116,8 +123,8 @@ $(document).ready(function() {
 
     });
 
-    prevBtn = 0;
-    btnPressed = false;
+    var prevBtn = 0;
+    var btnPressed = false;
     $('.qa').click(function() {
         console.log('selected answer');
         if(btnPressed) {
@@ -170,6 +177,10 @@ $(document).ready(function() {
             }
         );
     
+    });
+
+    socket.on('collect-answer', function(room) {
+        
     });
 
     socket.on('redirect', function(destination) {
