@@ -7,10 +7,11 @@
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
+    "jquery.loadtemplate": "^1.5.10",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
-    "cypress": "^4.1.0"
+    "cypress": "^4.3.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

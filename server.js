@@ -79,6 +79,7 @@ function prepDataCreate(nroom, name, socket) {
   console.log('room-' + nroom);
   _rooms.push({
     code: nroom, 
+    ongoing : false,
     owner: socket.id,
     roomName: name + "'s room",
     users: [
@@ -89,21 +90,18 @@ function prepDataCreate(nroom, name, socket) {
 
 //gets room user is joining and sends info (May be deprecated in favor of getRoomAtID())
 function prepDataJoin(info, socket) {
- 
-    for(var i = 0; i < _rooms.length; i++) {
-      for(var j = 0; j < _rooms[i].users.length; j++) {
-        if(_rooms[i].code == info.code) {
-          prepSocket(_rooms[i].users, info, socket);
-          return true;
-        }
-      }
+  var c = 0
+  _rooms.forEach(function(current) {
+    if(current.code == info.code) {
+      prepSocket(_rooms[c], info, socket);
     }
-
+    c++;
+  });
 }
 
 //pushes join info (ONLY ON ROOM JOIN)
 function prepSocket(room, info, socket) {
-  room.push([socket.id, info.name]);
+  room.users.push([socket.id, info.name]);
   socket.username = info.name;
   socket.room = info.code;
 
@@ -117,17 +115,24 @@ io.on('connection', function(socket){
       console.log('attempting to join room ' + info.code);
 
       if (checkRoomExist(info, socket)) {
-        socket.join(info.code, function() {
+          croom = getRoomAtCode(info.code);
+          if(croom.ongoing == false) {
+          socket.join(info.code, function() {
+            
+          prepDataJoin(info, socket);
+          console.log('user joined room-' + info.code);
           
-        prepDataJoin(info, socket);
-        console.log('user joined room-' + info.code);
-        croom = getRoomAtCode(info.code);
-        oid = croom.owner;
-        
-        socket.emit('join-success', croom);
-        io.to(`${oid}`).emit('updated-users', croom);
-        listUsersInRoom(info.code);
-        });
+          
+          oid = croom.owner;
+          
+          socket.emit('join-success', croom);
+          io.to(`${oid}`).emit('updated-users', croom);
+          listUsersInRoom(info.code);
+          });
+        } else {
+          console.log("user cannot join an ongoing quiz");
+          io.to(`${socket.id}`).emit('cannot-join', {reason : 'Quiz in-progress. Try again later'});
+        } 
       } else {
         console.log("unable to join room");
       }
@@ -152,19 +157,19 @@ io.on('connection', function(socket){
     socket.on('start-quiz-owner', function(room) {
       console.log('room ' + room.room + ' starting quiz');
       socket.to(room.room).emit('start-quiz');
+      var croom = getRoomAtCode(room.room);
+      croom.ongoing = true;
     });
 
 
     socket.on('disconnect', function(){
       //room cleanup (not really working) *********************
-      try {
-        croom = getRoomAtID(socket.id);
-        cleanRooms(socket.id);
+      
+      croom = getRoomAtID(socket.id);
+      cleanRooms(socket.id);
+      if(croom != undefined) {
         io.to(`${croom.owner}`).emit('updated-users', croom);
         console.log("Updating room " + croom.code + " with users " + croom.users);
-      }
-      catch(error) {
-        console.log("Could not update rooms");
       }
       console.log(socket.id  + ' disconnected');
 
@@ -191,20 +196,26 @@ io.on('connection', function(socket){
 
   //returns room at id
   function getRoomAtID(id) {
-
-    // res = _rooms.filter(o => {
-    //   if(o.users.indexOf(id > 0)) {
-
-    //   }
-    // });
-    for (var i = 0; i < _rooms.length; i++) {
-      for (var j = 0; j < _rooms[i].users.length; j++) {
-       
-        if(_rooms[i].users[j][0] == id) {
-          return _rooms[i];
+    try {
+      for (var i = 0; i < _rooms.length; i++) {
+        for (let u of _rooms[i].users) {
+          _rooms[i].users.forEach(function callback(val) {
+            if(val[0] == id) {
+              return _rooms[i];
+            }
+          });
         }
       }
     }
+    catch(e) {
+      console.log(e);
+    }
+  }
+
+  function reloadUsers(room) {
+    console.log('redirecting users');
+    var destination = '/index.html';
+    io.to(room.code).emit('redirect', destination);
   }
     
   
@@ -212,22 +223,25 @@ io.on('connection', function(socket){
   function cleanRooms(id) {
     console.log("Cleaning rooms...");
 
-    if(_rooms != undefined) {
+
       try {
         for (var i = 0; i < _rooms.length; i++) {
           var current = _rooms[i].users;
 
           for (var j = 0; j < current.length; j++) {
           
-            if(current[j][0] == id) {
+            if(current[j][0] == id && _rooms[i].owner != id) {
               current[j] = [];
               console.log("user removed");
             }
-            if(_rooms[i].owner == id) {
+            else if(_rooms[i].owner == id) {
+
+              reloadUsers(_rooms[i]);
               _rooms[i] = [];
+              
               console.log("Room removed");
             }
-            if(_rooms != undefined) {
+            else if(_rooms != undefined) {
               console.log("Active rooms: " + _rooms);
             }
             else {
@@ -239,7 +253,6 @@ io.on('connection', function(socket){
       catch(e) {
         console.log(e);
       }
-    }
   }
 
   //does what name implies, returns boolean value
@@ -266,8 +279,12 @@ io.on('connection', function(socket){
   //provide array of users in console
   function listUsersInRoom(code) {
     console.log('Users in room:')
-    res = _rooms.filter(o => o.code == code);
-    console.log(res.users);
+    for(var i = 0; i < _rooms.length; i++) {
+      if(_rooms[i].code == code) {
+        console.log(_rooms[i].users);
+        break;
+      }
+    }
   }
   
 
