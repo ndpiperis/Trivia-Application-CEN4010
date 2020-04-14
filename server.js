@@ -152,6 +152,12 @@ io.on('connection', function(socket){
       });
     });
 
+    //send question to room
+    socket.on("new-question", function(info) {
+      socket.to(`${info.room}`).emit('new-question-server', info.question);
+      console.log(info.question);
+    });
+  
 
     //QUIZ 
     socket.on('start-quiz-owner', function(room) {

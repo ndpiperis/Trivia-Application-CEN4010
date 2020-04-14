@@ -84,16 +84,12 @@ $(document).ready(function() {
 
     }
 
-    function changeToQuiz() {
+    // function changeToQuiz() {
 
-        $(".info-envelope-title, .load").fadeOut(200, function() {
-            $(".q-box").load('modules/quiz.html');
-        });
-    }
-
-    function UpdateQuiz() {
-        //todo
-    }
+    //     $(".info-envelope-title, .load").fadeOut(200, function() {
+    //         $(".q-box").load('modules/quiz.html');
+    //     });
+    // }
 
     //refreshes the list of users in the room every time join/leave occurs
     function updateUserList(info) {
@@ -106,11 +102,16 @@ $(document).ready(function() {
     }
 
     $('.q-box').on('click', '.start', function() {
+        
         console.log('starting quiz');
         socket.emit('start-quiz-owner', {
             room : room
         });
         $('.q-box .start').prop('disabled', true);
+
+        quiz = new QuizBuilder(room, socket);
+        quiz.beginQuiz(socket);
+
     });
 
 
@@ -142,9 +143,19 @@ $(document).ready(function() {
         }
     });
 
-    socket.on('start-quiz', function() {
-        console.log('owner is starting quiz');
-        changeToQuiz();
+    socket.on('new-question-server', function(q) {
+        console.log('Receiving new question from quiz');
+        console.log(q);
+        $('.q-box').loadTemplate('modules/quiz.html', 
+            {
+                question :  q.qu,
+                graphic  :  q.img, 
+                opt1 : 'A) ' + q.opt1,
+                opt2 : 'B) ' + q.opt2,
+                opt3 : 'C) ' + q.opt3,
+                opt4 : 'D) ' + q.opt4
+            }
+        );
     
     });
 
