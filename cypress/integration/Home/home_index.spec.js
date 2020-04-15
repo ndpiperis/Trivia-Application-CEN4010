@@ -1,7 +1,7 @@
 describe('Checks the content of the trivia app home page', () => {
 
     it('Navigates to the home page', () => {
-        cy.visit('localhost:4200');
+        cy.visit('localhost:25565');
     });
 
     it('Verifies text, buttons and elements in the page', () => {

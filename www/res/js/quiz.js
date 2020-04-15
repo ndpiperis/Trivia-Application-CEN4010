@@ -20,14 +20,14 @@ module.exports = class QuizBuilder {
     sendQuestion(socket) {
         //sends the whole json entry to feed into template
      
-        console.log(quiz.questions[this.localCounter].q);
+        console.log(quiz.questions[0].q);
         socket.to(qroom).emit('new-question', {
-            q : quiz.questions[this.localCounter].q,
-            opt1 : quiz.questions[this.localCounter].opt1,
-            opt2: quiz.questions[this.localCounter].opt2,
-            opt3 : quiz.questions[this.localCounter].opt3,
-            opt4 : quiz.questions[this.localCounter].opt4,
-            image : quiz.questions[this.localCounter].image
+            q : quiz.questions[localCounter].q,
+            opt1 : quiz.questions[localCounter].opt1,
+            opt2: quiz.questions[localCounter].opt2,
+            opt3 : quiz.questions[localCounter].opt3,
+            opt4 : quiz.questions[localCounter].opt4,
+            image : quiz.questions[localCounter].image
         });
         this.localCounter++;
     }
