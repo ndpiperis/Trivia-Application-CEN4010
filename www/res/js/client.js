@@ -52,17 +52,14 @@ $(document).ready(function() {
     //      UI UPDATES          //
     //////////////////////////////
 
-    function loadJSON() {
-        
-    }
-
     function populateDropdown() {
         $.getJSON('json/data.json', function(data) {
-            $.each(data, function(i, q){
-                $('.quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');
+            $.each(data, function(i, q) {
+                console.log(i);
+                    $('.quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');
+                console.log("Added " + q.title + " as active quiz");
             });
-        })
-        
+        });
     }
 
     //swaps view to game room

@@ -14,21 +14,24 @@ class QuizBuilder {
         this.socket = sock;
         //load quiz json into questions
         console.log("Finding " + selection);
-        $.getJSON('json/data.json', function(data) {
+        $.getJSON('../json/data.json', function(data) {
             // console.log(data);
             $.each(data, function(index, q) {
-                console.log(q.id);
-                this.quiz.push(q);
-                console.log("Added " + q.title + " as active quiz");
+                console.log(index);
+                if(index == selection) {
+                    this.quiz.push(q);
+                    console.log("Added " + q.title + " as active quiz");
+                }
             });
         });
+        console.log(this.quiz);
     }
 
     sendQuestion(socket) {
         //sends the whole json entry to feed into template
         console.log(this.quiz);
         socket.emit('new-question', {
-            question: this.quiz.questions[0],
+            question: this.quiz.questions[this.localCounter],
             room: this.room
         });
         this.localCounter++;
