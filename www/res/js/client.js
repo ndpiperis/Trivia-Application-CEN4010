@@ -1,4 +1,4 @@
-fs = require('fs');
+
 var socket = io();
 //global room code
 var room = 00000;
@@ -113,18 +113,15 @@ $(document).ready(function() {
     }
 
     $('.q-box').on('click', '.start', function() {
-        
+        var selection = $('.quiz-list').find(":selected").attr('id');
         console.log('starting quiz');
         socket.emit('start-quiz-owner', {
-            room : room
+            room : room,
+            selection: selection
         });
         $('.q-box .start').prop('disabled', true);
-        var selection = $('.quiz-list').find(":selected").attr('id');
         console.log("Owner has selected quiz " + selection);
         
-        
-        
-
     });
 
     var prevBtn = 0;
@@ -166,17 +163,17 @@ $(document).ready(function() {
         }
     });
 
-    socket.on('new-question-server', function(q) {
+    socket.on('new-question', function(qu) {
         console.log('Receiving new question from quiz');
-        console.log(q);
+        console.log(qu);
         $('.q-box').loadTemplate('modules/quiz.html', 
             {
-                question :  q.qu,
-                graphic  :  q.image, 
-                opt1 : 'A) ' + q.opt1,
-                opt2 : 'B) ' + q.opt2,
-                opt3 : 'C) ' + q.opt3,
-                opt4 : 'D) ' + q.opt4
+                question :  qu.q,
+                graphic  :  qu.image, 
+                opt1 : 'A) ' + qu.opt1,
+                opt2 : 'B) ' + qu.opt2,
+                opt3 : 'C) ' + qu.opt3,
+                opt4 : 'D) ' + qu.opt4
             }
         );
     

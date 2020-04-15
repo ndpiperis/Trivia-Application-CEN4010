@@ -103,21 +103,16 @@
                         "opt1": "True",
                         "opt2": "False",
                         "answer": "True"
+                        }
                     }
                 }
-            }
-<<<<<<< HEAD
-        ]
-
-=======
             ]
->>>>>>> 1adca212f7f4386769ea7deba0add37797e00bf4
         },
 
 
     "1" : {
         
-        "id" : "1",
+        "id" : 1,
         "title" : "History of Software Engineering",
         "questions": [    
             {
@@ -297,8 +292,9 @@
             }
         ]
     },
+    
     "2" : {
-        "id" : "2",
+        "id" : 2,
         "title" : "Guess the Programming Language",
         "questions": [    
             {
@@ -479,7 +475,7 @@
         ]
     },
     "3" : {
-        "id" : "3",
+        "id" : 3,
         "title" : "Data Structures",
         "questions": [    
             {
@@ -658,7 +654,7 @@
         ]
     },
     "4" : {
-        "id" : "4",
+        "id" : 4,
         "title" : "Logic Design",
         "questions": [    
             {
@@ -693,7 +689,8 @@
                         "answer": "False"
                     }
                 }
-            },{
+            },
+            {
                 "q": "Which of the following is an example of De Morgan's law?",
                 "image": "img/test.jpg",
                 "source": "https://www.geeksforgeeks.org/properties-of-boolean-algebra/",

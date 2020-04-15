@@ -1,31 +1,33 @@
-class QuizBuilder {
+module.exports = class QuizBuilder {
 
-    constructor(qroom, sock, selection) {
-        this.localCounter = 0;
-        this.room = qroom;
+    socket;
+    qroom;
+    localCounter;
+    quiz;
+    data
+    constructor(qroom, sock, selection, data) {
+        global.qroom = qroom;
+        global.localCounter = 0;
         this.socket = sock;
-        this.quiz = [];
-        var data;
-        //load quiz json into questions
-        console.log("Finding " + selection);
-        $.getJSON('../json/data.json', function(data) {
-            console.log(data[selection].questions);
-            this.data = data[selection].questions
-        }, function() {
-            this.quiz.push(data);
-        });
-        this.quiz.push(data);
-        console.log("sending...");
-        this.beginQuiz(sock);
+        global.datab = data[selection];
+        global.quiz = datab
+        console.log(selection);
+        console.log("sending..." + datab);
+        console.log(qroom);
+        this.beginQuiz(this.socket);
     }
 
-     sendQuestion(socket) {
+    sendQuestion(socket) {
         //sends the whole json entry to feed into template
      
-        console.log(this.quiz);
-        socket.emit('new-question', {
-            question: this.quiz.questions[this.localCounter],
-            room: this.room
+        console.log(quiz.questions[this.localCounter].q);
+        socket.to(qroom).emit('new-question', {
+            q : quiz.questions[this.localCounter].q,
+            opt1 : quiz.questions[this.localCounter].opt1,
+            opt2: quiz.questions[this.localCounter].opt2,
+            opt3 : quiz.questions[this.localCounter].opt3,
+            opt4 : quiz.questions[this.localCounter].opt4,
+            image : quiz.questions[this.localCounter].image
         });
         this.localCounter++;
     }

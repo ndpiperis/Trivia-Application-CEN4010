@@ -2,6 +2,9 @@
 //  Clyde Goodall 2020
     
 //includes xpress and initializes
+const jsio = require('jsonfile');
+const file = 'www/res/json/data.json';
+let QuizBuilder = require('./www/res/js/quiz.js');
 const express = require('express');
 const app = express();
 
@@ -9,6 +12,8 @@ const app = express();
 server = require('http').createServer(app)
 const io = require('socket.io')(server);
 console.log('Server initialized');
+quizJSON = jsio.readFileSync(file);
+console.log(quizJSON);
 
 
 //include resources
@@ -137,11 +142,11 @@ io.on('connection', function(socket){
 
     //QUIZ 
     socket.on('start-quiz-owner', function(room) {
-      console.log('room ' + room.room + ' starting quiz');
+      console.log('room ' + room.room + ' starting quiz #' + room.selection);
       socket.to(room.room).emit('start-quiz');
       var croom = getRoomAtCode(room.room);
       croom.ongoing = true;
-      quiz = new QuizBuilder(room, socket, selection);
+      quiz = new QuizBuilder(room.room, socket, room.selection, quizJSON);
     });
 
     socket.on('collect-answer', function(room) {
