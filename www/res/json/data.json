@@ -8,6 +8,7 @@
             {
                 "q": "What does html stand for?",
                 "image": "img/test.jpg",
+                "source": "",
                 "opt1": "HyperText Markup Language",
                 "opt2": "HyperText Transfer Protocol",
                 "opt3": "Internet Protocol",
@@ -32,14 +33,13 @@
                     "main": {
                         "q": "What does html stand for?",
                         "image": " ",
+                        "source": "",
                         "opt1": "HyperText Markup Language",
                         "opt2": "HyperText Transfer Protocol",
                         "answer": "HyperText Markup Language"
                     }
                 }
-
             },
-            
             {
                 "q": "What is SCRUM?",
                 "image": " ",
@@ -47,25 +47,75 @@
                 "opt2": "A programming language",
                 "opt3": "A learning method",
                 "opt4": "None of the above",
-                "answer": "An agile method"
+                "answer": "An agile method",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "What is SCRUM?",
+                        "image": " ",
+                        "source": "",
+                        "opt1": "An agile method",
+                        "opt2": "A learning method",
+                        "answer": "An agile method"
+                    }
+                }
             },
             {
                 "q": "Is JavaScript a programming language?",
                 "image": " ",
                 "opt1": "True",
                 "opt2": "False",
-                "answer": "True"
+                "answer": "True",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "Is JavaScript a programming language?",
+                        "image": " ",
+                        "source": "",
+                        "opt1": "True",
+                        "opt2": "False",
+                        "answer": "True"
+                    }
+                }
             }
             ]
-
         },
     "1" : {
         "id" : "1",
-        "title" : "sadljponfasipoudgdfhasng",
+        "title" : "History of Software Engineering",
         "questions": [    
             {
-                "qu": "What year did C start being developed?",
+                "q": "What year did C start being developed?",
                 "image": "img/test.jpg",
+                "source": "",
                 "opt1": "1967",
                 "opt2": "1972",
                 "opt3": "1970",
@@ -90,33 +140,586 @@
                     "main": {
                         "q": "What year did C start being developed?",
                         "image": " ",
+                        "source": "",
                         "opt1": "1972",
                         "opt2": "1969",
                         "answer": "1969"
                     }
                 }
+            },
+            {
+                "q": "What is the software crisis?",
+                "image": " ",
+                "source": "http://homepages.cs.ncl.ac.uk/brian.randell/NATO/NATOReports/index.html", 
+                "opt1": "Failure to establish or prove ownership of developers over software systems",
+                "opt2": "Failure to efficiently implement improvements and capabilities of software systems in a required amount of time",
+                "opt3": "Failure to penalize the implementation of software systems that cause ethical or moral dilemmas",
+                "opt4": "Failure to establish or prove ownership of developers over software systems",
+                "answer": "Failure to efficiently implement improvements and capabilities of software systems in a required amount of time",
 
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "What is the software crisis?",
+                        "image": " ",
+                        "source": "http://homepages.cs.ncl.ac.uk/brian.randell/NATO/NATOReports/index.html", 
+                        "opt1": "Failure to establish or prove ownership of developers over software systems",
+                        "opt2": "Failure to efficiently implement improvements and capabilities of software systems in a required amount of time",
+                        "answer": "Failure to efficiently implement improvements and capabilities of software systems in a required amount of time"
+                    }
+                }
             },
             {
-                "q": "What is SCRUM?",
+                "q": "What is the first “high-level” programming language?",
                 "image": " ",
-                "opt1": "An agile method",
-                "opt2": "A programming language",
-                "opt3": "A learning method",
-                "opt4": "None of the above",
-                "answer": "An agile method"
+                "source": "https://web.archive.org/web/20100715042920/http://www.math.grin.edu/~rebelsky/Courses/CS302/99S/Outlines/outline.02.html",
+                "opt1": "Assembly",
+                "opt2": "Plankalkul",
+                "opt3": "FORTRAN",
+                "opt4": "C",
+                "answer": "Plankalkul",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "What is the first “high-level” programming language?",
+                        "image": " ",
+                        "source": "https://web.archive.org/web/20100715042920/http://www.math.grin.edu/~rebelsky/Courses/CS302/99S/Outlines/outline.02.html",
+                        "opt1": "Assembly",
+                        "opt2": "Plankalkul",
+                        "answer": "Plankalkul"
+                    }
+                }
             },
             {
-                "q": "Is JavaScript a programming language?",
+                "q": "Who published the first algorithm to be executed by Charles Babbage’s Analytical Engine?",
                 "image": " ",
+                "source": "https://www.mentalfloss.com/article/53131/ada-lovelace-first-computer-programmer",
+                "opt1": "Thomas Edison",
+                "opt2": "Nikola Tesla",
+                "opt3": "Ada Lovelace",
+                "opt4": "Einstein",
+                "answer": "Ada Lovelace",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "Who published the first algorithm to be executed by Charles Babbage’s Analytical Engine?",
+                        "image": " ",
+                        "source": "https://web.archive.org/web/20100715042920/http://www.math.grin.edu/~rebelsky/Courses/CS302/99S/Outlines/outline.02.html",
+                        "opt1": "Thomas Edison",
+                        "opt2": "Ada Lovelace",
+                        "answer": "Ada Lovelace"
+                    }
+                }
+            },
+            {
+                "q": "What years did NATO host a conference to coin the terms “software engineering” and “software crisis”?",
+                "image": " ",
+                "source": "https://muse.jhu.edu/article/247698/pdf",
+                "opt1": "1968",
+                "opt2": "1958",
+                "opt3": "1963",
+                "opt4": "1965",
+                "answer": "1968",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "What years did NATO host a conference to coin the terms “software engineering” and “software crisis”?",
+                        "image": " ",
+                        "source": "https://web.archive.org/web/20100715042920/http://www.math.grin.edu/~rebelsky/Courses/CS302/99S/Outlines/outline.02.html",
+                        "opt1": "Thomas Edison",
+                        "opt2": "Ada Lovelace",
+                        "answer": "Ada Lovelace"
+                    }
+                }
+            }
+        ]
+    },
+    "2" : {
+        "id" : "2",
+        "title" : "Guess the Programming Language",
+        "questions": [    
+            {
+                "q": "x = 5 y = 10 temp = x x = y y = temp print(‘The value of x is now: {}‘.format(x)) print(‘The value of y is now: {}‘.format(y))",
+                "image": "img/test.jpg",
+                "source": "",
+                "opt1": "SQL",
+                "opt2": "HTML",
+                "opt3": "JavaScript",
+                "opt4": "Python",
+                "answer": "Python",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "x = 5 y = 10 temp = x x = y y = temp print(‘The value of x is now: {}‘.format(x)) print(‘The value of y is now: {}‘.format(y))",
+                        "image": " ",
+                        "source": "",
+                        "opt1": "Python",
+                        "opt2": "JavaScript",
+                        "answer": "Python"
+                    }
+                }
+            },
+            {
+                "q": "namespace HelloWorld { class Program { static void Main(string[] args) { Console.Writeline(“Hello World”); } } }",
+                "image": "img/test.jpg",
+                "source": "",
+                "opt1": "C#",
+                "opt2": "C++",
+                "opt3": "Assembly",
+                "opt4": "Python",
+                "answer": "C#",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "namespace HelloWorld { class Program { static void Main(string[] args) { Console.Writeline(“Hello World”); } } }",
+                        "image": " ",
+                        "source": "",
+                        "opt1": "C#",
+                        "opt2": "Python",
+                        "answer": "C#"
+                    }
+                }
+            },
+            {
+                "q": "NUM1 DB 32 NUM2 DB 8 RESULT DB ?",
+                "image": "img/test.jpg",
+                "source": "",
+                "opt1": "SQL",
+                "opt2": "HTML",
+                "opt3": "Assembly",
+                "opt4": "C",
+                "answer": "Assembly",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "NUM1 DB 32 NUM2 DB 8 RESULT DB ?",
+                        "image": " ",
+                        "source": "",
+                        "opt1": "SQL",
+                        "opt2": "Assembly",
+                        "answer": "Assembly"
+                    }
+                }
+            },
+            {
+                "q": "char word [30], temp[30]; cout << “Enter the string”; cin >> word; strcpy(temp, word); cout << “Uppercase: “ << strupr(temp) << endl; cout << “Lowercase: “ << strlwr(temp) << endl; return 0; ",
+                "image": "img/test.jpg",
+                "source": "",
+                "opt1": "Java",
+                "opt2": "JavaScript",
+                "opt3": "Python",
+                "opt4": "C++",
+                "answer": "C++",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "char word [30], temp[30]; cout << “Enter the string”; cin >> word; strcpy(temp, word); cout << “Uppercase: “ << strupr(temp) << endl; cout << “Lowercase: “ << strlwr(temp) << endl; return 0; ",
+                        "image": " ",
+                        "source": "",
+                        "opt1": "Java",
+                        "opt2": "C++",
+                        "answer": "C++"
+                    }
+                }
+            },
+            {
+                "q": "int first = 10; int second = 20; int sum = first + second; System.out.println(“The sum is: “ + sum);",
+                "image": "img/test.jpg",
+                "source": "",
+                "opt1": "HTML",
+                "opt2": "C++",
+                "opt3": "Java",
+                "opt4": "Assembly",
+                "answer": "Java",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "int first = 10; int second = 20; int sum = first + second; System.out.println(“The sum is: “ + sum);",
+                        "image": " ",
+                        "source": "",
+                        "opt1": "Java",
+                        "opt2": "C++",
+                        "answer": "Java"
+                    }
+                }
+            }
+        ]
+    },
+    "3" : {
+        "id" : "3",
+        "title" : "Data Structures",
+        "questions": [    
+            {
+                "q": "Which of the following is a drawback of using a linked-list?",
+                "image": "img/test.jpg",
+                "source": "https://www.geeksforgeeks.org/linked-list-set-1-introduction/",
+                "opt1": "Random access is not allowed.",
+                "opt2": "Extra memory space is required for a pointer for each element in list. ",
+                "opt3": "No locality of reference.",
+                "opt4": "All of the above are drawbacks.",
+                "answer": "All of the above are drawbacks.",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "Which of the following is a drawback of using a linked-list?",
+                        "image": " ",
+                        "source": "https://www.geeksforgeeks.org/linked-list-set-1-introduction/",
+                        "opt1": "Random access is not allowed.",
+                        "opt2": "Extra memory space is required for a pointer for each element in list. ",
+                        "opt3": "No locality of reference.",
+                        "opt4": "All of the above are drawbacks.",
+                        "answer": "All of the above are drawbacks."
+                    }
+                }
+            },
+            {
+                "q": "Which of the following is not an operation when working with stacks?",
+                "image": "img/test.jpg",
+                "source": "https://www.geeksforgeeks.org/stack-data-structure-introduction-program/",
+                "opt1": "Pop",
+                "opt2": "Pull",
+                "opt3": "Push",
+                "opt4": "isEmpty",
+                "answer": "Pull",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "Which of the following is not an operation when working with stacks?",
+                        "image": " ",
+                        "source": "https://www.geeksforgeeks.org/stack-data-structure-introduction-program/",
+                        "opt1": "Pop",
+                        "opt2": "Pull",
+                        "answer": "Pull"
+                    }
+                }
+            },
+            {
+                "q": "True or False: A queue follows the first in first out(FIFO) paradigm.",
+                "image": "img/test.jpg",
+                "source": "https://www.geeksforgeeks.org/queue-data-structure/",
                 "opt1": "True",
                 "opt2": "False",
-                "answer": "True"
+                "answer": "True",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "True or False: A queue follows the first in first out(FIFO) paradigm.",
+                        "image": " ",
+                        "source": "https://www.geeksforgeeks.org/queue-data-structure/",
+                        "opt1": "True",
+                        "opt2": "False",
+                        "answer": "True"
+                    }
+                }
+            },
+            {
+                "q": "Which of the following is the correct binary tree traversal for the type Preorder?",
+                "image": "img/test.jpg",
+                "source": "https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/",
+                "opt1": "Left-Root-Right",
+                "opt2": "Right-Root-Left",
+                "opt3": "Root-Left-Right",
+                "opt4": "Left-Right-Root",
+                "answer": "Root-Left-Right",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "Which of the following is the correct binary tree traversal for the type Preorder?",
+                        "image": " ",
+                        "source": "https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/",
+                        "opt1": "Right-Root-Left",
+                        "opt2": "Root-Left-Right",
+                        "answer": "Root-Left-Right"
+                    }
+                }
+            },
+            {
+                "q": "True or False: An array can store many items of different types.",
+                "image": "img/test.jpg",
+                "source": "https://www.geeksforgeeks.org/introduction-to-arrays/",
+                "opt1": "True",
+                "opt2": "False",
+                "answer": "False",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "True or False: An array can store many items of different types.",
+                        "image": " ",
+                        "source": "https://www.geeksforgeeks.org/introduction-to-arrays/",
+                        "opt1": "True",
+                        "opt2": "False",
+                        "answer": "False"
+                    }
+                }
+            }
+        ]
+    },
+    "4" : {
+        "id" : "4",
+        "title" : "Logic Design",
+        "questions": [    
+            {
+                "q": "True or False: An AND gate produces an output of 1 if ONLY one input is 1.",
+                "image": "img/test.jpg",
+                "source": "https://www.geeksforgeeks.org/introduction-of-logic-gates/",
+                "opt1": "True",
+                "opt2": "False",
+                "answer": "False",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "True or False: An AND gate produces an output of 1 if ONLY one input is 1.",
+                        "image": " ",
+                        "source": "https://www.geeksforgeeks.org/introduction-of-logic-gates/",
+                        "opt1": "False",
+                        "opt2": "True",
+                        "answer": "False"
+                    }
+                }
+            },{
+                "q": "Which of the following is an example of De Morgan's law?",
+                "image": "img/test.jpg",
+                "source": "https://www.geeksforgeeks.org/properties-of-boolean-algebra/",
+                "opt1": "X + 0 = X",
+                "opt2": "X + X = X",
+                "opt3": "X + X' = 1",
+                "opt4": "(XY)' = X' + Y'",
+                "answer": "(XY)' = X' + Y'",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+                    "q": " ",
+                    "image": " ",
+                    "answer": " ",
+
+                    "makeup": {
+                        "q": " ",
+                        "image": " ",
+                        "opt1": " ",
+                        "opt2": " ",
+                        "answer": " "
+                    },
+
+                    "main": {
+                        "q": "Which of the following is an example of De Morgan's law?",
+                        "image": " ",
+                        "source": "https://www.geeksforgeeks.org/properties-of-boolean-algebra/",
+                        "opt1": "X + X' = 1",
+                        "opt2": "(XY)' = X' + Y'",
+                        "answer": "(XY)' = X' + Y'"
+                    }
+                }
             }
         ]
     }
 }
-
-
-
-
