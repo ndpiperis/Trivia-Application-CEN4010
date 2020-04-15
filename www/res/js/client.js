@@ -1,3 +1,4 @@
+fs = require('fs');
 var socket = io();
 //global room code
 var room = 00000;
@@ -54,10 +55,8 @@ $(document).ready(function() {
 
     function populateDropdown() {
         $.getJSON('json/data.json', function(data) {
-            $.each(data, function(i, q) {
-                console.log(i);
-                    $('.quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');
-                console.log("Added " + q.title + " as active quiz");
+            $.each(data, function(i, q) { 
+                $('.quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');              
             });
         });
     }
@@ -122,8 +121,9 @@ $(document).ready(function() {
         $('.q-box .start').prop('disabled', true);
         var selection = $('.quiz-list').find(":selected").attr('id');
         console.log("Owner has selected quiz " + selection);
-        quiz = new QuizBuilder(room, socket, selection);
-        quiz.beginQuiz(socket);
+        
+        
+        
 
     });
 

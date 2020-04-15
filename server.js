@@ -141,6 +141,7 @@ io.on('connection', function(socket){
       socket.to(room.room).emit('start-quiz');
       var croom = getRoomAtCode(room.room);
       croom.ongoing = true;
+      quiz = new QuizBuilder(room, socket, selection);
     });
 
     socket.on('collect-answer', function(room) {

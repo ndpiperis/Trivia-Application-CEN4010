@@ -1,34 +1,27 @@
 class QuizBuilder {
 
-    room;
-    localCounter = 0;
-    localScore = [
-
-    ];
-    quiz = [
-
-    ];
-
     constructor(qroom, sock, selection) {
+        this.localCounter = 0;
         this.room = qroom;
         this.socket = sock;
+        this.quiz = [];
+        var data;
         //load quiz json into questions
         console.log("Finding " + selection);
         $.getJSON('../json/data.json', function(data) {
-            // console.log(data);
-            $.each(data, function(index, q) {
-                console.log(index);
-                if(index == selection) {
-                    this.quiz.push(q);
-                    console.log("Added " + q.title + " as active quiz");
-                }
-            });
+            console.log(data[selection].questions);
+            this.data = data[selection].questions
+        }, function() {
+            this.quiz.push(data);
         });
-        console.log(this.quiz);
+        this.quiz.push(data);
+        console.log("sending...");
+        this.beginQuiz(sock);
     }
 
-    sendQuestion(socket) {
+     sendQuestion(socket) {
         //sends the whole json entry to feed into template
+     
         console.log(this.quiz);
         socket.emit('new-question', {
             question: this.quiz.questions[this.localCounter],
@@ -37,26 +30,26 @@ class QuizBuilder {
         this.localCounter++;
     }
 
-    checkQuestion() {
+     checkQuestion() {
         //todo
     }
 
-    getScoreAtID(uid) {
+     getScoreAtID(uid) {
         res = localScore.filter(o => {
             return o.id === uid;
         });
     }
 
-    timer(socket) {
-         for(var i = 0; i < 2; i++) {
-             setInterval(this.sendQuestion(socket), 30000);
-             socket.emit('collect-answers', this.room);
-         }
+     timer(socket) {
+         //for(var i = 0; i < 2; i++) {
+             //setInterval(this.sendQuestion(socket), 30000);
+             //socket.emit('collect-answers', this.room);
+         //}
     }
 
-    beginQuiz(socket) {
-        this.sendQuestion(socket);
-        this.timer(socket);
+     beginQuiz(sock) {
+        this.sendQuestion(sock);
+        //this.timer(socket);
     }
     
 }
