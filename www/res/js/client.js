@@ -58,9 +58,8 @@ $(document).ready(function() {
 
     function populateDropdown() {
         $.getJSON('json/data.json', function(data) {
-            $.each(data.quizzes, function(i, q){
-                console.log(q.quizzes[i].title);
-                $('.quizList').append('<option class="q' + i + '">' + q.quizzes[i].title + '</option>');
+            $.each(data, function(i, q){
+                $('.quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');
             });
         })
         
@@ -124,8 +123,9 @@ $(document).ready(function() {
             room : room
         });
         $('.q-box .start').prop('disabled', true);
-
-        quiz = new QuizBuilder(room, socket);
+        var selection = $('.quiz-list').find(":selected").attr('id');
+        console.log("Owner has selected quiz " + selection);
+        quiz = new QuizBuilder(room, socket, selection);
         quiz.beginQuiz(socket);
 
     });
@@ -153,7 +153,6 @@ $(document).ready(function() {
         changeToRoom(info);
         console.log("Owner: " + info.owner);
         if(info.owner == socket.id) {
-            console.log("You are the owner of this room");
             updateUserList(info);
         }
     });
@@ -176,7 +175,7 @@ $(document).ready(function() {
         $('.q-box').loadTemplate('modules/quiz.html', 
             {
                 question :  q.qu,
-                graphic  :  q.img, 
+                graphic  :  q.image, 
                 opt1 : 'A) ' + q.opt1,
                 opt2 : 'B) ' + q.opt2,
                 opt3 : 'C) ' + q.opt3,

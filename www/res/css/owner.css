@@ -1,0 +1,36 @@
+.quiz-list {
+    
+    border:none;
+    color:rgba(0,0,0, .85);
+    background:white;
+    border-bottom:2px solid rgba(0,0,0, .2);
+    
+    border-radius:5px;
+    margin:8px;
+    outline:none;
+    width: 250px;
+    height:45px;
+    font-size:13pt;
+    font-family: 'Montserrat';
+    box-sizing:border-box;
+    padding-left:12px;
+    padding-right:12px;
+}
+
+.q {
+    border:none;
+    color:rgba(0,0,0, .85);
+    background:white;
+    -webkit-appearance: none;
+    appearance:none;
+    -moz-appearance:none;
+    margin:8px;
+    outline:none;
+    width: 250px;
+    height:45px;
+    font-size:13pt;
+    font-family: 'Montserrat';
+    box-sizing:border-box;
+    padding-left:12px;
+    padding-right:12px;
+}

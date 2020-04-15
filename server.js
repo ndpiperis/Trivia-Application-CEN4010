@@ -129,8 +129,9 @@ io.on('connection', function(socket){
 
     //send question to room
     socket.on("new-question", function(info) {
+      console.log("New question: " + info);
       socket.to(`${info.room}`).emit('new-question-server', info.question);
-      console.log(info.question);
+      
     });
   
 
