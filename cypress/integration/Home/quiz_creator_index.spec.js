@@ -5,7 +5,7 @@ describe('Checks the content of the trivia app home page', () => {
     });
 
     it('Navigates to quiz creator page', () => {
-        cy.get('a[href="quiz_creator.html]').click();
+        cy.get('a[href="quiz_creator.html"]').click();
     });
     
     it('Verfies and checks content on quiz creator page', () => {
