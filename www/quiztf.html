@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Trivia Application</title>
+        <meta http-equiv="Content-Security-Policy" 
+                content="default-src 'self';
+                style-src 'self' 'unsafe-inline';
+                script-src 'self' http://localhost:4200 'unsafe-inline' 'unsafe-eval';
+                connect-src 'self';
+                font-src 'self' data:;
+                connect-src ws:">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+               <!--Math.min(textarea.scrollHeight, limit) + "px";-->
+        <!--CSS-->
+        <link rel="stylesheet" type="text/css" href="css/mobile.css"/>
+        <link rel="stylesheet" type="text/css" href="css/quiz.css"/>
+    </head>
+    <body>
+        <!--contains all visible layers-->
+
+            <!--large colored landing area-->
+            <section class="an fillScreen">
+                <!-- GAME UI -->
+                <section class="game-ui an fc">
+                    <section class="q-box fc">
+                        
+                        
+                        <section class="qc">
+                            <section class="quiz-data"></section>
+                                <h2 class="shifted-title">How much wood could a wood chuck chuck if a wood chuck could chuck wood</h2>
+                                <img src="test.jpg" class="qimg" alt="Picture Test" >
+                            </section>  
+
+                            <section class="a-box fc">                        
+                                <input type="button" class="landing-button qa" value="This is the answer for A.">
+                                <br>
+
+                        
+                                <input type="button" class="landing-button qa" value="This is the answer for B.">
+                                <br>
+                                
+                            </section>  
+                           
+
+                            <!--/div-->
+                        </section>
+                        
+                    </section>
+                    
+                </section>
+            </section>
+           
+
+
+        <!-- Script loading -->
+        <script src="jquery/dist/jquery.js">
+        </script>
+        <script src="js/ui.js">           
+        </script>
+        <script src="socket.io-client/dist/socket.io.js">           
+        </script>  
+        <script src="js/client.js">           
+        </script>
+        <script src="js/index.js">
+        </script>
+        <script src="js/data.js">
+        </script>
+        
+        <script>
+            document.getElementById("reviewButton").checked = true;
+
+            function hideTextBox(e)
+            {
+                e.style.height = "";
+            }
+
+            function showTextBox(e)
+            {
+                
+                e.style.height = "";
+                e.style.height = e.scrollHeight + "px"; 
+
+            }
+
+            //SHOW/HIDE REVIEW SECTION
+            function myFunction() {
+                var x = document.getElementById("reviewSection");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {
+                    x.style.display = "none";
+                }
+            }
+        </script>
+
+    </body>
+
+</html>

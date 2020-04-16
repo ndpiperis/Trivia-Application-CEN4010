@@ -4,7 +4,6 @@
         "id" : 0,
         "title" : "Software Engineering",
         "questions": [
-        
             {
                 "q": "Which of the following is a bitwise operator?",
                 "image": "",
