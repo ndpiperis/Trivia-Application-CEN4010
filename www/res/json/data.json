@@ -6,106 +6,167 @@
         "questions": [
         
             {
-                "q": "What does html stand for?",
-                "image": "img/test.jpg",
-                "source": "",
-                "opt1": "HyperText Markup Language",
-                "opt2": "HyperText Transfer Protocol",
-                "opt3": "Internet Protocol",
-                "opt4": "None of the above",
-                "answer": "HyperText Markup Language",
+                "q": "Which of the following is a bitwise operator?",
+                "image": "",
+                "source": "https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/",
+                "opt1": "&&",
+                "opt2": "||",
+                "opt3": "!",
+                "opt4": "~",
+                "answer": "~",
 
                 "review":{
                     "correct": "false",
-                    "explanation": " ",
-                    "q": " ",
-                    "image": " ",
-                    "answer": " ",
+                    "explanation": "Logical operators return either 0 or 1 while bitwise operators return integer values.",
+                    "source": "https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/",
 
                     "makeup": {
-                        "q": " ",
-                        "image": " ",
-                        "opt1": " ",
-                        "opt2": " ",
-                        "answer": " "
-                    },
-
-                    "main": {
-                        "q": "What does html stand for?",
-                        "image": " ",
-                        "source": "",
-                        "opt1": "HyperText Markup Language",
-                        "opt2": "HyperText Transfer Protocol",
-                        "answer": "HyperText Markup Language"
-                    }
-                }
-            },
-            {
-                "q": "What is SCRUM?",
-                "image": " ",
-                "opt1": "An agile method",
-                "opt2": "A programming language",
-                "opt3": "A learning method",
-                "opt4": "None of the above",
-                "answer": "An agile method",
-
-                "review":{
-                    "correct": "false",
-                    "explanation": " ",
-                    "q": " ",
-                    "image": " ",
-                    "answer": " ",
-
-                    "makeup": {
-                        "q": " ",
-                        "image": " ",
-                        "opt1": " ",
-                        "opt2": " ",
-                        "answer": " "
-                    },
-
-                    "main": {
-                        "q": "What is SCRUM?",
-                        "image": " ",
-                        "source": "",
-                        "opt1": "An agile method",
-                        "opt2": "A learning method",
-                        "answer": "An agile method"
-                    }
-                }
-            },
-            {
-                "q": "Is JavaScript a programming language?",
-                "image": " ",
-                "opt1": "True",
-                "opt2": "False",
-                "answer": "True",
-
-                "review":{
-                    "correct": "false",
-                    "explanation": " ",
-                    "q": " ",
-                    "image": " ",
-                    "answer": " ",
-
-                    "makeup": {
-                        "q": " ",
-                        "image": " ",
-                        "opt1": " ",
-                        "opt2": " ",
-                        "answer": " "
-                    },
-
-                    "main": {
-                        "q": "Is JavaScript a programming language?",
-                        "image": " ",
-                        "source": "",
+                        "q": "True or False: A bitwise operator considers any non zero operand as 1.",
+                        "image": "",
                         "opt1": "True",
                         "opt2": "False",
-                        "answer": "True"
-                        }
+                        "answer": "False"
+                    },
+
+                    "main": {
+                        "q": "Which of the following is a bitwise operator?",
+                        "image": "",
+                        "source": "https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/",
+                        "opt1": "~",
+                        "opt2": "&&",
+                        "answer": "~"
                     }
                 }
+            },
+            {
+                "q": "What programming language is this in? Console.WriteLine(“Hello World!”)",
+                "image": "",
+                "source": "",
+                "opt1": "C#",
+                "opt2": "C++",
+                "opt3": "Visual Basic",
+                "opt4": "Python",
+                "answer": "C#",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": "Even though C# and Visual Basic share some similar functions, one main difference is that Visual Basic doesn’t use semicolons – like Python.",
+                    "source": "",
+
+                    "makeup": {
+                        "q": "What programming language is this in? cout << “Hello World!”;",
+                        "image": "",
+                        "opt1": "C++",
+                        "opt2": " Python",
+                        "answer": "C++"
+                    },
+
+                    "main": {
+                        "q": "What programming language is this in? Console.WriteLine(“Hello World!”)",
+                        "image": "",
+                        "source": "",
+                        "opt1": "C#",
+                        "opt2": "Visual Basic",
+                        "answer": "C#"
+                    }
+                }
+            },
+            {
+                "q": "Which type of sort repeatedly swaps the adjacent elements when they are in the wrong order?",
+                "image": "",
+                "source": "https://www.geeksforgeeks.org/bubble-sort/",
+                "opt1": "Bubble sort",
+                "opt2": "Quick sort",
+                "opt3": "Tree sort",
+                "opt4": "Merge sort",
+                "answer": "Bubble sort",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " ",
+
+                    "makeup": {
+                        "q": "Which algorithm first creates a binary search tree from the elements of the input list or array and then performs an in-order traversal?",
+                        "image": "",
+                        "source": "https://www.geeksforgeeks.org/tree-sort/",
+                        "opt1": "Tree sort",
+                        "opt2": "Quick sort",
+                        "answer": "Tree sort"
+                    },
+
+                    "main": {
+                        "q": "Which type of sort repeatedly swaps the adjacent elements when they are in the wrong order?",
+                        "image": "",
+                        "source": "https://www.geeksforgeeks.org/bubble-sort/",
+                        "opt1": "Tree sort",
+                        "opt2": "Bubble sort",
+                        "answer": "Bubble sort"
+                        }
+                    }
+                },
+                {
+                    "q": "Which developmental process involves planning incrementally and is easier to change the process if the customer needs to adjust their requirement?",
+                    "image": "",
+                    "opt1": "Plan driven process",
+                    "opt2": "Agile Process",
+                    "opt3": "Incremental development",
+                    "opt4": "Extreme programming",
+                    "answer": "Agile Process",
+    
+                    "review":{
+                        "correct": "false",
+                        "explanation": " The agile process is a great method for small to medium sized groups. The benefits of the agile process are The plan driven process can be seen through this example The Incremental development can be seen through this example Also in incremental development specification, validation and development are interleaved.Extreme programming can be seen through this example",
+    
+                        "makeup": {
+                            "q": "Which developmental process involves planning in advance and progress is measured against this plan?",
+                            "image": "",
+                            "opt1": "Plan driven process",
+                            "opt2": "Extreme programming",
+                            "answer": "Plan driven process"
+                        },
+    
+                        "main": {
+                            "q": "Which developmental process involves planning incrementally and is easier to change the process if the customer needs to adjust their requirement?",
+                            "image": "",
+                            "source": "",
+                            "opt1": "Agile Process",
+                            "opt2": "Incremental development",
+                            "answer": "Agile Process"
+                            }
+                        }
+                    },
+                    {
+                        "q": "",
+                        "image": " ",
+                        "opt1": "",
+                        "opt2": "",
+                        "answer": "",
+        
+                        "review":{
+                            "correct": "false",
+                            "explanation": " ",
+                            "q": " ",
+                            "image": " ",
+                            "answer": " ",
+        
+                            "makeup": {
+                                "q": " ",
+                                "image": " ",
+                                "opt1": " ",
+                                "opt2": " ",
+                                "answer": " "
+                            },
+        
+                            "main": {
+                                "q": "",
+                                "image": " ",
+                                "source": "",
+                                "opt1": "",
+                                "opt2": "",
+                                "answer": ""
+                                }
+                            }
+                        }
             ]
         },
 
