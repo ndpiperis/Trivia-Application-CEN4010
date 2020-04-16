@@ -1,57 +1,79 @@
 module.exports = class QuizBuilder {
-
     socket;
     qroom;
     localCounter;
     quiz;
-    data
+    history = [
+
+    ];
+    current = [
+
+    ];
+
     constructor(qroom, sock, selection, data) {
-        global.qroom = qroom;
-        global.localCounter = 0;
+        this.qroom = qroom;
+
+        this.localCounter = 0;
         this.socket = sock;
-        global.datab = data[selection];
-        global.quiz = datab
-        console.log(selection);
-        console.log("sending..." + datab);
-        console.log(qroom);
-        this.beginQuiz(this.socket);
+        this.datab = data[selection];
+        this.quiz = this.datab
+        this.beginQuiz();
+        //console.log(quiz);
     }
 
-    sendQuestion(socket) {
+    sendQuestion() {
         //sends the whole json entry to feed into template
-     
-        console.log(quiz.questions[0].q);
-        socket.to(qroom).emit('new-question', {
-            q : quiz.questions[localCounter].q,
-            opt1 : quiz.questions[localCounter].opt1,
-            opt2: quiz.questions[localCounter].opt2,
-            opt3 : quiz.questions[localCounter].opt3,
-            opt4 : quiz.questions[localCounter].opt4,
-            image : quiz.questions[localCounter].image
-        });
+        
+        if(typeof(this.quiz.questions[this.localCounter].opt3) != undefined && typeof(this.quiz.questions[this.localCounter].opt4) != undefined) {
+            this.socket.to(this.qroom).emit('new-question', {
+                q : this.quiz.questions[this.localCounter].q,
+                opt1 : this.quiz.questions[this.localCounter].opt1,
+                opt2 : this.quiz.questions[this.localCounter].opt2,
+                opt3 : this.quiz.questions[this.localCounter].opt3,
+                opt4 : this.quiz.questions[this.localCounter].opt4,
+                image : this.quiz.questions[this.localCounter].image
+            });
+
+        }
+        else {
+            socket.to(qroom).emit('new-question', {
+                q : this.quiz.questions[this.localCounter].q,
+                opt1 : this.quiz.questions[this.localCounter].opt1,
+                opt2: this.quiz.questions[this.localCounter].opt2,
+                image : this.quiz.questions[this.localCounter].image
+            });
+        }
+        //this.localCounter++;
+    }
+
+    collect(info, id) {
+        console.log("answer received (" + id + ") : " + info.answer);
         this.localCounter++;
+        this.sendQuestion();
     }
 
      checkQuestion() {
         //todo
     }
 
-     getScoreAtID(uid) {
-        res = localScore.filter(o => {
-            return o.id === uid;
-        });
+    //  getScoreAtID(uid) {
+    //     res = localScore.filter(o => {
+    //         return o.id === uid;
+    //     });
+    // }
+
+     beginQuiz() {
+        this.sendQuestion();
+        //this.timer();
+    }
+    
+    //self explanatory
+    resetQuiz() {
+        this.localCounter = 0;
+        quiz = '';
+        data = ''
     }
 
-     timer(socket) {
-         //for(var i = 0; i < 2; i++) {
-             //setInterval(this.sendQuestion(socket), 30000);
-             //socket.emit('collect-answers', this.room);
-         //}
-    }
-
-     beginQuiz(sock) {
-        this.sendQuestion(sock);
-        //this.timer(socket);
-    }
+    //socket listeners
     
 }

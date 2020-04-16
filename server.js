@@ -8,6 +8,7 @@ let QuizBuilder = require('./www/res/js/quiz.js');
 const express = require('express');
 const app = express();
 
+
 //Creates server, binds socket to server
 server = require('http').createServer(app)
 const io = require('socket.io')(server);
@@ -49,9 +50,6 @@ var _rooms = [
 
   ];
 
-var user_quizzes = [
-
-];
 
 //pushes room to array (ONLY ON ROOM CREATE)
 function prepDataCreate(nroom, name, socket) {
@@ -64,7 +62,8 @@ function prepDataCreate(nroom, name, socket) {
     roomName: name + "'s room",
     users: [
       
-    ]
+    ],
+    quiz : null
   });
 }
 
@@ -141,17 +140,36 @@ io.on('connection', function(socket){
   
 
     //QUIZ 
-    socket.on('start-quiz-owner', function(room) {
-      console.log('room ' + room.room + ' starting quiz #' + room.selection);
-      socket.to(room.room).emit('start-quiz');
-      var croom = getRoomAtCode(room.room);
+    socket.on('start-quiz-owner', function(info) {
+      cr = info.room;
+      console.log('room ' + info.room + ' starting quiz #' + info.selection);
+      socket.to(info.room).emit('start-quiz');
+      var croom = getRoomAtCode(info.room);
       croom.ongoing = true;
-      quiz = new QuizBuilder(room.room, socket, room.selection, quizJSON);
+      quiz = new QuizBuilder(info.room, socket, info.selection, quizJSON);
+      croom.quiz = quiz;
+      console.log("quiz entered into memory: " + croom.quiz);
     });
 
-    socket.on('collect-answer', function(room) {
-      io.to(`${room}`).emit('collect-answer-server', room);
-    })
+    //gets answer and uses quizbuilder to collect and check
+    socket.on('collect-answer', function(info) {
+      var croom = getRoomAtCode(info.room);
+      console.log(info.answer);
+      console.log(croom.quiz);
+      //croom.quiz.collect(info, socket.id);
+    });
+
+
+    socket.on('reset-quiz-owner', function(info) {
+      console.log('resetting room ' + info.room);
+      
+      var croom = getRoomAtCode(info.room);
+      croom.quiz = '';
+      io.to(info.room).emit('reset-quiz', {
+        room: croom
+      });
+      croom.ongoing = false;
+    });
 
 
     socket.on('disconnect', function(){
@@ -178,16 +196,24 @@ io.on('connection', function(socket){
       console.log(socket.id  + ' disconnected');
 
     });
-
-    
-
-
   });
 
 
   //UTILITY FUNCTIONS
 
   //returns room at code or err
+
+  function removeQuiz(room) {
+    for(var i = 0; i < quizzes.length; i++) {
+      console.log(quizzes[i]);
+      if(quizzes[i].code == room) {
+        quizzes.splice(i, 1);
+        console.log("quiz erased");
+      }
+    }
+  }
+
+
   function getRoomAtCode(code) {
 
     for (var i = 0; i < _rooms.length; i++) {
@@ -232,12 +258,13 @@ io.on('connection', function(socket){
           
             if(_rooms[i].owner == id) {
               reloadUsers(_rooms[i]);
-              //delete _rooms[i];
+   
               _rooms.splice(i, 1);
+              
               console.log("Room removed");
             }
             else if(current[j][0] == id) {
-              //delete current[j];
+      
               current.splice(j, 1);
               console.log("user removed");
 

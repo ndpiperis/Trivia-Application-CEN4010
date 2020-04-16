@@ -719,7 +719,7 @@
         "questions": [    
             {
                 "q": "True or False: An AND gate produces an output of 1 if ONLY one input is 1.",
-                "image": "img/test.jpg",
+                "image": " ",
                 "source": "https://www.geeksforgeeks.org/introduction-of-logic-gates/",
                 "opt1": "True",
                 "opt2": "False",

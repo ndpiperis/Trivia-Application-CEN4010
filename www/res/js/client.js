@@ -112,7 +112,7 @@ $(document).ready(function() {
         $(".members").append("<div class='user'>" + user[i][1] + "</div>");
     }
 
-    $('.q-box').on('click', '.start', function() {
+    $('.q-box').on('click', '#start', function() {
         var selection = $('.quiz-list').find(":selected").attr('id');
         console.log('starting quiz');
         socket.emit('start-quiz-owner', {
@@ -120,20 +120,32 @@ $(document).ready(function() {
             selection: selection
         });
         $('.q-box .start').prop('disabled', true);
+        $('.q-box #reset').prop('disabled', false);
         console.log("Owner has selected quiz " + selection);
         
     });
 
-    var prevBtn = 0;
-    var btnPressed = false;
-    $('.qa').click(function() {
-        console.log('selected answer');
-        if(btnPressed) {
-            prevBtn.toggleClass('active');
-            prevBtn = this;
-        }
-        this.toggleClass('active');
+    $('.q-box').on('click', '#reset', function() {
+        console.log('resetting quiz');
+        socket.emit('reset-quiz-owner', {
+            room : room,
+            id : socket.id
+        });
+        $('.q-box .start').prop('disabled', false);
+        $('.q-box .reset').prop('disabled', true);
         
+    });
+
+
+
+    $('.q-box').on('mousedown', '.qa', function() {
+        
+        $(this).addClass('activated'); 
+        $('.qa').not(this).attr('disabled', 'true');      
+        socket.emit('collect-answer', {
+            code : room,
+            answer : $(this).attr('value')
+        });
     });
 
     //////////////////////////////
@@ -163,19 +175,45 @@ $(document).ready(function() {
         }
     });
 
+    socket.on('reset-quiz', function(info) {
+        console.log("resetting room");
+            if( socket.id != info.room.owner) {
+                console.log("resetting room");
+                $('.q-box').loadTemplate('modules/quiz-waitroom.html',{
+                    title : 'Room ' + room
+                });
+            }
+    });
+
+    //loads question ui template from quiz.html or quiztf.html
     socket.on('new-question', function(qu) {
         console.log('Receiving new question from quiz');
-        console.log(qu);
-        $('.q-box').loadTemplate('modules/quiz.html', 
-            {
-                question :  qu.q,
-                graphic  :  qu.image, 
-                opt1 : 'A) ' + qu.opt1,
-                opt2 : 'B) ' + qu.opt2,
-                opt3 : 'C) ' + qu.opt3,
-                opt4 : 'D) ' + qu.opt4
-            }
-        );
+        console.log(qu.length);
+        if(qu.opt3 != undefined && qu.opt4 != undefined) {
+            $('.q-box').loadTemplate('modules/quiz.html', 
+                {
+                    question :  qu.q,
+                    graphic  :  qu.image, 
+                    opt1 : qu.opt1,
+                    opt2 : qu.opt2,
+                    opt3 : qu.opt3,
+                    opt4 : qu.opt4
+                }
+            );
+        } else {
+            $('.q-box').loadTemplate('modules/quiztf.html', 
+                {
+                    question :  qu.q,
+                    graphic  :  qu.image, 
+                    opt1 : qu.opt1,
+                    opt2 : qu.opt2
+                }
+            );
+        }
+
+        if(qu.image != "" || qu.image != " ") {    
+            $(".qimg").show();
+        }
     
     });
 

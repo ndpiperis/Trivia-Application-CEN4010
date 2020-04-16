@@ -71,9 +71,13 @@ fieldset {
     padding-left:5%;
 }
 
-.qa:active, .active {
+.qa:active, .activated {
     background:rgb(135, 255, 163);
+    -webkit-box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);
+    -moz-box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);
+    box-shadow: inset 0px 0px 24px -1px rgba(0,0,0,0.26);  
 }
+
 
 .quiz-data {
     display:flex;
@@ -98,6 +102,10 @@ img {
     
   }
 
+  .qimg {
+      display:none;
+  }
+
 
 
 @media (min-width:300px) {
@@ -111,7 +119,7 @@ img {
         border-top:1px solid rgba(0,0,0, .1);
         object-fit: cover;
         border-bottom:1px solid rgba(0,0,0, .1);
-        display: block;
+        /* display: block; */
         margin-left: auto;
         margin-right: auto;
     }
@@ -135,7 +143,7 @@ img {
         border-top:1px solid rgba(0,0,0, .1);
         object-fit: cover;
         border-bottom:1px solid rgba(0,0,0, .1);
-        display: block;
+        /* display: block; */
         margin-left: auto;
         margin-right: auto;
     }
