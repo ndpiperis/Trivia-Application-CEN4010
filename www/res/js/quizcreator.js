@@ -13,3 +13,13 @@ var json = JSON.stringify(obj);
 var fs = require('fs');
 fs.writeFile('myjsonfile.json', json, 'utf8', callback);
 
+$(document).ready(function() {
+    $('.entry-form').submit(function(e) {
+        ntitle = $('#title').val()
+        nquestion = $('#question').val()
+        nimg = $('#img').val()
+
+        e.preventDefault();
+
+    });
+});
