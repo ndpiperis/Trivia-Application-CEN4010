@@ -3,7 +3,8 @@ var socket = io();
 //global room code
 var room = 00000;
 var errShown = false;
-
+var qno = 0;
+var submitted = null;
 
 
 //////////////////////////////
@@ -139,13 +140,15 @@ $(document).ready(function() {
 
 
     $('.q-box').on('mousedown', '.qa', function() {
-        
+        console.log("#" + room);
+        submitted = true;
         $(this).addClass('activated'); 
         $('.qa').not(this).attr('disabled', 'true');      
         socket.emit('collect-answer', {
             code : room,
             answer : $(this).attr('value')
         });
+        
     });
 
     //////////////////////////////
@@ -187,32 +190,49 @@ $(document).ready(function() {
 
     //loads question ui template from quiz.html or quiztf.html
     socket.on('new-question', function(qu) {
+        
+        qno = qu.qno;
         console.log('Receiving new question from quiz');
-        console.log(qu.length);
-        if(qu.opt3 != undefined && qu.opt4 != undefined) {
-            $('.q-box').loadTemplate('modules/quiz.html', 
-                {
-                    question :  qu.q,
-                    graphic  :  qu.image, 
-                    opt1 : qu.opt1,
-                    opt2 : qu.opt2,
-                    opt3 : qu.opt3,
-                    opt4 : qu.opt4
-                }
-            );
-        } else {
+        console.log(qu.q);
+        $(this).removeClass('activated'); 
+        $('.qa').not(this).attr('disabled', 'false'); 
+
+        if(qu.opt3 === undefined && qu.opt4 === undefined) {
             $('.q-box').loadTemplate('modules/quiztf.html', 
                 {
-                    question :  qu.q,
-                    graphic  :  qu.image, 
-                    opt1 : qu.opt1,
-                    opt2 : qu.opt2
+                question :  qu.q,
+                graphic  :  qu.image, 
+                opt1 : qu.opt1,
+                opt2 : qu.opt2
                 }
             );
+        } 
+        else {
+            $('.q-box').loadTemplate('modules/quiz.html', 
+                {
+                question :  qu.q,
+                graphic  :  qu.image, 
+                opt1 : qu.opt1,
+                opt2 : qu.opt2,
+                opt3 : qu.opt3,
+                opt4 : qu.opt4
+                }
+            );
+            
         }
 
         if(qu.image != "" || qu.image != " ") {    
             $(".qimg").show();
+        }
+
+        if(submitted == null) {
+            submitted = false;
+        }
+        else if(submitted == false) {
+            socket.emit('collect-answer', {
+                code : room,
+                answer : "---"
+            });
         }
     
     });
@@ -258,3 +278,4 @@ $(document).ready(function() {
 
     
 });
+

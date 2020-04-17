@@ -102,70 +102,70 @@
                         "answer": "Bubble sort"
                         }
                     }
-                },
-                {
-                    "q": "Which developmental process involves planning incrementally and is easier to change the process if the customer needs to adjust their requirement?",
-                    "image": "",
-                    "opt1": "Plan driven process",
-                    "opt2": "Agile Process",
-                    "opt3": "Incremental development",
-                    "opt4": "Extreme programming",
-                    "answer": "Agile Process",
+            },
+            {
+                "q": "Which developmental process involves planning incrementally and is easier to change the process if the customer needs to adjust their requirement?",
+                "image": "",
+                "opt1": "Plan driven process",
+                "opt2": "Agile Process",
+                "opt3": "Incremental development",
+                "opt4": "Extreme programming",
+                "answer": "Agile Process",
+
+                "review":{
+                    "correct": "false",
+                    "explanation": " The agile process is a great method for small to medium sized groups. The benefits of the agile process are The plan driven process can be seen through this example The Incremental development can be seen through this example Also in incremental development specification, validation and development are interleaved.Extreme programming can be seen through this example",
+
+                    "makeup": {
+                        "q": "Which developmental process involves planning in advance and progress is measured against this plan?",
+                        "image": "",
+                        "opt1": "Plan driven process",
+                        "opt2": "Extreme programming",
+                        "answer": "Plan driven process"
+                    },
+
+                    "main": {
+                        "q": "Which developmental process involves planning incrementally and is easier to change the process if the customer needs to adjust their requirement?",
+                        "image": "",
+                        "source": "",
+                        "opt1": "Agile Process",
+                        "opt2": "Incremental development",
+                        "answer": "Agile Process"
+                        }
+                    }
+            },
+            {
+                    "q": "test",
+                    "image": " ",
+                    "opt1": "1",
+                    "opt2": "2",
+                    "answer": "",
     
                     "review":{
                         "correct": "false",
-                        "explanation": " The agile process is a great method for small to medium sized groups. The benefits of the agile process are The plan driven process can be seen through this example The Incremental development can be seen through this example Also in incremental development specification, validation and development are interleaved.Extreme programming can be seen through this example",
+                        "explanation": " ",
+                        "q": " ",
+                        "image": " ",
+                        "answer": " ",
     
                         "makeup": {
-                            "q": "Which developmental process involves planning in advance and progress is measured against this plan?",
-                            "image": "",
-                            "opt1": "Plan driven process",
-                            "opt2": "Extreme programming",
-                            "answer": "Plan driven process"
+                            "q": " ",
+                            "image": " ",
+                            "opt1": " ",
+                            "opt2": " ",
+                            "answer": " "
                         },
     
                         "main": {
-                            "q": "Which developmental process involves planning incrementally and is easier to change the process if the customer needs to adjust their requirement?",
-                            "image": "",
-                            "source": "",
-                            "opt1": "Agile Process",
-                            "opt2": "Incremental development",
-                            "answer": "Agile Process"
-                            }
-                        }
-                    },
-                    {
-                        "q": "",
-                        "image": " ",
-                        "opt1": "",
-                        "opt2": "",
-                        "answer": "",
-        
-                        "review":{
-                            "correct": "false",
-                            "explanation": " ",
-                            "q": " ",
+                            "q": "",
                             "image": " ",
-                            "answer": " ",
-        
-                            "makeup": {
-                                "q": " ",
-                                "image": " ",
-                                "opt1": " ",
-                                "opt2": " ",
-                                "answer": " "
-                            },
-        
-                            "main": {
-                                "q": "",
-                                "image": " ",
-                                "source": "",
-                                "opt1": "",
-                                "opt2": "",
-                                "answer": ""
-                                }
+                            "source": "",
+                            "opt1": "",
+                            "opt2": "",
+                            "answer": ""
                             }
                         }
+            }
             ]
         },
 

@@ -1,10 +1,13 @@
 
 //  Clyde Goodall 2020
+
+
+
     
 //includes xpress and initializes
 const jsio = require('jsonfile');
+let QuizBuilder = require('./www/res/js/quiz.js')
 const file = 'www/res/json/data.json';
-let QuizBuilder = require('./www/res/js/quiz.js');
 const express = require('express');
 const app = express();
 
@@ -63,7 +66,7 @@ function prepDataCreate(nroom, name, socket) {
     users: [
       
     ],
-    quiz : null
+    quiz : "none"
   });
 }
 
@@ -141,22 +144,21 @@ io.on('connection', function(socket){
 
     //QUIZ 
     socket.on('start-quiz-owner', function(info) {
-      cr = info.room;
       console.log('room ' + info.room + ' starting quiz #' + info.selection);
       socket.to(info.room).emit('start-quiz');
       var croom = getRoomAtCode(info.room);
       croom.ongoing = true;
-      quiz = new QuizBuilder(info.room, socket, info.selection, quizJSON);
-      croom.quiz = quiz;
-      console.log("quiz entered into memory: " + croom.quiz);
+      croom.quiz = new QuizBuilder(info.room, socket, info.selection, quizJSON, croom.users);
+      
+      //console.log("quiz entered into memory: " + croom.quiz);
     });
 
     //gets answer and uses quizbuilder to collect and check
     socket.on('collect-answer', function(info) {
-      var croom = getRoomAtCode(info.room);
-      console.log(info.answer);
-      console.log(croom.quiz);
-      //croom.quiz.collect(info, socket.id);
+      var croom = getRoomAtCode(info.code);
+      //console.log("#" + info.code);
+      //console.log(croom.quiz);
+      croom.quiz.collect(info, socket.id);
     });
 
 
@@ -164,7 +166,8 @@ io.on('connection', function(socket){
       console.log('resetting room ' + info.room);
       
       var croom = getRoomAtCode(info.room);
-      croom.quiz = '';
+      croom.quiz.resetQuiz();
+      croom.quiz = 0;
       io.to(info.room).emit('reset-quiz', {
         room: croom
       });
@@ -201,27 +204,25 @@ io.on('connection', function(socket){
 
   //UTILITY FUNCTIONS
 
-  //returns room at code or err
-
-  function removeQuiz(room) {
-    for(var i = 0; i < quizzes.length; i++) {
-      console.log(quizzes[i]);
-      if(quizzes[i].code == room) {
-        quizzes.splice(i, 1);
-        console.log("quiz erased");
-      }
-    }
-  }
+  // function removeQuiz(room) {
+  //   for(var i = 0; i < quizzes.length; i++) {
+  //     console.log(quizzes[i]);
+  //     if(quizzes[i].code == room) {
+  //       quizzes.splice(i, 1);
+  //       console.log("quiz erased");
+  //     }
+  //   }
+  // }
 
 
   function getRoomAtCode(code) {
 
     for (var i = 0; i < _rooms.length; i++) {
       if(_rooms[i].code == code) {
+        console.log("room found at #" + code);
         return _rooms[i];    
       }
     }
-    return 1;
   }
 
   //returns room at id
@@ -229,9 +230,9 @@ io.on('connection', function(socket){
     
       for (var i = 0; i < _rooms.length; i++) {
         for (var j = 0; j < _rooms[i].users.length; j++) {
-          console.log(_rooms[i]);
+          //console.log(_rooms[i]);
           if(_rooms[i].users[j][0] == id || _rooms[i].owner == id) {
-            console.log(_rooms[i]);
+            //console.log(_rooms[i]);
             return _rooms[i];
           }
           else {
