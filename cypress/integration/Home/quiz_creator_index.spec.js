@@ -1,4 +1,4 @@
-describe('Checks the content of the trivia app home page', () => {
+describe('Checks the content of the trivia quiz creator page', () => {
 
     it('Navigates to home page', () => {
         cy.visit('localhost:25565');
