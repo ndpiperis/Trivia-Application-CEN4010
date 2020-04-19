@@ -201,6 +201,17 @@ io.on('connection', function(socket){
       console.log(socket.id  + ' disconnected');
 
     });
+
+
+
+
+
+    socket.on('collect-title', function(info){
+      obj.title = $('#quiz-title').attr('value');
+    });
+
+
+
   });
 
 
