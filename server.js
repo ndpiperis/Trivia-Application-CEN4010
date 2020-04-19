@@ -8,6 +8,7 @@
 const jsio = require('jsonfile');
 let QuizBuilder = require('./www/res/js/quiz.js')
 const file = 'www/res/json/data.json';
+fileTemp = 'www/res/json/datatest.json';
 const express = require('express');
 const app = express();
 
@@ -18,7 +19,6 @@ const io = require('socket.io')(server);
 console.log('Server initialized');
 quizJSON = jsio.readFileSync(file);
 console.log(quizJSON);
-
 
 //include resources
 app.use(express.static(__dirname + '/node_modules'));
@@ -201,6 +201,18 @@ io.on('connection', function(socket){
       console.log(socket.id  + ' disconnected');
 
     });
+
+
+
+    socket.on('collect-quiz-data', function(info){
+      jsio.writeFile(fileTemp, info, { flag: 'a' }, function (err) {
+        if (err) console.error(err)
+        console.log('Write Complete');
+      })
+    });
+
+
+
   });
 
 
