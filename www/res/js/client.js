@@ -52,6 +52,10 @@ $(document).ready(function() {
         }
     });
 
+    $('#submit').click(function() {
+            //put all values into obj here
+            socket.emit('collect-title',obj);
+    });
 
     //////////////////////////////
     //      UI UPDATES          //
