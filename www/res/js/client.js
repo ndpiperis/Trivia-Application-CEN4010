@@ -53,8 +53,40 @@ $(document).ready(function() {
     });
 
     $('#submit').click(function() {
+        var obj = { 
+            id: "",
+            title: "",
+                questions: [
+                {
+                    q: "",
+                    img: "",
+                    source: "",
+                    opt1: "",
+                    opt2: "",
+                    opt3: "",
+                    opt4: "",
+                    answer: ""
+                }
+            ]
+        }
+
             //put all values into obj here
-            socket.emit('collect-title',obj);
+            obj.title = $('#quiz-title').val();
+            obj.questions[0].q = $('#question').val();
+            obj.questions[0].source = $('#source-explanation').val();
+            obj.questions[0].img = $('#img').val();
+            obj.questions[0].opt1 = $('#opt1').val();
+            obj.questions[0].opt2 = $('#opt2').val();
+            obj.questions[0].opt3 = $('#opt3').val();
+            obj.questions[0].opt4 = $('#opt4').val();
+            obj.questions[0].answer = $('#answer').val();
+
+            var finalObj = [];
+            finalObj.push({
+                0:obj
+            });
+
+            socket.emit('collect-quiz-data',finalObj);
     });
 
     //////////////////////////////
