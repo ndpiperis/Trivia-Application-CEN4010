@@ -6,7 +6,7 @@
         "questions": [
             {
                 "q": "Which of the following is a bitwise operator?",
-                "image": "",
+                "image": "img/test.jpg",
                 "source": "https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/",
                 "opt1": "&&",
                 "opt2": "||",
@@ -72,7 +72,7 @@
             },
             {
                 "q": "Which type of sort repeatedly swaps the adjacent elements when they are in the wrong order?",
-                "image": "",
+                "image": "img/test.jpg",
                 "source": "https://www.geeksforgeeks.org/bubble-sort/",
                 "opt1": "Bubble sort",
                 "opt2": "Quick sort",
@@ -136,10 +136,10 @@
             },
             {
                     "q": "test",
-                    "image": " ",
+                    "image": "img/test.jpg",
                     "opt1": "1",
                     "opt2": "2",
-                    "answer": "",
+                    "answer": "1",
     
                     "review":{
                         "correct": "false",

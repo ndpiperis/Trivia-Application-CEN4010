@@ -6,7 +6,7 @@ module.exports = class QuizBuilder {
     qcopy;
     users;
     reset;
-    
+    complete;
     current = [
 
     ];
@@ -14,6 +14,8 @@ module.exports = class QuizBuilder {
     finalScore;
 
     constructor(qroom, sock, selection, data, u) {
+        global.current = [];
+        this.complete = false;
         global.finalScore = [
 
         ];
@@ -25,11 +27,11 @@ module.exports = class QuizBuilder {
         global.users = u;
         global.quiz = this.datab;
         global.qcopy = [];
-        console.log(quiz.questions[0].q);
-        console.log(quiz.questions[1].q);
-        console.log(quiz.questions[2].q);
-        console.log(quiz.questions[3].q);
-        console.log(quiz.questions[4].q);
+        //console.log(quiz.questions[0].q);
+        //console.log(quiz.questions[1].q);
+        //console.log(quiz.questions[2].q);
+        //console.log(quiz.questions[3].q);
+        //console.log(quiz.questions[4].q);
 
         this.beginQuiz();
         
@@ -42,7 +44,7 @@ module.exports = class QuizBuilder {
 
             if(quiz.questions[0].opt3 === undefined && quiz.questions[0].opt4 === undefined) {
                 this.socket.to(this.qroom).emit('new-question', {
-                    qno : this.c,
+                    qno : c,
                     q : quiz.questions[0].q,
                     opt1 : quiz.questions[0].opt1,
                     opt2: quiz.questions[0].opt2,
@@ -51,7 +53,7 @@ module.exports = class QuizBuilder {
             }
             else {
                 this.socket.to(this.qroom).emit('new-question', {
-                    qno : this.c,
+                    qno : c,
                     q : quiz.questions[0].q,
                     opt1 : quiz.questions[0].opt1,
                     opt2 : quiz.questions[0].opt2,
@@ -62,52 +64,72 @@ module.exports = class QuizBuilder {
             }
             qcopy.push(quiz.questions[0]);
             quiz.questions.splice(0, 1);
+            console.log(c);
             c++;  
     }
 
     collect(info, id) {
-        
-        this.current.push({
-            qid : c,
+        var actualfuckingnumber = c-1;
+        current.push({
+            qid : actualfuckingnumber,
             id: id,
             answer : info.answer
         });
-        console.log(this.current);
+        console.log(current);
     }
 
     calculate() {
+        console.log(users);
         
        for(var i = 0; i < users.length; i++) {
-           var total = 0;
-           var filt = this.current.filter(a => a.id = users[i].id);
-           filt.forEach(function(index, item) {
-            if(filt[index].answer == qcopy.questions[index].answer) {
-                total++;
+            var total = 0;
+           
+            var filt = current.filter(function(a) {
+               if(a.id == current[i].id) {
+                    return true;
+                } else {
+                    return false;
+               }
+            });
+            console.log(filt);
+           
+            for(var j = 0; j < qcopy.length; j++) {
+                if(filt[j].answer == qcopy[j].answer) {
+                    total+= 100;
+                }
             }
-           });
-           console.log("score:" + total);
-       }
+            console.log("score:" + total);
+            var final = Math.round(total / qcopy.length);
+            finalScore.push({
+                id: users[i].id,
+                score: final
+            });
+        } 
+        
+        this.socket.to(this.qroom).emit('final-score', finalScore);
     }
 
-    timer() {
+    async timer() {
         if(!reset) {
             var that = this;
             if(c == 5) {
                 setTimeout(function() {
-                    
                     that.calculate();
+                    
                 }, 3000);
                 console.log("Quiz finished");
+                quiz = qcopy;
                 if(reset) {console.log("ignore");}
             }
             else {
                 setTimeout(function() {
                     that.sendQuestion(); 
                     that.timer();
-                }, 3000);
+                }, 30000);
             } 
         }
     }
+
 
      beginQuiz() {
         this.sendQuestion();
@@ -119,6 +141,7 @@ module.exports = class QuizBuilder {
     //self explanatory
     resetQuiz() {
         reset = true;
+
         // this.socket = null;
         // this.qroom = null;
         // c = null;
@@ -128,8 +151,8 @@ module.exports = class QuizBuilder {
         // reset = null;
         // this.current = null;
         // finalScore = null;
+
     }
 
-    //socket listeners
     
 }

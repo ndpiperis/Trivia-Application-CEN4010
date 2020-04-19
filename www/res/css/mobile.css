@@ -310,6 +310,14 @@ box-shadow: 0px 10px 59px 5px rgba(0,0,0,0.2);
   }
 }
 
+@media (min-device-width: 600px) {
+  .splash {
+    width:200px;
+    height:auto;
+  }
+
+}
+
 
 /* room view/ Game UI */
 

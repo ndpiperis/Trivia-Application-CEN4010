@@ -145,7 +145,7 @@ io.on('connection', function(socket){
     //QUIZ 
     socket.on('start-quiz-owner', function(info) {
       console.log('room ' + info.room + ' starting quiz #' + info.selection);
-      socket.to(info.room).emit('start-quiz');
+      //socket.to(info.room).emit('start-quiz');
       var croom = getRoomAtCode(info.room);
       croom.ongoing = true;
       croom.quiz = new QuizBuilder(info.room, socket, info.selection, quizJSON, croom.users);
@@ -156,7 +156,7 @@ io.on('connection', function(socket){
     //gets answer and uses quizbuilder to collect and check
     socket.on('collect-answer', function(info) {
       var croom = getRoomAtCode(info.code);
-      //console.log("#" + info.code);
+      console.log("#" + info.code + ", A:" + info.answer);
       //console.log(croom.quiz);
       croom.quiz.collect(info, socket.id);
     });
@@ -166,11 +166,11 @@ io.on('connection', function(socket){
       console.log('resetting room ' + info.room);
       
       var croom = getRoomAtCode(info.room);
-      croom.quiz.resetQuiz();
-      croom.quiz = 0;
+      
       io.to(info.room).emit('reset-quiz', {
         room: croom
       });
+      delete croom.quiz;
       croom.ongoing = false;
     });
 
@@ -188,7 +188,9 @@ io.on('connection', function(socket){
             console.log(croom.code + ' being updated');       
             cleanRooms(socket.id);
             console.log("Updating room " + croom.code + " with " + croom.users.length + " users ");
-            io.to(`${croom.owner}`).emit('updated-users', croom);
+            socket.to(croom.owner).emit('updated-users', {
+              owner : croom.owner
+            });
           } 
           catch(e) {
             console.log(e);
@@ -213,13 +215,21 @@ io.on('connection', function(socket){
   //     }
   //   }
   // }
+  //forces a reset of quiz in a given room
+  function forceReset(croom) {
+    io.to(croom.code).emit('reset-quiz', {
+      room: croom.code
+    });
+    delete croom.quiz;
+    croom.ongoing = false;
+  }
 
 
   function getRoomAtCode(code) {
 
     for (var i = 0; i < _rooms.length; i++) {
       if(_rooms[i].code == code) {
-        console.log("room found at #" + code);
+        //console.log("room found at #" + code);
         return _rooms[i];    
       }
     }
@@ -268,6 +278,9 @@ io.on('connection', function(socket){
       
               current.splice(j, 1);
               console.log("user removed");
+              if(_rooms[i].users.length == 0) {
+                forceReset();
+              }
 
             }
             else if(_rooms != undefined) {

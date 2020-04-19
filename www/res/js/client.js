@@ -5,6 +5,9 @@ var room = 00000;
 var errShown = false;
 var qno = 0;
 var submitted = null;
+var owner = 0;
+var sent = false;
+var freshStart = true;
 
 
 //////////////////////////////
@@ -65,6 +68,7 @@ $(document).ready(function() {
     //swaps view to game room
     function changeToRoom(info) {
         room = info.code;
+        owner = info.owner;
         console.log('Room ' + room);
         console.log($(window).height());
         $(".landing-splash, .landing-body").fadeOut(200, function() {
@@ -116,14 +120,16 @@ $(document).ready(function() {
     $('.q-box').on('click', '#start', function() {
         var selection = $('.quiz-list').find(":selected").attr('id');
         console.log('starting quiz');
-        socket.emit('start-quiz-owner', {
-            room : room,
-            selection: selection
-        });
+        if(selection != null){
+            socket.emit('start-quiz-owner', {
+                room : room,
+                selection: selection
+            });
+        }
         $('.q-box .start').prop('disabled', true);
         $('.q-box #reset').prop('disabled', false);
         console.log("Owner has selected quiz " + selection);
-        
+        selection = null;
     });
 
     $('.q-box').on('click', '#reset', function() {
@@ -144,11 +150,13 @@ $(document).ready(function() {
         submitted = true;
         $(this).addClass('activated'); 
         $('.qa').not(this).attr('disabled', 'true');      
+        submitted = $(this);
         socket.emit('collect-answer', {
+            qid : qno,
             code : room,
-            answer : $(this).attr('value')
+            answer : submitted.attr('value')
         });
-        
+        sent = true;
     });
 
     //////////////////////////////
@@ -159,6 +167,7 @@ $(document).ready(function() {
 
     //receives join success packet, start room change
     socket.on('join-success', function(info) {
+        room = info.code;
         changeToRoom(info);
         console.log("Owner: " + info.owner);
         if(info.owner == socket.id) {
@@ -178,24 +187,29 @@ $(document).ready(function() {
         }
     });
 
+    //resets global vars
     socket.on('reset-quiz', function(info) {
         console.log("resetting room");
-            if( socket.id != info.room.owner) {
-                console.log("resetting room");
-                $('.q-box').loadTemplate('modules/quiz-waitroom.html',{
-                    title : 'Room ' + room
-                });
-            }
+        if( socket.id != info.room.owner) {
+            console.log("resetting room");
+            $('.q-box').loadTemplate('modules/quiz-waitroom.html',{
+                title : 'Room ' + room
+            });
+        }
+        qno = 0;
+        submitted = null;
+        owner = 0;
+        sent = false;
+        freshStart = true;
     });
 
     //loads question ui template from quiz.html or quiztf.html
     socket.on('new-question', function(qu) {
         
-        qno = qu.qno;
-        console.log('Receiving new question from quiz');
+        //console.log('Receiving new question from quiz');
         console.log(qu.q);
-        $(this).removeClass('activated'); 
-        $('.qa').not(this).attr('disabled', 'false'); 
+        //$(this).removeClass('activated'); 
+        //$('.qa').not(this).attr('disabled', 'false'); 
 
         if(qu.opt3 === undefined && qu.opt4 === undefined) {
             $('.q-box').loadTemplate('modules/quiztf.html', 
@@ -217,34 +231,40 @@ $(document).ready(function() {
                 opt3 : qu.opt3,
                 opt4 : qu.opt4
                 }
-            );
-            
+            );           
         }
 
-        if(qu.image != "" || qu.image != " ") {    
+        if(qu.image != "" && qu.image != " ") {    
             $(".qimg").show();
         }
-
-        if(submitted == null) {
-            submitted = false;
-        }
-        else if(submitted == false) {
-            socket.emit('collect-answer', {
-                code : room,
-                answer : "---"
-            });
-        }
-    
+        submitted = null;
+        if(!freshStart) collectPrevious();
+        freshStart = false;
     });
 
-    socket.on('collect-answer', function(room) {
+    socket.on('final-score', function(info) {
+        console.log("Final score received");
+        for(var i = 0; i < info.length; i++) { 
+            if(socket.id == info[i].id) {
+
+            }
+            else {
+                $('.q-box').loadTemplate('modules/quiz-score.html', 
+                    {
+                    score: info[i].score
+                    }
+                );
+            }
+        }
+        $('score h1').css('color', 'rgb(' + (255 - score) + ',' + (155 + score) + ',' + (50 + (score/3) + ')'));
+        qno = -1;
 
     });
 
     socket.on('redirect', function(destination) {
         console.log("refreshing");
         window.location.href = destination;
-
+ 
     });
 
     //shows input error messages
@@ -274,7 +294,18 @@ $(document).ready(function() {
     //     HELPERS              //
     //////////////////////////////
 
-    
+    function collectPrevious(qno) {
+        if(!sent) {
+            socket.emit('collect-answer', {
+                qid : qno,
+                code : room,
+                answer : "---"
+            });
+            
+        }
+        sent = false;
+        
+    }
 
     
 });
