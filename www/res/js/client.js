@@ -81,10 +81,8 @@ $(document).ready(function() {
             obj.questions[0].opt4 = $('#opt4').val();
             obj.questions[0].answer = $('#answer').val();
 
-            var finalObj = [];
-            finalObj.push({
-                0:obj
-            });
+            var finalObj = {};
+            finalObj = Object.assign({1:obj}, finalObj[0]);
 
             socket.emit('collect-quiz-data',finalObj);
     });
