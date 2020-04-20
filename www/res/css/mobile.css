@@ -65,6 +65,11 @@ body, html {
   align-items:center;
 }
 
+.fc-no-align {
+  display:flex;
+  justify-content:center;
+}
+
 .an {
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;

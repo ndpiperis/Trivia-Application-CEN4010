@@ -63,4 +63,8 @@ fieldset {
     box-sizing:border-box;
     padding:15px;
 }
+
+.qc-head {
+    margin-left:15px;
+}
   

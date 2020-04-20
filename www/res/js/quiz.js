@@ -42,7 +42,7 @@ module.exports = class QuizBuilder {
     sendQuestion() {
         //sends the whole json entry to feed into template
         //console.log(c);
-
+        console.log(quiz.questions[0].q);
             if(quiz.questions[0].opt3 === undefined && quiz.questions[0].opt4 === undefined) {
                 this.socket.to(this.qroom).emit('new-question', {
                     qno : c,
@@ -75,26 +75,26 @@ module.exports = class QuizBuilder {
             qid : info.qid,
             answer : info.answer
         });
-        console.log(current.id);
+        console.log(current);
     }
 
-    getAnswersByUser(u) {
-        var arrayBuilder = [];
-        for(var i = 0; i < current.length; i ++) {
-            if(current[i].id == u.id) {
-                arrayBuilder.push({
-                    answer : current[i].answer
-                });
-            }
-        }
-        return arrayBuilder;
-    }
+    // getAnswersByUser(u) {
+    //     var arrayBuilder = [];
+    //     for(var i = 0; i < current.length; i ++) {
+    //         if(current[i].id == u.id) {
+    //             arrayBuilder.push({
+    //                 answer : current[i].answer
+    //             });
+    //         }
+    //     }
+    //     return
+    // }
 
     calculate() {
-        for(var i = 0; i < users.length; i ++) {
-            ua = getAnswersByUser(users[i]);
+        // for(var i = 0; i < users.length; i ++) {
+        //     ua = getAnswersByUser(users[i]);
 
-        }
+        // }
         
     }
 
