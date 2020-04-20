@@ -206,7 +206,7 @@ io.on('connection', function(socket){
 
 
     socket.on('collect-quiz-data', function(info){
-      jsio.writeFile(fileTemp, info, { flag: 'a' }, function (err) {
+      jsio.writeFile(fileTemp, info, { flag: 'a' }, {spaces: 2, EOL: ',\n'}, function (err) {
         if (err) console.error(err)
         console.log('Write Complete');
       })

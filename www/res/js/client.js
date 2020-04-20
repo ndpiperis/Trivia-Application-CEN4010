@@ -9,6 +9,7 @@ var sent = false;
 var freshStart = true;
 var i = 0;
 var qno = 0;
+var t = 0;
 
 
 //////////////////////////////
@@ -53,11 +54,51 @@ $(document).ready(function() {
         }
     });
 
-    $('#submit').click(function() {
+    $('.q-box').on('click', '#submit', function() {
         var obj = { 
             id: "",
             title: "",
                 questions: [
+                {
+                    q: "",
+                    img: "",
+                    source: "",
+                    opt1: "",
+                    opt2: "",
+                    opt3: "",
+                    opt4: "",
+                    answer: ""
+                },
+                {
+                    q: "",
+                    img: "",
+                    source: "",
+                    opt1: "",
+                    opt2: "",
+                    opt3: "",
+                    opt4: "",
+                    answer: ""
+                },
+                {
+                    q: "",
+                    img: "",
+                    source: "",
+                    opt1: "",
+                    opt2: "",
+                    opt3: "",
+                    opt4: "",
+                    answer: ""
+                },
+                {
+                    q: "",
+                    img: "",
+                    source: "",
+                    opt1: "",
+                    opt2: "",
+                    opt3: "",
+                    opt4: "",
+                    answer: ""
+                },
                 {
                     q: "",
                     img: "",
@@ -73,30 +114,38 @@ $(document).ready(function() {
 
             //put all values into obj here
             obj.title = $('#quiz-title').val();
-
-            obj.questions[i].q = $('#question').val();
-            obj.questions[i].source = $('#source-explanation').val();
-            obj.questions[i].img = $('#img').val();
-            obj.questions[i].opt1 = $('#opt1-' + i).val();
-            obj.questions[i].opt2 = $('#opt2' + i).val();
-            obj.questions[i].opt3 = $('#opt3').val();
-            obj.questions[i].opt4 = $('#opt4').val();
-            obj.questions[i].answer = $('#answer').val();
-
+            obj.id = i;
+            for(t = 0; t < 5; t++) {
+            obj.questions[t].q = $('#question-' + i).val();
+            obj.questions[t].source = $('#source-explanation-' + i).val();
+            obj.questions[t].opt1 = $('#opt1-' + i).val();
+            obj.questions[t].opt2 = $('#opt2-' + i).val();
+            obj.questions[t].opt3 = $('#opt3-' + i).val();
+            obj.questions[t].opt4 = $('#opt4-' + i).val();
+            obj.questions[t].answer = $('#answer-' + i).val();
+        };
             var finalObj = {};
-            finalObj = Object.assign({i:obj}, finalObj[i]);
+            finalObj = Object.assign({[i]:obj}, finalObj[i]);
 
             socket.emit('collect-quiz-data',finalObj);
 
             $('.q-box').loadTemplate('modules/quiz-creator.html',{
-                title : 'Room ' + room
+                question: 'question-' + i,
+                opt1: 'opt1-' + i,
+                opt2: 'opt2-' + i,
+                opt3: 'opt3-' + i,
+                opt4: 'opt4-' + i,
+                answer: 'answer-' + i
             });
+            i++;
 
+            $('.q-box').loadTemplate('modules/quiz-manager.html');
+
+            populateDropdownCreatedQuiz();
     });
 
     $('.q-box').on('click', '#create-quiz', function() {
         $('.q-box').loadTemplate('modules/quiz-creator.html');
-           
     });
 
     //////////////////////////////
@@ -106,7 +155,15 @@ $(document).ready(function() {
     function populateDropdown() {
         $.getJSON('json/data.json', function(data) {
             $.each(data, function(i, q) { 
-                $('.quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');              
+                $('#quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');              
+            });
+        });
+    }
+
+    function populateDropdownCreatedQuiz() {
+        $.getJSON('json/datatest.json', function(data) {
+            $.each(data, function(i, q) { 
+                $('#created-quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');              
             });
         });
     }
