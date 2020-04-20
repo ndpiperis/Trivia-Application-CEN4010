@@ -148,6 +148,8 @@ io.on('connection', function(socket){
       console.log('room ' + info.room + ' starting quiz #' + info.selection);
       //socket.to(info.room).emit('start-quiz');
       var croom = getRoomAtCode(info.room);
+      quizJSON = jsio.readFile(info.fileLoc);
+      console.log(quizJSON);
       croom.ongoing = true;
       croom.quiz = new QuizBuilder(info.room, socket, info.selection, quizJSON, croom.users);
       

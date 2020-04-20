@@ -10,7 +10,8 @@ var freshStart = true;
 var i = 0;
 var qno = 0;
 var t = 0;
-var lastFocused = null;
+var fileLoc = null;
+var selID = null;
 
 
 //////////////////////////////
@@ -175,9 +176,10 @@ $(document).ready(function() {
 
     function populateDropdownCreatedQuiz() {
         $.getJSON('json/datatest.json', function(data) {
-            console.log(data);
+            
             $.each(data, function(i, q) { 
-                $('#created-quiz-list').append('<option id="' + i + '" class="q' + i + '">' + q.title + '</option>');              
+                console.log(q.id);
+                $('#created-quiz-list').append('<option id="' + q.id+ '" class="q' + i + '">' + q.title + '</option>');              
             });
         });
     }
@@ -236,16 +238,18 @@ $(document).ready(function() {
     $('.q-box').on('click', '#start', function() {
         
         console.log('starting quiz');
-        if(lastFocused != null){
+        if(fileLoc != null){
+            console.log($('select:focus').find(":selected").attr('id'));
             socket.emit('start-quiz-owner', {
                 room : room,
-                selection: $(':focus').find(":selected").attr('id')
+                selection: $('select:focus').find(":selected").attr('id'),
+                file : fileLoc
             });
         }
         $('.q-box .start').prop('disabled', true);
         $('.q-box #reset').prop('disabled', false);
         console.log("Owner has selected quiz " + $(':focus').find(":selected").attr('id'));
-        selection = null;
+        
     });
 
     //resets quiz (not very functional)
@@ -275,7 +279,14 @@ $(document).ready(function() {
     //gets last focused dropdown for quiz selector
     $('.q-box').on('focus', 'select', function() {
         console.log("new dropdown focused");
-        lastFocused = $(this);
+        selID = $(this);
+        if ($(this).attr('id') == 'quiz-list') {
+            fileLoc = 'json/data.json';
+        }
+        else {
+            fileLoc = 'json/datatest.json';
+        }
+        console.log(fileLoc);
     });
 
     //////////////////////////////
