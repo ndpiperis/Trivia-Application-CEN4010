@@ -13,6 +13,7 @@ module.exports = class QuizBuilder {
     finalScore;
 
     constructor(qroom, sock, selection, data, u) {
+        global.cid = 0;
         global.current = [];
         this.complete = false;
         global.finalScore = [
@@ -26,14 +27,14 @@ module.exports = class QuizBuilder {
         global.users = u;
         global.quiz = this.datab;
         global.qcopy = [];
-        global.incorrect = {};
+        global.incorrect = [];
         
         //console.log(quiz.questions[0].q);
         //console.log(quiz.questions[1].q);
         //console.log(quiz.questions[2].q);
         //console.log(quiz.questions[3].q);
         //console.log(quiz.questions[4].q);
-
+        console.log(users);
         this.beginQuiz();
         
         
@@ -76,25 +77,76 @@ module.exports = class QuizBuilder {
             answer : info.answer
         });
         console.log(current);
+        
+        if(cid >= ((c-1) * users.length)) {
+            console.log(cid);
+            this.calculate();
+        }
+        cid++;
     }
 
-    // getAnswersByUser(u) {
-    //     var arrayBuilder = [];
-    //     for(var i = 0; i < current.length; i ++) {
-    //         if(current[i].id == u.id) {
-    //             arrayBuilder.push({
-    //                 answer : current[i].answer
-    //             });
-    //         }
-    //     }
-    //     return
-    // }
+    getAnswersByUser(u) {
+        //console.log(current.length);
+        //console.log(u[0]);
+        var arrayBuilder = [];
+        for(var i = 0; i < current.length; i ++) {
+            if(current[i].id == u[0]) {
+                console.log("answer sorted");
+                arrayBuilder.push(current[i].answer);
+            }
+        }
+        //console.log(arrayBuilder);
+        return arrayBuilder;
+    }
+
+    processScore(scores, user) {
+        var score = 0;
+        var tempIncorrect = {
+            [user[0]]: [
+
+            ]
+        };
+        for(var i = 0; i < scores.length; i ++) {
+           console.log(qcopy[i].answer);
+            if(scores[i] == qcopy[i].answer) {
+                console.log("right");
+                score += 100;
+            }
+            else {
+                console.log("wrong");
+                tempIncorrect[user[0]].push(
+                    quiz.questions[i]
+                );
+            }
+        }
+        incorrect.push(tempIncorrect);
+
+        return (Math.round(score / qcopy.length));
+    }
+
+    loadScreen() {
+        this.socket.to(this.qroom).emit('set-load-screen');
+    }
+
 
     calculate() {
-        // for(var i = 0; i < users.length; i ++) {
-        //     ua = getAnswersByUser(users[i]);
+        this.loadScreen();
+        var score = [];
+        //console.log(qcopy);
+        for(var i = 0; i < users.length; i ++) {
+            console.log("calculating");
+            var ua = this.getAnswersByUser(users[i]);
+            
 
-        // }
+            score.push({
+                score: this.processScore(ua, users[i]),
+                id : users[i][0]
+            });
+
+            
+        }
+        console.log(score);
+        this.socket.to(this.qroom).emit('final-score', score);
         
     }
 
@@ -105,10 +157,11 @@ module.exports = class QuizBuilder {
                 setTimeout(function() {
                     console.log("Pulling final answer from clients");
                     that.socket.to(that.qroom).emit('last-call-answer', c);
-                    //that.calculate();
+                    console.log("Quiz finished");
                     
+                    return true;
                 }, this.wait);
-                console.log("Quiz finished");
+                
                 
                 if(reset) {console.log("ignore");}
             }
@@ -121,10 +174,13 @@ module.exports = class QuizBuilder {
         }
     }
 
+  
 
-     beginQuiz() {
+
+    async beginQuiz() {
         this.sendQuestion();
         this.timer();
+        
         
     }
 

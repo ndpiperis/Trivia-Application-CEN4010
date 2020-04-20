@@ -6,6 +6,7 @@
     
 //includes xpress and initializes
 const jsio = require('jsonfile');
+const fs = require('fs'); 
 let QuizBuilder = require('./www/res/js/quiz.js')
 const file = 'www/res/json/data.json';
 fileTemp = 'www/res/json/datatest.json';
@@ -206,10 +207,12 @@ io.on('connection', function(socket){
 
 
     socket.on('collect-quiz-data', function(info){
-      jsio.writeFile(fileTemp, info, { flag: 'a' }, function (err) {
+      quizTemp = jsio.readFileSync(fileTemp);
+      quizTemp = Object.assign(info, quizTemp);
+      fs.writeFile(fileTemp, JSON.stringify(quizTemp, null, 4), function (err) {
         if (err) console.error(err)
         console.log('Write Complete');
-      })
+      });
     });
 
 

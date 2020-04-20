@@ -9,6 +9,8 @@ var sent = false;
 var freshStart = true;
 var i = 0;
 var qno = 0;
+var t = 0;
+var lastFocused = null;
 
 
 //////////////////////////////
@@ -53,7 +55,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#submit').click(function() {
+    $('.q-box').on('click', '#submit', function() {
         var obj = { 
             id: "",
             title: "",
@@ -67,46 +69,115 @@ $(document).ready(function() {
                     opt3: "",
                     opt4: "",
                     answer: ""
+                },
+                {
+                    q: "",
+                    img: "",
+                    source: "",
+                    opt1: "",
+                    opt2: "",
+                    opt3: "",
+                    opt4: "",
+                    answer: ""
+                },
+                {
+                    q: "",
+                    img: "",
+                    source: "",
+                    opt1: "",
+                    opt2: "",
+                    opt3: "",
+                    opt4: "",
+                    answer: ""
+                },
+                {
+                    q: "",
+                    img: "",
+                    source: "",
+                    opt1: "",
+                    opt2: "",
+                    opt3: "",
+                    opt4: "",
+                    answer: ""
+                },
+                {
+                    q: "",
+                    img: "",
+                    source: "",
+                    opt1: "",
+                    opt2: "",
+                    opt3: "",
+                    opt4: "",
+                    answer: ""
                 }
             ]
-        }
+        };
 
             //put all values into obj here
             obj.title = $('#quiz-title').val();
-
-            obj.questions[i].q = $('#question').val();
-            obj.questions[i].source = $('#source-explanation').val();
-            obj.questions[i].img = $('#img').val();
-            obj.questions[i].opt1 = $('#opt1-' + i).val();
-            obj.questions[i].opt2 = $('#opt2' + i).val();
-            obj.questions[i].opt3 = $('#opt3').val();
-            obj.questions[i].opt4 = $('#opt4').val();
-            obj.questions[i].answer = $('#answer').val();
-
+            obj.id = i;
+            for(t = 0; t < 5; t++) {
+            obj.questions[t].q = $('#question-' + i).val();
+            obj.questions[t].source = $('#source-explanation-' + i).val();
+            obj.questions[t].opt1 = $('#opt1-' + i).val();
+            obj.questions[t].opt2 = $('#opt2-' + i).val();
+            obj.questions[t].opt3 = $('#opt3-' + i).val();
+            obj.questions[t].opt4 = $('#opt4-' + i).val();
+            obj.questions[t].answer = $('#answer-' + i).val();
+        };
             var finalObj = {};
-            finalObj = Object.assign({i:obj}, finalObj[i]);
+            
+
+            finalObj = Object.assign({[i]:obj}, finalObj[i]);
 
             socket.emit('collect-quiz-data',finalObj);
 
             $('.q-box').loadTemplate('modules/quiz-creator.html',{
-                title : 'Room ' + room
+                question: 'question-' + i,
+                opt1: 'opt1-' + i,
+                opt2: 'opt2-' + i,
+                opt3: 'opt3-' + i,
+                opt4: 'opt4-' + i,
+                answer: 'answer-' + i
+            });
+            i++;
+
+            $('.q-box').loadTemplate('modules/quiz-manager.html', {
+                title: 'Room ' + room
             });
 
+            popu();
     });
 
     $('.q-box').on('click', '#create-quiz', function() {
         $('.q-box').loadTemplate('modules/quiz-creator.html');
-           
     });
 
     //////////////////////////////
     //      UI UPDATES          //
     //////////////////////////////
 
+    function popu() {
+        setTimeout(function() {
+            populateDropdown();
+            populateDropdownCreatedQuiz();
+        }, 500);
+        
+    }
+
     function populateDropdown() {
         $.getJSON('json/data.json', function(data) {
             $.each(data, function(i, q) { 
-                $('.quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');              
+                $('#quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');              
+            });
+        });
+    }
+
+    function populateDropdownCreatedQuiz() {
+        $.getJSON('json/datatest.json', function(data) {
+            console.log(data);
+            $.each(data, function(i, q) { 
+                $('#created-quiz-list').append('<option id="' + i + '" class="q' + i + '">' + q.title + '</option>');              
             });
         });
     }
@@ -131,7 +202,7 @@ $(document).ready(function() {
             $('.q-box').loadTemplate('modules/quiz-manager.html',{
                 title : 'Room ' + room
             });
-            populateDropdown();
+            popu();
            
         } else {
             //loads spinner
@@ -161,21 +232,23 @@ $(document).ready(function() {
         $(".members").append("<div class='user'>" + user[i][1] + "</div>");
     }
 
+
     $('.q-box').on('click', '#start', function() {
-        var selection = $('.quiz-list').find(":selected").attr('id');
+        
         console.log('starting quiz');
-        if(selection != null){
+        if(lastFocused != null){
             socket.emit('start-quiz-owner', {
                 room : room,
-                selection: selection
+                selection: $(':focus').find(":selected").attr('id')
             });
         }
         $('.q-box .start').prop('disabled', true);
         $('.q-box #reset').prop('disabled', false);
-        console.log("Owner has selected quiz " + selection);
+        console.log("Owner has selected quiz " + $(':focus').find(":selected").attr('id'));
         selection = null;
     });
 
+    //resets quiz (not very functional)
     $('.q-box').on('click', '#reset', function() {
         console.log('resetting quiz');
         socket.emit('reset-quiz-owner', {
@@ -188,7 +261,7 @@ $(document).ready(function() {
     });
 
 
-
+    //answer picker handler. Highlights one answer at a time
     $('.q-box').on('mousedown', '.qa', function() {
         console.log("#" + room);
         $('.q-box .qa').removeClass('activated');
@@ -197,6 +270,12 @@ $(document).ready(function() {
         submitted = $(this);
        sent = true;
         
+    });
+
+    //gets last focused dropdown for quiz selector
+    $('.q-box').on('focus', 'select', function() {
+        console.log("new dropdown focused");
+        lastFocused = $(this);
     });
 
     //////////////////////////////
@@ -215,8 +294,16 @@ $(document).ready(function() {
         }
     });
 
+    //error if user cannot join
     socket.on('cannot-join', function(reason) {
         showDialog(reason.reason, true, false);
+    });
+
+    //send client to laod spinner
+    socket.on('set-load-screen', function() {
+        $('.q-box').loadTemplate('modules/quiz-waitroom.html',{
+            title : 'Calculating score '
+        });
     });
 
     //pulls users from server
@@ -299,11 +386,13 @@ $(document).ready(function() {
 
     socket.on('final-score', function(info) {
         console.log("Final score received");
+        
         for(var i = 0; i < info.length; i++) { 
-            if(socket.id == info[i].id) {
+            if(socket.id != info[i].id) {
 
             }
             else {
+                console.log(info[i].score);
                 $('.q-box').loadTemplate('modules/quiz-score.html', 
                     {
                     score: info[i].score
