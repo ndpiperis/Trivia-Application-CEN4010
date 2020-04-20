@@ -103,49 +103,29 @@
                 }
             },
             {
-                "q": "Which type of sort repeatedly swaps the adjacent elements when they are in the wrong order?",
-                "image": "img/test.jpg",
-                "source": "https://www.geeksforgeeks.org/bubble-sort/",
-                "opt1": "Bubble sort",
-                "opt2": "Quick sort",
-                "opt3": "Tree sort",
-                "opt4": "Merge sort",
-                "answer": "Bubble sort",
+                "q": "What is a characteristic of C++?",
+                "opt1": "Multiple inheritances",
+                "opt2": "Supports garbage collection",
+                "opt3": "Used for application development",
+                "opt4": "Is a low-level language",
+                "answer": "Multiple inheritances",
 
                 "review":{
                     "correct": "false",
-                    "explanation": "Bubble sort: compares adjacent pairs of an object and swaps the two if the order is incorrect. This procedure will be repeated until the array is in order.",
-                    "image": "img/questions/q5/example_1.jpg",
-                    "source": "https://www.geeksforgeeks.org/bubble-sort/",
-                    
-                    "explanation": "Quick sort: quick sorting is done by dividing arrays into smaller arrays. This can be seen in the following picture.",
-                    "image": "img/questions/q5/example_2.jpg",
-                    "source": "https://www.techiedelight.com/quicksort/",
-
-                    "explanation": "Tree sort: creates a binary search tree and then preforms an in-order transversal.",
-                    "image": "img/questions/q5/example_3.jpg",
-                    "source": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.geeksforgeeks.org%2Fwp-content%2Fuploads%2FBSTSearch.png&imgrefurl=https%3A%2F%2Fwww.geeksforgeeks.org%2Fbinary-search-tree-data-structure%2F&tbnid=bDF-q-SxLMzb5M&vet=12ahUKEwiRmvn68vToAhUBzawKHUfHCq8QMygAegUIARDvAQ..i&docid=v8JGWLys7T2pCM&w=333&h=293&q=what%20is%20a%20tree%20sort&safe=strict&ved=2ahUKEwiRmvn68vToAhUBzawKHUfHCq8QMygAegUIARDvAQ",
-
-                    "explanation": "Merge sort: divides an array into two halves, then calls itself for the two halves and then merges the two sorted halves.",
-                    "image": "img/questions/q5/example_4.jpg",
-                    "source": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMerge_algorithm&psig=AOvVaw2BvJaZaTN2PSHgqqUvVzec&ust=1587399971715000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjt7Pbz9OgCFQAAAAAdAAAAABAD",
-  
+                    "explanation": "C++ is used mainly for system development. It is a low-level language and supports multiple inheritances, but it does not support garbage collection",
+                      
                     "makeup": {
-                        "q": "Which algorithm first creates a binary search tree from the elements of the input list or array and then performs an in-order traversal?",
-                        "image": "",
-                        "source": "https://www.geeksforgeeks.org/tree-sort/",
-                        "opt1": "Tree sort",
-                        "opt2": "Quick sort",
-                        "answer": "Tree sort"
+                        "q": "What is not a characteristic of C++?",
+                        "opt1": "Supports garbage collection",
+                        "opt2": "Is a low-level language",
+                        "answer": "Supports garbage collection"
                     },
 
                     "main": {
-                        "q": "Which type of sort repeatedly swaps the adjacent elements when they are in the wrong order?",
-                        "image": "",
-                        "source": "https://www.geeksforgeeks.org/bubble-sort/",
-                        "opt1": "Tree sort",
-                        "opt2": "Bubble sort",
-                        "answer": "Bubble sort"
+                        "q": "What is a characteristic of C++?",
+                        "opt1": "Multiple inheritances",
+                        "opt2": "Used for application development",
+                        "answer": "Multiple inheritances"
                         }
                     }
             },
