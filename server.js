@@ -156,7 +156,7 @@ io.on('connection', function(socket){
     //gets answer and uses quizbuilder to collect and check
     socket.on('collect-answer', function(info) {
       var croom = getRoomAtCode(info.code);
-      console.log("#" + info.code + ", A:" + info.answer);
+      console.log("#" + info.qid + ", A:" + info.answer);
       //console.log(croom.quiz);
       croom.quiz.collect(info, socket.id);
     });
@@ -201,6 +201,7 @@ io.on('connection', function(socket){
       console.log(socket.id  + ' disconnected');
 
     });
+    
 
 
 
