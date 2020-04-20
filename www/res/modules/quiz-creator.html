@@ -3,13 +3,15 @@
   
     <fieldset>
         <legend>Quiz Title</legend>
-        <input class="landing-textfield quiz-title" type="text" placeholder="" maxlength="30"/>
+        <form action="" method="POST" class="entry-form fc">
+        <input class="landing-textfield quiz-title" id="quiz-title" type="text" placeholder="" maxlength="30"/>
     
     </fieldset>
     <fieldset>
         <legend>Main Question:</legend>
-        <textarea class="tbox landing-textfield" ></textarea>
+        <textarea class="tbox landing-textfield" id="question" ></textarea>
         <br>
+
        
         <input type="button" class="upload" value="Upload image" id="img" name="img" accept="image/*">
         <br>
@@ -17,26 +19,36 @@
 
         <!--div class="grow"-->
    
-        <input type="text" class="panswer landing-textfield" placeholder="A">
+        <input type="text" class="panswer landing-textfield" id="opt1-0"   placeholder="A">
         <br>
 
-        <input type="text" class="panswer landing-textfield" placeholder="B">
+   
+        <input type="text" class="panswer landing-textfield" id="opt2-0" placeholder="B">
         <br>
+
  
-        <input type="text" class="panswer landing-textfield" placeholder="C">
+        <input type="text" class="panswer landing-textfield" id="opt3-0" placeholder="C">
         <br>
+
   
-        <input type="text" class="panswer landing-textfield" placeholder="D">
-  
+        <input type="text" class="panswer landing-textfield" id="opt4-0"  placeholder="D">
+        <br>
+
+        <textarea class="tbox quiz-textfield" id="answer" placeholder="Answer"></textarea>
+        <br>
     </fieldset>
 
     <fieldset>
         <legend>Review</legend>
-    
-            <textarea class="tbox quiz-textfield" placeholder="Explanation"></textarea>
+
+        
+            <textarea class="tbox quiz-textfield" id="explanation" placeholder="Explanation"></textarea>
             <br>
 
-            <textarea class="tbox quiz-textfield" placeholder="Example Question"></textarea>
+            <textarea class="tbox quiz-textfield" id="source-explanation" placeholder="Source"></textarea>
+            <br>
+
+            <textarea class="tbox quiz-textfield" id="example-question" placeholder="Example Question"></textarea>
             <br>
 
             <input type="button" class="upload" value="Upload image" id="img" name="img" accept="image/*">
@@ -45,11 +57,11 @@
             <br>
 
 
-            <textarea class="tbox quiz-textfield" placeholder="Answer"></textarea>
+            <textarea class="tbox quiz-textfield" id="answer" placeholder="Answer"></textarea>
             <br>
             <br>
             
-            <textarea class="tbox quiz-textfield" placeholder="Makeup Question"></textarea>
+            <textarea class="tbox quiz-textfield" id="makeup-question" placeholder="Makeup Question"></textarea>
             <br>
 
         
@@ -59,13 +71,18 @@
             <br>
             
        
-            <input type="text" class="panswer landing-textfield" placeholder="A">
+            <input type="text" class="panswer landing-textfield" id="opt1-review" placeholder="A">
             <br>
 
-            <input type="text" class="panswer landing-textfield" placeholder="B">
+            <input type="text" class="panswer landing-textfield" id="opt2-review" placeholder="B">
             <br>
+
+            <input type="text" class="panswer landing-textfield" id="answer-review" placeholder="Answer">
+            <br>
+
+            <input type="button" class="landing-button" id="submit" value="Submit">
     </fieldset>
-
+</form>
 
     <!--/div-->
 </section>

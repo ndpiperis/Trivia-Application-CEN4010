@@ -72,19 +72,22 @@ $(document).ready(function() {
 
             //put all values into obj here
             obj.title = $('#quiz-title').val();
-            obj.questions[0].q = $('#question').val();
-            obj.questions[0].source = $('#source-explanation').val();
-            obj.questions[0].img = $('#img').val();
-            obj.questions[0].opt1 = $('#opt1').val();
-            obj.questions[0].opt2 = $('#opt2').val();
-            obj.questions[0].opt3 = $('#opt3').val();
-            obj.questions[0].opt4 = $('#opt4').val();
-            obj.questions[0].answer = $('#answer').val();
+
+            for(i = 0; i < obj.length; i++) {
+            obj.questions[i].q = $('#question').val();
+            obj.questions[i].source = $('#source-explanation').val();
+            obj.questions[i].img = $('#img').val();
+            obj.questions[i].opt1 = $('#opt1-' + i).val();
+            obj.questions[i].opt2 = $('#opt2' + i).val();
+            obj.questions[i].opt3 = $('#opt3').val();
+            obj.questions[i].opt4 = $('#opt4').val();
+            obj.questions[i].answer = $('#answer').val();
 
             var finalObj = {};
-            finalObj = Object.assign({1:obj}, finalObj[0]);
+            finalObj = Object.assign({i:obj}, finalObj[i]);
 
             socket.emit('collect-quiz-data',finalObj);
+            }
     });
 
     //////////////////////////////
