@@ -10,6 +10,7 @@ var freshStart = true;
 var i = 0;
 var qno = 0;
 var t = 0;
+var lastFocused = null;
 
 
 //////////////////////////////
@@ -110,7 +111,7 @@ $(document).ready(function() {
                     answer: ""
                 }
             ]
-        }
+        };
 
             //put all values into obj here
             obj.title = $('#quiz-title').val();
@@ -125,6 +126,8 @@ $(document).ready(function() {
             obj.questions[t].answer = $('#answer-' + i).val();
         };
             var finalObj = {};
+            
+
             finalObj = Object.assign({[i]:obj}, finalObj[i]);
 
             socket.emit('collect-quiz-data',finalObj);
@@ -139,9 +142,11 @@ $(document).ready(function() {
             });
             i++;
 
-            $('.q-box').loadTemplate('modules/quiz-manager.html');
+            $('.q-box').loadTemplate('modules/quiz-manager.html', {
+                title: 'Room ' + room
+            });
 
-            populateDropdownCreatedQuiz();
+            popu();
     });
 
     $('.q-box').on('click', '#create-quiz', function() {
@@ -151,6 +156,14 @@ $(document).ready(function() {
     //////////////////////////////
     //      UI UPDATES          //
     //////////////////////////////
+
+    function popu() {
+        setTimeout(function() {
+            populateDropdown();
+            populateDropdownCreatedQuiz();
+        }, 500);
+        
+    }
 
     function populateDropdown() {
         $.getJSON('json/data.json', function(data) {
@@ -162,8 +175,9 @@ $(document).ready(function() {
 
     function populateDropdownCreatedQuiz() {
         $.getJSON('json/datatest.json', function(data) {
+            console.log(data);
             $.each(data, function(i, q) { 
-                $('#created-quiz-list').append('<option id="' + q.id + '" class="q' + i + '">' + q.title + '</option>');              
+                $('#created-quiz-list').append('<option id="' + i + '" class="q' + i + '">' + q.title + '</option>');              
             });
         });
     }
@@ -188,7 +202,7 @@ $(document).ready(function() {
             $('.q-box').loadTemplate('modules/quiz-manager.html',{
                 title : 'Room ' + room
             });
-            populateDropdown();
+            popu();
            
         } else {
             //loads spinner
@@ -220,17 +234,17 @@ $(document).ready(function() {
 
 
     $('.q-box').on('click', '#start', function() {
-        var selection = $('.quiz-list').find(":selected").attr('id');
+        
         console.log('starting quiz');
-        if(selection != null){
+        if(lastFocused != null){
             socket.emit('start-quiz-owner', {
                 room : room,
-                selection: selection
+                selection: $(':focus').find(":selected").attr('id')
             });
         }
         $('.q-box .start').prop('disabled', true);
         $('.q-box #reset').prop('disabled', false);
-        console.log("Owner has selected quiz " + selection);
+        console.log("Owner has selected quiz " + $(':focus').find(":selected").attr('id'));
         selection = null;
     });
 
@@ -256,6 +270,12 @@ $(document).ready(function() {
         submitted = $(this);
        sent = true;
         
+    });
+
+    //gets last focused dropdown for quiz selector
+    $('.q-box').on('focus', 'select', function() {
+        console.log("new dropdown focused");
+        lastFocused = $(this);
     });
 
     //////////////////////////////
