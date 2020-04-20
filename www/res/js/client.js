@@ -8,6 +8,7 @@ var submitted = null;
 var owner = 0;
 var sent = false;
 var freshStart = true;
+var i = 0;
 
 
 //////////////////////////////
@@ -73,7 +74,6 @@ $(document).ready(function() {
             //put all values into obj here
             obj.title = $('#quiz-title').val();
 
-            for(i = 0; i < obj.length; i++) {
             obj.questions[i].q = $('#question').val();
             obj.questions[i].source = $('#source-explanation').val();
             obj.questions[i].img = $('#img').val();
@@ -87,7 +87,16 @@ $(document).ready(function() {
             finalObj = Object.assign({i:obj}, finalObj[i]);
 
             socket.emit('collect-quiz-data',finalObj);
-            }
+
+            $('.q-box').loadTemplate('modules/quiz-creator.html',{
+                title : 'Room ' + room
+            });
+
+    });
+
+    $('.q-box').on('click', '#create-quiz', function() {
+        $('.q-box').loadTemplate('modules/quiz-creator.html');
+           
     });
 
     //////////////////////////////
