@@ -1,5 +1,5 @@
 module.exports = class QuizBuilder {
-    wait = 2000;
+    wait = 5000;
     socket;
     qroom;
     c;
@@ -43,7 +43,8 @@ module.exports = class QuizBuilder {
     sendQuestion() {
         //sends the whole json entry to feed into template
         //console.log(c);
-        console.log(quiz.questions[0].q);
+        try {
+            console.log(quiz.questions[0].q);
             if(quiz.questions[0].opt3 === undefined && quiz.questions[0].opt4 === undefined) {
                 this.socket.to(this.qroom).emit('new-question', {
                     qno : c,
@@ -67,6 +68,10 @@ module.exports = class QuizBuilder {
             qcopy.push(quiz.questions[0]);
             quiz.questions.splice(0, 1);
             c++;  
+        }
+        catch(e) {
+            console.log("Could not send question. Did quiz reset?");
+        }
     }
 
     collect(info, id) {
@@ -101,11 +106,8 @@ module.exports = class QuizBuilder {
 
     processScore(scores, user) {
         var score = 0;
-        var tempIncorrect = {
-            [user[0]]: [
 
-            ]
-        };
+
         for(var i = 0; i < scores.length; i ++) {
            console.log(qcopy[i].answer);
             if(scores[i] == qcopy[i].answer) {
@@ -114,13 +116,14 @@ module.exports = class QuizBuilder {
             }
             else {
                 console.log("wrong");
-                tempIncorrect[user[0]].push(
-                    quiz.questions[i]
-                );
+              incorrect.push({
+                    id : user[0],
+                    qo : qcopy[i]
+                });
             }
         }
-        incorrect.push(tempIncorrect);
 
+        console.log(incorrect);
         return (Math.round(score / qcopy.length));
     }
 
@@ -128,6 +131,10 @@ module.exports = class QuizBuilder {
         this.socket.to(this.qroom).emit('set-load-screen');
     }
 
+    //sends review screen to user
+    loadReview() {
+        this.socket.to(this.qroom).emit('load-review-server', incorrect);
+    }
 
     calculate() {
         this.loadScreen();
@@ -156,7 +163,14 @@ module.exports = class QuizBuilder {
             if(c == 5) {
                 setTimeout(function() {
                     console.log("Pulling final answer from clients");
-                    that.socket.to(that.qroom).emit('last-call-answer', c);
+                    try
+                    {
+                        that.socket.to(that.qroom).emit('last-call-answer', c);
+                    }
+                    catch(e) {
+                        console.log("Could not pull final answers, quiz probably reset");
+                    }
+                    
                     console.log("Quiz finished");
                     
                     return true;
@@ -174,8 +188,6 @@ module.exports = class QuizBuilder {
         }
     }
 
-  
-
 
     async beginQuiz() {
         this.sendQuestion();
@@ -185,19 +197,30 @@ module.exports = class QuizBuilder {
     }
 
     
+    
     //self explanatory
     resetQuiz() {
+        console.log("resetting 4");
         reset = true;
 
-        // this.socket = null;
-        // this.qroom = null;
-        // c = null;
-        // quiz = null;
-        // qcopy = null;
-        // users = null;
-        // reset = null;
-        // this.current = null;
-        // finalScore = null;
+        global.cid = 0;
+        global.current = [];
+        this.complete = true;
+        global.finalScore = [
+
+        ];
+        this.qroom = null;
+        global.c = 0;
+        global.reset = false;
+        this.socket = null;
+        this.datab = null;
+        global.users = [];
+        global.quiz = null;
+        global.qcopy = [];
+        global.incorrect = [];
+        
+        current = [];
+
 
     }
 

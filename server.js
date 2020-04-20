@@ -148,10 +148,10 @@ io.on('connection', function(socket){
       console.log('room ' + info.room + ' starting quiz #' + info.selection);
       //socket.to(info.room).emit('start-quiz');
       var croom = getRoomAtCode(info.room);
-      quizJSON = jsio.readFile(info.fileLoc);
-      console.log(quizJSON);
+      pJSON = jsio.readFileSync('www/res/' + info.file);
+      console.log(pJSON);
       croom.ongoing = true;
-      croom.quiz = new QuizBuilder(info.room, socket, info.selection, quizJSON, croom.users);
+      croom.quiz = new QuizBuilder(info.room, socket, info.selection, pJSON, croom.users);
       
       //console.log("quiz entered into memory: " + croom.quiz);
     });
@@ -165,16 +165,19 @@ io.on('connection', function(socket){
     });
 
 
-    socket.on('reset-quiz-owner', function(info) {
-      console.log('resetting room ' + info.room);
-      
-      var croom = getRoomAtCode(info.room);
-      
-      io.to(info.room).emit('reset-quiz', {
-        room: croom
-      });
+    socket.on('reset-quiz-owner', function(room) {
+      console.log('resetting room ' + room);
+      console.log("resetting 1");
+      var croom = getRoomAtCode(room);
+      console.log("resetting 2");
+
+      console.log("resetting 3");
+      croom.quiz.resetQuiz();
       delete croom.quiz;
+      console.log("resetting 5");
       croom.ongoing = false;
+      socket.to(croom.code).emit('reset-quiz', croom);
+      console.log("resetting 6");
     });
 
 
@@ -205,8 +208,10 @@ io.on('connection', function(socket){
 
     });
     
-
-
+    socket.on('load-review', function(user) {
+      croom = getRoomAtID(user);
+      croom.quiz.loadReview(user);
+    });
 
     socket.on('collect-quiz-data', function(info){
       quizTemp = jsio.readFileSync(fileTemp);
@@ -224,15 +229,6 @@ io.on('connection', function(socket){
 
   //UTILITY FUNCTIONS
 
-  // function removeQuiz(room) {
-  //   for(var i = 0; i < quizzes.length; i++) {
-  //     console.log(quizzes[i]);
-  //     if(quizzes[i].code == room) {
-  //       quizzes.splice(i, 1);
-  //       console.log("quiz erased");
-  //     }
-  //   }
-  // }
   //forces a reset of quiz in a given room
   function forceReset(croom) {
     io.to(croom.code).emit('reset-quiz', {
