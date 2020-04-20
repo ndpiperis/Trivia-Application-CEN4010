@@ -71,6 +71,38 @@
                 }
             },
             {
+                "q": "What is the time complexity of the following code?",
+                "image": "img/questions/q3/main_question.jpg",
+                "opt1": "O(K)",
+                "opt2": "O(K^2)",
+                "opt3": "O(2K)",
+                "opt4": "O(log(K))",
+                "answer": "O(K^2)",
+
+                "review": {
+                    "correct": "false",
+                    "image": "img/questions/q3/example.jpg",
+                    "explanation": "The time complexity of this code is O(X).",
+                    "source": "https://www.geeksforgeeks.org/analysis-of-algorithms-set-4-analysis-of-loops/",
+
+                    "makeup": {
+                        "q": "What is the time complexity of the following code?",
+                        "image": "img/questions/q3/makeup_question.jpg",
+                        "opt1": "O(X)",
+                        "opt2": "O(X + Y)",
+                        "answer": "O(X + Y)"
+                    },
+
+                    "main": {
+                        "q": "What is the time complexity of the following code?",
+                        "image": "img/questions/q3/main_question.jpg",
+                        "opt1": "O(K^2)",
+                        "opt2": "O(K + K)",
+                        "answer": "O(K^2)"
+                    }
+                }
+            },
+            {
                 "q": "Which type of sort repeatedly swaps the adjacent elements when they are in the wrong order?",
                 "image": "img/test.jpg",
                 "source": "https://www.geeksforgeeks.org/bubble-sort/",
@@ -82,8 +114,22 @@
 
                 "review":{
                     "correct": "false",
-                    "explanation": " ",
+                    "explanation": "Bubble sort: compares adjacent pairs of an object and swaps the two if the order is incorrect. This procedure will be repeated until the array is in order.",
+                    "image": "img/questions/q5/example_1.jpg",
+                    "source": "https://www.geeksforgeeks.org/bubble-sort/",
+                    
+                    "explanation": "Quick sort: quick sorting is done by dividing arrays into smaller arrays. This can be seen in the following picture.",
+                    "image": "img/questions/q5/example_2.jpg",
+                    "source": "https://www.techiedelight.com/quicksort/",
 
+                    "explanation": "Tree sort: creates a binary search tree and then preforms an in-order transversal.",
+                    "image": "img/questions/q5/example_3.jpg",
+                    "source": "https://www.google.com/imgres?imgurl=https%3A%2F%2Fmedia.geeksforgeeks.org%2Fwp-content%2Fuploads%2FBSTSearch.png&imgrefurl=https%3A%2F%2Fwww.geeksforgeeks.org%2Fbinary-search-tree-data-structure%2F&tbnid=bDF-q-SxLMzb5M&vet=12ahUKEwiRmvn68vToAhUBzawKHUfHCq8QMygAegUIARDvAQ..i&docid=v8JGWLys7T2pCM&w=333&h=293&q=what%20is%20a%20tree%20sort&safe=strict&ved=2ahUKEwiRmvn68vToAhUBzawKHUfHCq8QMygAegUIARDvAQ",
+
+                    "explanation": "Merge sort: divides an array into two halves, then calls itself for the two halves and then merges the two sorted halves.",
+                    "image": "img/questions/q5/example_4.jpg",
+                    "source": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMerge_algorithm&psig=AOvVaw2BvJaZaTN2PSHgqqUvVzec&ust=1587399971715000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjt7Pbz9OgCFQAAAAAdAAAAABAD",
+  
                     "makeup": {
                         "q": "Which algorithm first creates a binary search tree from the elements of the input list or array and then performs an in-order traversal?",
                         "image": "",
@@ -104,67 +150,32 @@
                     }
             },
             {
-                "q": "Which developmental process involves planning incrementally and is easier to change the process if the customer needs to adjust their requirement?",
-                "image": "",
-                "opt1": "Plan driven process",
-                "opt2": "Agile Process",
-                "opt3": "Incremental development",
-                "opt4": "Extreme programming",
-                "answer": "Agile Process",
+                "q": "What is a unique characteristic/feature of a stack data structure?",
+                "opt1": "First In First Out (FIFO)",
+                "opt2": "Push, Pop, and Pull",
+                "opt3": "It is a linear data structure",
+                "opt4": "Push and Pop",
+                "answer": "Push and Pop",
 
                 "review":{
                     "correct": "false",
-                    "explanation": " The agile process is a great method for small to medium sized groups. The benefits of the agile process are The plan driven process can be seen through this example The Incremental development can be seen through this example Also in incremental development specification, validation and development are interleaved.Extreme programming can be seen through this example",
+                    "explanation": "stacks and queues are similar in that they store data linearly, but ultimately what sets them apart is how they remove an item and the names of their operations for inserting and removing data. A stack removes the most recent/last item, while a queue removes the first item. The names of the operations a stack will use to insert and remove data are “push” and “pop”, while for a queue it’s “enqueue” and “dequeue.”",
 
                     "makeup": {
-                        "q": "Which developmental process involves planning in advance and progress is measured against this plan?",
+                        "q": "What is a unique characteristic/feature of a queue data structure?",
                         "image": "",
-                        "opt1": "Plan driven process",
-                        "opt2": "Extreme programming",
-                        "answer": "Plan driven process"
+                        "opt1": "First In First Out (FIFO)",
+                        "opt2": "It is a linear data structure",
+                        "answer": "First In First Out (FIFO)"
                     },
 
                     "main": {
-                        "q": "Which developmental process involves planning incrementally and is easier to change the process if the customer needs to adjust their requirement?",
-                        "image": "",
-                        "source": "",
-                        "opt1": "Agile Process",
-                        "opt2": "Incremental development",
+                        "q": "What is a unique characteristic/feature of a stack data structure?",
+                        "opt1": "Push, Pop, and Pull",
+                        "opt2": "Push and Pop",
                         "answer": "Agile Process"
                         }
                     }
-            },
-            {
-                    "q": "test",
-                    "image": "img/test.jpg",
-                    "opt1": "1",
-                    "opt2": "2",
-                    "answer": "1",
-    
-                    "review":{
-                        "correct": "false",
-                        "explanation": " ",
-                        "q": " ",
-                        "image": " ",
-                        "answer": " ",
-    
-                        "makeup": {
-                            "q": " ",
-                            "image": " ",
-                            "opt1": " ",
-                            "opt2": " ",
-                            "answer": " "
-                        },
-    
-                        "main": {
-                            "q": "",
-                            "image": " ",
-                            "source": "",
-                            "opt1": "",
-                            "opt2": "",
-                            "answer": ""
-                            }
-                        }
             }
             ]
         },
