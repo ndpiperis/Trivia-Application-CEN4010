@@ -161,6 +161,7 @@ $(document).ready(function() {
         $(".members").append("<div class='user'>" + user[i][1] + "</div>");
     }
 
+
     $('.q-box').on('click', '#start', function() {
         var selection = $('.quiz-list').find(":selected").attr('id');
         console.log('starting quiz');
@@ -176,6 +177,7 @@ $(document).ready(function() {
         selection = null;
     });
 
+    //resets quiz (not very functional)
     $('.q-box').on('click', '#reset', function() {
         console.log('resetting quiz');
         socket.emit('reset-quiz-owner', {
@@ -188,7 +190,7 @@ $(document).ready(function() {
     });
 
 
-
+    //answer picker handler. Highlights one answer at a time
     $('.q-box').on('mousedown', '.qa', function() {
         console.log("#" + room);
         $('.q-box .qa').removeClass('activated');
@@ -215,8 +217,16 @@ $(document).ready(function() {
         }
     });
 
+    //error if user cannot join
     socket.on('cannot-join', function(reason) {
         showDialog(reason.reason, true, false);
+    });
+
+    //send client to laod spinner
+    socket.on('set-load-screen', function() {
+        $('.q-box').loadTemplate('modules/quiz-waitroom.html',{
+            title : 'Calculating score '
+        });
     });
 
     //pulls users from server
@@ -299,11 +309,13 @@ $(document).ready(function() {
 
     socket.on('final-score', function(info) {
         console.log("Final score received");
+        
         for(var i = 0; i < info.length; i++) { 
-            if(socket.id == info[i].id) {
+            if(socket.id != info[i].id) {
 
             }
             else {
+                console.log(info[i].score);
                 $('.q-box').loadTemplate('modules/quiz-score.html', 
                     {
                     score: info[i].score
