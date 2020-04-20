@@ -130,7 +130,6 @@ $(document).ready(function() {
         };
             var finalObj = {};
             
-
             finalObj = Object.assign({[i]:obj}, finalObj[i]);
 
             socket.emit('collect-quiz-data',finalObj);
