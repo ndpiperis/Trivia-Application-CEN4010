@@ -10,12 +10,7 @@ describe('Checks the functionality of the quiz feature and content', () => {
     });
     
     it('Chooses a quiz from the dropdown and presses start', () => {
-        cy.get('.quiz-list').select('Software Engineering');
-        
+        cy.get('#quiz-list').select('Software Engineering');
         cy.get('#start').click();
-    });
-
-    it('Starts quiz and chooses options', () => {
-
     });
 });

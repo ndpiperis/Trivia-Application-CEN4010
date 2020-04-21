@@ -23,4 +23,9 @@ describe('Checks the content of the trivia lobby page', () => {
         cy.get('#reset').should('have.attr', 'type', 'button').should('have.value', 'Reset');
         cy.get('#start').should('have.attr', 'type', 'button').should('have.value', 'Start');
     });
+
+    it('Clicks on leave button and verfies if it is working', () => {
+        cy.get('#leave').click();
+        cy.get('.info-envelope-title').should('contain', 'Knowledge that sticks.');
+    });
 });
