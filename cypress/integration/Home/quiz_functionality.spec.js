@@ -14,4 +14,8 @@ describe('Checks the functionality of the quiz feature and content', () => {
         
         cy.get('#start').click();
     });
+
+    it('Starts quiz and chooses options', () => {
+
+    });
 });
