@@ -217,13 +217,10 @@ io.on('connection', function(socket){
       quizTemp = jsio.readFileSync(fileTemp);
       quizTemp = Object.assign(info, quizTemp);
       fs.writeFile(fileTemp, JSON.stringify(quizTemp, null, 4), function (err) {
-        if (err) console.error(err)
+        if (err) console.error(err);
         console.log('Write Complete');
       });
     });
-
-
-
   });
 
 
