@@ -132,14 +132,22 @@ $(document).ready(function() {
             
             finalObj = Object.assign({[i]:obj}, finalObj[i]);
 
-            socket.emit('collect-quiz-data',finalObj);
+            socket.emit('collect-quiz-data', obj);
 
+            $('.q-box').loadTemplate('modules/quiz-creator.html',{
+                question: 'question-' + i,
+                opt1: 'opt1-' + i,
+                opt2: 'opt2-' + i,
+                opt3: 'opt3-' + i,
+                opt4: 'opt4-' + i,
+                answer: 'answer-' + i
+            });
             i++;
 
             $('.q-box').loadTemplate('modules/quiz-manager.html', {
                 title: 'Room ' + room
             });
-            console.log(finalObj);
+
             popu();
     });
 

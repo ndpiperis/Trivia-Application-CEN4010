@@ -213,10 +213,10 @@ io.on('connection', function(socket){
       croom.quiz.loadReview(user);
     });
 
-    socket.on('collect-quiz-data', function(info){
+    socket.on('collect-quiz-data', function(info){  
       console.log(info);
       quizTemp = jsio.readFileSync(fileTemp);
-      quizTemp = Object.assign(info, quizTemp);
+      quizTemp = Object.assign({[info.id]:info}, quizTemp);
       fs.writeFile(fileTemp, JSON.stringify(quizTemp, null, 4), function (err) {
         if (err) console.error(err);
         console.log('Write Complete');
