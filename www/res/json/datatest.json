@@ -1,103 +1,52 @@
 {
     "0": {
         "id": 0,
-        "title": "erqwer",
+        "title": "test",
         "questions": [
             {
-                "q": "uy",
+                "q": "test",
                 "img": "",
-                "opt1": "vihv",
-                "opt2": "",
-                "opt3": "jk",
-                "opt4": "kj",
-                "answer": "j"
+                "opt1": "12",
+                "opt2": "123",
+                "opt3": "3",
+                "opt4": "4",
+                "answer": "4"
             },
             {
-                "q": "uy",
+                "q": "test",
                 "img": "",
-                "opt1": "vihv",
-                "opt2": "",
-                "opt3": "jk",
-                "opt4": "kj",
-                "answer": "j"
+                "opt1": "12",
+                "opt2": "123",
+                "opt3": "3",
+                "opt4": "4",
+                "answer": "4"
             },
             {
-                "q": "uy",
+                "q": "test",
                 "img": "",
-                "opt1": "vihv",
-                "opt2": "",
-                "opt3": "jk",
-                "opt4": "kj",
-                "answer": "j"
+                "opt1": "12",
+                "opt2": "123",
+                "opt3": "3",
+                "opt4": "4",
+                "answer": "4"
             },
             {
-                "q": "uy",
+                "q": "test",
                 "img": "",
-                "opt1": "vihv",
-                "opt2": "",
-                "opt3": "jk",
-                "opt4": "kj",
-                "answer": "j"
+                "opt1": "12",
+                "opt2": "123",
+                "opt3": "3",
+                "opt4": "4",
+                "answer": "4"
             },
             {
-                "q": "uy",
+                "q": "test",
                 "img": "",
-                "opt1": "vihv",
-                "opt2": "",
-                "opt3": "jk",
-                "opt4": "kj",
-                "answer": "j"
-            }
-        ]
-    },
-    "1": {
-        "id": 1,
-        "title": "asdasdsss2",
-        "questions": [
-            {
-                "q": "",
-                "img": "",
-                "opt1": "",
-                "opt2": "",
-                "opt3": "",
-                "opt4": "",
-                "answer": ""
-            },
-            {
-                "q": "",
-                "img": "",
-                "opt1": "",
-                "opt2": "",
-                "opt3": "",
-                "opt4": "",
-                "answer": ""
-            },
-            {
-                "q": "",
-                "img": "",
-                "opt1": "",
-                "opt2": "",
-                "opt3": "",
-                "opt4": "",
-                "answer": ""
-            },
-            {
-                "q": "",
-                "img": "",
-                "opt1": "",
-                "opt2": "",
-                "opt3": "",
-                "opt4": "",
-                "answer": ""
-            },
-            {
-                "q": "",
-                "img": "",
-                "opt1": "",
-                "opt2": "",
-                "opt3": "",
-                "opt4": "",
-                "answer": ""
+                "opt1": "12",
+                "opt2": "123",
+                "opt3": "3",
+                "opt4": "4",
+                "answer": "4"
             }
         ]
     }

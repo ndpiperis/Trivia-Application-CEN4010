@@ -214,6 +214,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('collect-quiz-data', function(info){
+      console.log(info);
       quizTemp = jsio.readFileSync(fileTemp);
       quizTemp = Object.assign(info, quizTemp);
       fs.writeFile(fileTemp, JSON.stringify(quizTemp, null, 4), function (err) {
