@@ -1,5 +1,5 @@
 module.exports = class QuizBuilder {
-    wait = 5000;
+    wait = 20000;
     socket;
     qroom;
     c;
@@ -197,7 +197,7 @@ module.exports = class QuizBuilder {
     }
 
     
-    
+
     //self explanatory
     resetQuiz() {
         console.log("resetting 4");
