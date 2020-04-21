@@ -318,6 +318,11 @@ $(document).ready(function() {
         
     });
 
+    //leave
+    $('.q-box').on('click', '#leave', function() {
+        window.location.reload(true); 
+    });
+
     //gets last focused dropdown for quiz selector
     $('.q-box').on('focus', 'select', function() {
         console.log("new dropdown focused");
