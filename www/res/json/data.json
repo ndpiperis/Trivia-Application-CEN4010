@@ -45,12 +45,12 @@
                 "opt2": "C++",
                 "opt3": "Visual Basic",
                 "opt4": "Python",
-                "answer": "C#",
+                "answer": "Visual Basic",
 
                 "review":{
                     "correct": "false",
                     "explanation": "Even though C# and Visual Basic share some similar functions, one main difference is that Visual Basic doesn’t use semicolons – like Python.",
-                    "source": "",
+                    "source": "https://www.dotnetperls.com/console-vbnet",
 
                     "makeup": {
                         "q": "What programming language is this in? cout << “Hello World!”;",
@@ -113,6 +113,7 @@
                 "review":{
                     "correct": "false",
                     "explanation": "C++ is used mainly for system development. It is a low-level language and supports multiple inheritances, but it does not support garbage collection",
+                    "source": "https://data-flair.training/blogs/features-of-c-plus-plus/",
                       
                     "makeup": {
                         "q": "What is not a characteristic of C++?",
@@ -140,6 +141,7 @@
                 "review":{
                     "correct": "false",
                     "explanation": "Stacks and queues are similar in that they store data linearly, but ultimately what sets them apart is how they remove an item and the names of their operations for inserting and removing data. A stack removes the most recent/last item, while a queue removes the first item. The names of the operations a stack will use to insert and remove data are “push” and “pop”, while for a queue it’s “enqueue” and “dequeue.”",
+                    "source": "https://www.geeksforgeeks.org/difference-between-stack-and-queue-data-structures/",
 
                     "makeup": {
                         "q": "What is a unique characteristic/feature of a queue data structure?",
