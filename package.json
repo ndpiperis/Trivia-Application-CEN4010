@@ -9,7 +9,7 @@
     "jquery-ui": "^1.12.1",
     "jquery.loadtemplate": "^1.5.10",
     "jsonfile": "^6.0.1",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.4.0"
   },
   "devDependencies": {
     "cypress": "^4.4.0"
