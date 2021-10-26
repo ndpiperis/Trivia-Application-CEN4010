@@ -6,7 +6,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "jquery": "^3.4.1",
-    "jquery-ui": "^1.12.1",
+    "jquery-ui": "^1.13.0",
     "jquery.loadtemplate": "^1.5.10",
     "jsonfile": "^6.0.1",
     "socket.io": "^2.3.0"
