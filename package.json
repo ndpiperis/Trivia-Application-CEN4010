@@ -4,7 +4,7 @@
   "description": "Cypress automation testing",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "jquery.loadtemplate": "^1.5.10",
